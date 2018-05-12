@@ -1,0 +1,58 @@
+<div class="content-heading">ตรวจสอบ ข้อมูลผู้ใช้
+    <small>
+        <a [routerLink]="['/users/manageUsers']"> Manage User </a>-> View User
+    </small>
+</div>
+<div class="col-masonry">
+    <div class="panel b m0">
+        <div class="panel-heading">
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="row">
+                        <div class="col-lg-5">
+                            <h4 class="media-heading">ชื่อ นามสกุล</h4>
+                        </div>
+                        <div class="col-lg-6">
+                            <p>{{user!=null?user.name:"?"}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="row">
+
+                        <div class="col-lg-5">
+                            <h4 class="media-heading">อีเมล์</h4>
+                        </div>
+                        <div class="col-lg-6">
+                            <p>{{user!=null?user.email:"?"}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="row">
+                        <div class="col-lg-5">
+                            <h4 class="media-heading">เบอร์มือถือ</h4>
+                        </div>
+                        <div class="col-lg-6">
+                            <p>{{user!=null?user.mobilePhoneNo:"?"}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="row">
+                        <div class="col-lg-5">
+                            <h4 class="media-heading">ลงทะเบียนเมื่อ</h4>
+                        </div>
+                        <div class="col-lg-6">
+                            <p>{{user!=null?getCreatedAtString(user.createdAt):"?"}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+        </div>
+    </div>
+</div>

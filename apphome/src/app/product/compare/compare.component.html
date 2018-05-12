@@ -1,0 +1,73 @@
+<!-- Head Section -->
+<div class="head-section bg">
+    <div class="container">
+        <h4>Compare <span class="font-light">Product</span></h4>
+        <p>Angushop Compare Product</p>
+    </div>
+</div>
+
+<!-- Loading -->
+<div class="valign-wrapper" *ngIf="loadingState" #loading>
+    <mat-spinner></mat-spinner>
+</div>
+
+<div class="container-page compare-product" *ngIf="productState">
+    <div class="box-page">
+        
+        <!-- Start Table -->
+        <div class="wrap-table" #wraptable>
+            <table class="table-compare" #table>
+                <tr>
+                    <td class="info" rowspan="2">
+                        <h3 class="counter">{{productView}} <small>of</small> {{products.length}}</h3>
+                        <p>Products to compare</p>
+                        <button mat-mini-fab [disabled]="disablePrev" (click)="prevView()">
+                            <mat-icon>&#xE314;</mat-icon>
+                        </button>
+                        <button mat-mini-fab [disabled]="disableNext" (click)="nextView()">
+                            <mat-icon>&#xE315;</mat-icon>
+                        </button>
+                    </td>
+                    <td *ngIf="products.length == 0" rowspan="7" class="empty">
+                        <img src="http://via.placeholder.com/246x339" width="100" alt=""/>
+                        <h5 class="title">Sorry... no product founded</h5>
+                    </td>
+                    <td class="wrap-img" *ngFor="let product of products | slice:startSlice:endSlice">
+                        <a mat-mini-fab class="close" (click)="onSelectRemove(product)">
+                            <mat-icon>&#xE5CD;</mat-icon>
+                        </a>
+                        <img [src]="product.image" [alt]="product.productName" />
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding-left:0;padding-right:0;" *ngFor="let product of products | slice:startSlice:endSlice">
+                        <h6 class="title truncate"><a [routerLink]="'/shop/p/' + product.slug">{{product.productName}}</a></h6>
+                        <strong class="light">{{product.price  | currency:'USD':'$'}}</strong>
+                        <rating [value]="product.rate"></rating>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Width</td>
+                    <td *ngFor="let product of products | slice:startSlice:endSlice">{{product.width}} cm</td>
+                </tr>
+                <tr>
+                    <td>Height</td>
+                    <td *ngFor="let product of products | slice:startSlice:endSlice">{{product.height}} cm</td>
+                </tr>
+                <tr>
+                    <td>Weight</td>
+                    <td *ngFor="let product of products | slice:startSlice:endSlice">{{product.weight}} kg</td>
+                </tr>
+                <tr>
+                    <td>Sold</td>
+                    <td *ngFor="let product of products | slice:startSlice:endSlice">{{product.sold}}</td>
+                </tr>
+                <tr>
+                    <td>Stock</td>
+                    <td *ngFor="let product of products | slice:startSlice:endSlice">{{product.stock}}</td>
+                </tr>
+            </table>
+            <!-- End Table -->
+        </div>
+    </div>
+</div>

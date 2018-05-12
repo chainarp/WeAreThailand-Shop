@@ -1,0 +1,108 @@
+<div class="content-heading">
+    <div class="pull-center" *ngIf="users!=null&&users.length==0">
+        <label class="file-upload">
+            <a [routerLink]="'/users/addUser'">
+                <button class="btn btn-warning">
+                    <em class="fa fa-plus"></em>&nbsp;&nbsp; สร้างข้อมูลผู้ใช้</button>
+            </a>
+        </label>
+    </div>
+    <div class="pull-center" *ngIf="users!=null&&users.length==1">
+        <label class="file-upload">
+            <!-- <a [routerLink]="'/users/addUser'"> -->
+            <button class="btn btn-warning" (click)="usersEdit(users[0].key)">
+                <em class="fa fa-plus"></em>&nbsp;&nbsp; แก้ไขข้อมูลผู้ใช้</button>
+            <!-- </a> -->
+        </label>
+    </div>
+    <div class="pull-center" *ngIf="users!=null&&users.length==1">
+        <label class="file-upload">
+            <!-- <a [routerLink]="'/users/addUser'"> -->
+            <button class="btn btn-warning" (click)="usersShow(users[0].key)">
+                <em class="fa fa-plus"></em>&nbsp;&nbsp; ตรวจสอบข้อมูลผู้ใช้</button>
+            <!-- </a> -->
+        </label>
+    </div>
+    <!--
+    <small>
+        <a [routerLink]=" ['/home'] ">Dashboard</a> -> Users List </small>
+    -->
+</div>
+<!-- Zero Configuration-->
+<!--
+<div class="panel panel-default">
+    <div class="panel-heading">Users List</div>
+    <div class="panel-body">
+        <div class="table-responsive customTable">
+            <table class="table table-striped" [mfData]="users" #mf="mfDataTable" [mfRowsOnPage]="10">
+                <thead>
+                    <tr>
+                        <th class="thsearch text-center">
+                            <mfDefaultSorter by="emailToSearch">Email</mfDefaultSorter>
+                            <form (keyup)="getUsersByEmail(emailToSearch.value)"> <!-- [(ngModel)]="emailToSearch" - ->
+                                <input class="form-control searchinput" type="text" name="emailToSearch" id="emailToSearch"  placeholder="Search"
+                                    #emailToSearch>
+                            </form>
+                        </th>
+
+                        <th class="thsearch text-center">
+                            <mfDefaultSorter by="nameToSearch">Name</mfDefaultSorter>
+                            <form (keyup)="getUsersByName(nameToSearch.value)"> <!-- [(ngModel)]="nameToSearch" - ->
+                                <input class="form-control searchinput" type="text" name="nameToSearch" id="nameToSearch" placeholder="Search"
+                                    #nameToSearch>
+                            </form>
+                        </th>
+                        <th class="thsearch text-center">
+                            <mfDefaultSorter by="siteName">Mobile Number</mfDefaultSorter>
+                        </th>
+                        <th class="thsearch text-center">
+                            <mfDefaultSorter by="siteName">User Role(s)</mfDefaultSorter>
+                        </th>
+                        <th class="thnosearch  text-center">
+                            <mfDefaultSorter>View</mfDefaultSorter>
+                        </th>
+                        <th class="thnosearch  text-center">
+                            <mfDefaultSorter>Edit</mfDefaultSorter>
+                        </th>
+                        <th class="thnosearch  text-center">
+                            <mfDefaultSorter>Delete</mfDefaultSorter>
+                        </th>
+
+                        <th class="thnoitem"></th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let item of mf.data">
+                    <tr class=" text-center" *ngIf="(item.role != 'Admin' || item.role == 'Admin')">
+                        <td>{{item.email}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.mobilePhoneNo}}</td>
+                        <td>{{item.userRoles.join()}}</td>
+                        <td>
+                            <button class="btn btn-sm btn-default" type="button" (click)="usersShow(item.$key)">
+                                <em class="fa fa-search"></em>
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-sm btn-primary" type="button" (click)="usersEdit(item.$key)">
+                                <em class="fa fa-pencil"></em>
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-sm btn-danger" type="button" (click)="usersDelete(item.$key)">
+                                <em class="fa fa-trash-o"></em>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="7">
+                            <mfBootstrapPaginator [rowsOnPageSet]="[10,20,30]"></mfBootstrapPaginator>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+-->

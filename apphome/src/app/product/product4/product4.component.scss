@@ -1,0 +1,246 @@
+/*
+Import
+=========================== */
+@import '../../../assets/sass/css3-mixins';
+@import '../../../assets/sass/variable';
+
+/*
+Container
+=========================== */
+.container-page .box-page{
+    padding-bottom: 25px;
+}
+
+/*
+Product
+=========================== */
+.wrap-product{
+    margin-bottom: 0;
+    background: #fff;
+
+    > .col{
+        padding: 0;
+
+        &.side-product{
+            background: #fff;
+            margin-bottom: 30px;
+        }
+
+        &.main-product{
+            padding: 0 15px 0 30px;
+        }
+    }
+}
+
+/*
+Tab
+=========================== */
+.mat-tab-label, .mat-tab-link{
+    font-family: $font-family;
+}
+
+/*
+Order By
+=========================== */
+.orderby{
+    position: relative;
+    top: -8px;
+}
+
+.btn-order.active.mat-menu-item{
+    color: #fff;
+
+    mat-icon{
+        color: #fff;
+    }
+}
+
+/*
+Colors
+=========================== */
+.colors{
+    padding: 0;
+    margin: 10px 0 -7px 0;
+    display: inline-block;
+
+    li{
+        float: left;
+        display: block;
+        margin: 0 5px 5px 0;
+
+        .mat-mini-fab{
+            border: solid 5px transparent;
+            @include transition("all 0.5s ease-in-out");
+            position: relative;
+            width: 30px;
+            height: 30px;
+        }
+
+        &.active .mat-mini-fab{
+            border-color: #fff;
+            -webkit-box-shadow: 0px 2px 3px rgba(0,0,0,0.1) !important;
+            box-shadow: 0px 2px 3px rgba(0,0,0,0.1) !important;
+        }
+
+        &.dark .mat-mini-fab{
+            background-color: #333;
+        }
+
+        &.gray2 .mat-mini-fab{
+            background-color: #999;
+        }
+
+        &.gray1 .mat-mini-fab{
+            background-color: #cfcfcf;
+        }
+
+        &.gray .mat-mini-fab{
+            background-color: #f5f5f5;
+        }
+    }
+}
+
+/*
+Filter
+=========================== */
+.wrap-filter{
+    position: relative;
+    font-family: $font-family;
+    border: solid 1px #efefef;
+
+    .content-filter{
+        padding: 20px 25px;
+        position: relative;
+        border-bottom: solid 1px #efefef;
+
+        .title{
+            margin-bottom: 10px;
+            text-transform: capitalize;
+        }
+
+        // Search widget
+        &.search{
+
+            input{
+                width: 100%;
+                border: 0;
+                outline: 0;
+                padding-right: 35px;
+                background: transparent;
+            }
+
+            .icon{
+                position: absolute;
+                right: 25px;
+                top: 20px;
+                font-size: 24px;
+            }
+        }
+    }
+
+    ul.categories{
+        margin-bottom: 5px;
+
+        li{
+
+            a{
+                display: block;
+                padding: 5px 0;
+                color: $color-content;
+                border-bottom: dashed 1px #efefef;
+
+                &:hover,
+                &:focus{
+                    text-decoration: none;
+                }
+            }
+
+            &:last-child a{
+                border-bottom: 0;
+                padding-bottom: 0;
+            }
+        }
+         
+    }
+}
+
+/*
+Recntly
+=========================== */
+.recently{
+    display: block;
+    margin: 0;
+    font-family: $font-family;
+
+    li{
+        display: block;
+        position: relative;
+        padding: 20px 25px;
+        min-height: 100px;
+        padding-left: 95px;
+        border-bottom: solid 1px #efefef;
+
+        .wrap-img{
+            width: 60px;
+            height: 60px;
+            overflow: hidden;
+            border: solid 1px #efefef;
+            position: absolute;
+            left: 20px;
+            top: 20px;
+
+            img{
+                width: 100%;
+            }
+        }
+
+        .title{
+            text-transform: capitalize;
+            margin-bottom: 5px;
+
+            a{
+                color: $color-title;
+                text-decoration: none !important; 
+            }
+        }
+
+        p{
+            margin-bottom: 0;
+        }
+    }
+}
+
+/*
+Responsive
+=========================== */
+@media(max-width:767px){
+    .wrap-product{
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
+
+@media(max-width:568px){
+    .wrap-product{
+        padding-left: 15px;
+        padding-right: 15px;
+        margin-bottom: 30px !important;
+        background: #fff;
+    
+        > .col{
+            padding: 0;
+            margin: 0;
+    
+            &.side-product{
+                background: #fff;
+                margin-bottom: 0;
+                margin-top: 20px;
+            }
+    
+            &.main-product{
+                padding: 0 15px;
+            }
+        }
+    }
+}
+

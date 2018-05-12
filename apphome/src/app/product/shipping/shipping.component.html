@@ -1,0 +1,245 @@
+<!-- Head Section -->
+<div class="head-section bg">
+    <div class="container">
+        <h4>Shipping <span class="font-light">Product</span></h4>
+        <p>Angushop Shipping Product</p>
+    </div>
+</div>
+
+<div class="container-page">
+    <div class="box-page">
+        <!-- Start List -->
+        <ul class="row list-justify">
+            <li class="col s4">
+                Cart
+            </li>
+            <li class="col s4 active">
+                Delivery
+            </li>
+            <li class="col s4 disabled">
+                Receipt
+            </li>
+        </ul>
+        <!-- End List -->
+
+        <div class="row margin-top30">
+            <div class="col l8 m7 s12">
+                <h5>Shipping Info</h5>
+                
+                <!-- Start Form -->
+                <form #formRef="ngForm" (ngSubmit)="onSubmit(formRef)">
+                    <div class="row">
+                        <div class="col m6 s12">
+                            <mat-form-field>
+                                <input matInput 
+                                    type="text"
+                                    placeholder="First Name" 
+                                    value="" 
+                                    name="firstname" 
+                                    [(ngModel)]="firstname" 
+                                    #firstnameRef="ngModel" 
+                                    required>
+                            </mat-form-field>
+                            <small class="error" *ngIf="firstnameRef.errors?.required && firstnameRef.touched">required error</small>
+                            <small class="error" *ngIf="firstnameRef.errors?.required && firstnameRef.dirty">required error</small>
+                        </div>
+                        <div class="col m6 s12">
+                            <mat-form-field>
+                                <input matInput 
+                                    type="text"
+                                    placeholder="Last Name" 
+                                    value=""
+                                    name="lastname" 
+                                    [(ngModel)]="lastname" 
+                                    #lastnameRef="ngModel" 
+                                    required>
+                            </mat-form-field>
+                            <small class="error" *ngIf="lastnameRef.errors?.required && lastnameRef.touched">required error</small>                            
+                            <small class="error" *ngIf="lastnameRef.errors?.required && lastnameRef.dirty">required error</small>                            
+                        </div>
+                    </div>
+                    
+                    <div class="clearfix"></div>
+
+                    <div class="row">
+                        <div class="col m6 s12">
+                            <mat-form-field>
+                                <input matInput 
+                                    type="email"
+                                    placeholder="Email" 
+                                    value=""
+                                    name="email"
+                                    [(ngModel)]="email" 
+                                    #emailRef="ngModel"
+                                    required
+                                    email>
+                            </mat-form-field>
+                            <small class="error" *ngIf="emailRef.errors?.required && emailRef.touched">required error</small>                                                        
+                            <small class="error" *ngIf="emailRef.errors?.required && emailRef.dirty">required error</small>                                                        
+                            <small class="error" *ngIf="emailRef.errors?.email && emailRef.dirty">email not valid</small>                                                        
+                        </div>
+                        <div class="col m6 s12">
+                            <mat-form-field>
+                                <input matInput 
+                                    type="text"
+                                    placeholder="Phone Number" 
+                                    value=""
+                                    name="phone" 
+                                    [(ngModel)]="phone" 
+                                    #phoneRef="ngModel" 
+                                    required
+                                    phone="ID">
+                            </mat-form-field>
+                            <small class="error" *ngIf="phoneRef.errors?.required && phoneRef.touched">required error</small>                                                                                    
+                            <small class="error" *ngIf="phoneRef.errors?.required && phoneRef.dirty">required error</small>                                                                                    
+                            <small class="error" *ngIf="phoneRef.errors?.phone && phoneRef.dirty">phone not valid</small>                                                                                    
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+                    
+                    <div class="row">
+                        <div class="col s12">
+                            <mat-form-field>
+                                <input matInput 
+                                    type="text"
+                                    placeholder="Address" 
+                                    value=""
+                                    name="address" 
+                                    [(ngModel)]="address" 
+                                    #addressRef="ngModel" 
+                                    required>
+                            </mat-form-field>
+                            <small class="error" *ngIf="addressRef.errors?.required && addressRef.touched">required error</small>                                                                                                                
+                            <small class="error" *ngIf="addressRef.errors?.required && addressRef.dirty">required error</small>                                                                                                                
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="row">
+                        <div class="col m6 s12">
+                            <mat-form-field>
+                                <input matInput 
+                                    type="text"
+                                    placeholder="City" 
+                                    value=""
+                                    name="city" 
+                                    [(ngModel)]="city" 
+                                    #cityRef="ngModel" 
+                                    required>
+                            </mat-form-field>
+                            <small class="error" *ngIf="cityRef.errors?.required && cityRef.touched">required error</small>                                                                                                                                            
+                            <small class="error" *ngIf="cityRef.errors?.required && cityRef.dirty">required error</small>                                                                                                                                            
+                        </div>
+                        <div class="col m6 s12">
+                            <mat-form-field>
+                                <input matInput 
+                                    type="text"
+                                    placeholder="Zipcode" 
+                                    value=""
+                                    name="zipcode" 
+                                    [(ngModel)]="zipcode" 
+                                    #zipcodeRef="ngModel" 
+                                    maxlength="5"
+                                    required
+                                    number>
+                            </mat-form-field>
+                            <small class="error" *ngIf="zipcodeRef.errors?.required && zipcodeRef.touched">required error</small>                                                                                                                                            
+                            <small class="error" *ngIf="zipcodeRef.errors?.required && zipcodeRef.dirty">required error</small>                                                                                                                                            
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="row">
+                        <div class="col m6 s12">
+                            <mat-form-field>
+                                <input matInput 
+                                    type="text"
+                                    placeholder="State" 
+                                    value=""
+                                    name="state"
+                                    [(ngModel)]="state" 
+                                    #stateRef="ngModel">
+                            </mat-form-field>
+                        </div>
+                        <div class="col m6 s12">
+                            <mat-form-field>
+                            <input matInput 
+                                type="text"
+                                placeholder="Country" 
+                                value=""
+                                name="country" 
+                                [(ngModel)]="country" 
+                                #countryRef="ngModel" 
+                                required>
+                            </mat-form-field>
+                            <small class="error" *ngIf="countryRef.errors?.required && countryRef.touched">required error</small>                                                                                                                                                                                                    
+                            <small class="error" *ngIf="countryRef.errors?.required && countryRef.dirty">required error</small>                                                                                                                                                                                                    
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <p class="margin-bottom10"><em><small>Test dummy, click <a href="https://stripe.com/docs/testing" target="_BLANK" class="link">here</a> for more test</small></em></p>
+                    <div class="alert alert-info">
+                        <strong class="right">4242424242424242</strong> Card number
+                        <hr />
+                        <strong class="right">02/18</strong> MM/YY
+                        <hr />
+                        <strong class="right">222</strong> CVC
+                    </div>
+
+                    <div class="clearfix"></div>                    
+
+                    <div class="row margin-top20">
+                        <div class="col l6 push-l6 s12 right-align">
+                            <button [disabled]="formRef.invalid || touched" type="submit" mat-button class="btn btn-primary margin-bottom10">
+                                <span *ngIf="nottouched">Continue to Checkout</span>
+                                <span *ngIf="touched">Loading...</span>
+                            </button>
+                        </div>
+                        <div class="col l6 pull-l6 s12">
+                            <a mat-button routerLink="/shop/cart" class="btn btn-default">Back To Cart</a>
+                        </div>
+                    </div>
+                </form>
+                <!-- End Form -->
+                <!-- <div>{{formRef.value | json}}</div> -->
+            </div>
+            <div class="col l4 m5 s12">
+                <h5>Order Products</h5>
+                <!-- Start List Produt --> 
+                <ul class="list-product">
+                    <li *ngFor="let product of productsOrder">
+                        <div class="wrap-img">
+                            <img [src]="product.image" class="img-responsive" alt=""/> 
+                        </div>
+                        <h6 class="title"><a [routerLink]="['/shop/p/' + product.slug]" >{{product.productName}}</a></h6>
+                        <p class="margin-top10">
+                            <span class="right">{{product.quantity * product.price | currency:'USD':'$'}}</span>
+                            {{product.quantity}}x
+                        </p>
+                    </li>
+                </ul>
+                <!-- End List Produt -->
+                <table class="count">
+                    <tr>
+                        <td>Sub Total</td>
+                        <td class="right-align">{{subTotal  | currency:'USD':'$'}}</td>
+                    </tr>
+                    <tr>
+                        <td>Promo</td>
+                        <td class="right-align">{{promoValue  | currency:'USD':'$'}}</td>
+                    </tr>
+                    <tr>
+                        <td>Total Price</td>
+                        <td class="right-align"><strong>{{total  | currency:'USD':'$'}}</strong></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        
+    </div>
+</div>

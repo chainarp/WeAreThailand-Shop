@@ -1,0 +1,24 @@
+<!-- Head Section -->
+<div class="head-section bg">
+    <div class="container">
+        <h4>Wish<span class="font-light">List</span> Product</h4>
+        <p>Delectus aliquando incorrupte ne sea qui cu iudicabit.</p>
+    </div>
+</div>
+<!-- End Section -->
+<div class="container-page">
+    <div class="box-page padding-bottom20">
+        <div class="wrap-product">
+            <!-- App Product -->
+            <app-product 
+                [filter]="{
+                    index: productWishlist
+                }"
+                [showBtnClose]="true"
+                [setlimit]="8" 
+                [paginate]="true"
+                (onRemove)="onSelectRemove($event)"
+            ></app-product>
+        </div>
+    </div>
+</div>

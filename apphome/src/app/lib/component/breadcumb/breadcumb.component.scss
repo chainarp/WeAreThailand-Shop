@@ -1,0 +1,33 @@
+ul.location{
+    padding: 0;
+    margin: 0 0 -5px 0;
+    display: inline-block;
+
+    li{
+        float: left;
+        display: block;
+        margin-right: 15px;
+        font-size: 14px;
+        text-transform: capitalize;
+
+        &:after{
+            content: "/";
+            font-size: 12px;
+            position: relative;
+            left: 7px;
+            color: #cfcfcf;
+        }
+
+        &:last-child:after{
+            display: none;
+        }
+
+        &.active{
+            color: #999;
+
+            &:after{
+                display: none;
+            }
+        }
+    }
+}

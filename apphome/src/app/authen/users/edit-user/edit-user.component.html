@@ -1,0 +1,74 @@
+<!--
+<div class="content-heading ">
+    แก้ไขข้อมูลผู้ใช้
+    <small>
+        <a [routerLink]=" ['/home'] ">Dashboard</a> ->
+        <a [routerLink]="['/users/manageUsers']"> Manage User </a>-> Edit User
+    </small>
+</div>
+-->
+<div class="container-md">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <div class="panel b">
+                <div class="panel-heading  text-bold bg-purple-dark"><h3>แก้ไขข้อมูลผู้ใช้</h3></div>
+                <div class="panel-body">
+                    <form (ngSubmit)="onSubmitEditUser()" [formGroup]="userForm">
+                        <div class="form-group">
+                            <label>อีเมล์*</label>
+                            <input class="form-control" formControlName="email" type="email" email name="email" id="email" [(ngModel)]="userRecord.email"
+                                placeholder="กรอก อีเมล์ ..." />
+                            <!--
+                                <small [hidden]="userForm.controls.email.valid" class="text-danger">
+                                    email is required and correct pattern
+                                </small>
+                            -->
+                        </div>
+                        <div class="form-group">
+                            <label>รหัสผ่าน*</label>
+                            <password-strength-bar [passwordToCheck]="userRecord.password" [barLabel]="barLabel"></password-strength-bar>
+                            <input class="form-control" formControlName="password" type="password" name="password" id="password" [(ngModel)]="userRecord.password"
+                                placeholder="กรอก รหัสผ่าน ..." />
+                            <small [hidden]="userForm.controls.password.valid" class="text-danger">
+                                รหัสผ่านต้องกรอกและมีความยาวมากกว่า 6 ตัวอักษร
+                            </small>
+                        </div>
+                        <div class="form-group">
+                            <label>ยืนยันรหัสผ่าน*</label>
+                            <input class="form-control" formControlName="confirmPassword" type="password" name="confirmPassword" id="confirmPassword"
+                                placeholder="กรอก ยืนยันรหัสผ่าน ..." />
+                            <small [hidden]="!userForm.errors?.mismatchedPasswords" class="text-danger">
+                                ยืนยันรหัสผ่านต้องกรอก และ ต้องเหมือนกับรหัสผ่าน
+                            </small>
+                        </div>
+                        <div class="form-group">
+                            <label>ชื่อ นามสกุล*</label>
+                            <input class="form-control" formControlName="name" type="text" name="name" id="name" [(ngModel)]="userRecord.name" placeholder="กรอก ชื่อนามสกุล (ภาษาไทย) ..."
+                            />
+                            <small [hidden]="userForm.controls.name.valid" class="text-danger">
+                                ชื่อนามสกุล เป็นภาษาไทย เช่น ชายนริศ ผดุงกุล
+                            </small>
+                        </div>
+                        <div class="form-group">
+                            <label>เบอร์มือถือ*</label>
+                            <input class="form-control" formControlName="mobilePhoneNo" name="mobilePhoneNo" id="mobilePhoneNo" [(ngModel)]="userRecord.mobilePhoneNo"
+                                type="text" placeholder="กรอก เบอร์มือถือ..." />
+                            <small [hidden]="userForm.controls.mobilePhoneNo.valid" class="text-danger">
+                                เบอร์มือถือ ต้องกรอก เช่น +66816123913
+                            </small>
+                        </div>
+
+                        <p>
+                            <small class="text-muted">* หมายถึง ข้อมูลที่ต้องกรองให้ถูกต้อง</small>
+                        </p>
+                        <div class="col-md-12">
+                            <button class="btn btn-danger pull-right s-n-btn" (click)="cancel()">ยกเลิกการแก้ไข</button>
+                            <button class="btn btn-primary pull-right s-n-btn" [disabled]="!userForm.valid" type="submit">ยืนยันแก้ไข</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

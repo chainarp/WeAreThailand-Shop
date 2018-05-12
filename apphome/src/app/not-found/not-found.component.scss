@@ -1,0 +1,46 @@
+/*
+Import
+=========================== */
+@import '../../assets/sass/css3-mixins';
+@import '../../assets/sass/variable';
+
+/*
+Wrap Not Found
+=========================== */
+.wrap-notfound{
+    padding: 0;
+    text-align: center;
+    background-image: url('../../assets/images/bg/brick-wall.png');
+    background-color: #fff;
+
+    .content{
+        padding: 100px 15px;
+        display: table;
+        margin: auto;
+    }
+
+    h1{
+        font-size: 102px;
+
+        small{
+            display: block;
+            font-size: 24px;
+            line-height: 32px;
+            font-weight: 400;
+            margin-top: 50px;
+        }
+    }
+
+    a{
+        margin: 5px;
+    }
+}
+
+/*
+Responisve
+=========================== */
+@media(max-height:400px) {
+    .wrap-notfound{
+        height: auto !important;
+    }
+}

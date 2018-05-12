@@ -1,0 +1,96 @@
+<div class="head-section bg">
+    <div class="container">
+        <h1 class="font-light">ลงทะเบียน</h1>
+        
+    </div>
+</div>
+
+   
+
+   <div class="wrapper">
+    <div class="block-center mt-xl wd-xl">
+        <!-- START panel-->
+        <div class="panel panel-dark panel-flat">
+<!--
+            <div class="panel-heading text-center">
+                <a href="#">
+                    <img class="block-center img-rounded img-responsive" src="assets/img/logo.png" alt="Image" />
+                </a>
+            </div>
+-->
+            <div class="panel-body">
+<!--                <p class="text-center pv">ลงทะเบียน เป็นสมาชิกกับ WeChef</p>-->
+                <form [formGroup]="userForm" class="form-validate mb-lg" role="form" name="registerForm" novalidate="" (ngSubmit)="onSubmitAddUser()" [formGroup]="userForm" >
+                    <div class="form-group has-feedback">
+                        <label class="text-muted">อีเมล์</label>
+                        <input class="form-control" type="email" name="account_email" placeholder="Enter email" autocomplete="off" formControlName="email"
+                            required="" [(ngModel)]="userRecord.email" />
+                        <span class="fa fa-envelope form-control-feedback text-muted"></span>
+                        <small [hidden]="userForm.controls.email.valid" class="text-danger">
+                            อีเมล์ต้องกรอก และ กรอกให้ถูกต้องด้วย เช่น chainarisp@yahoo.com
+                        </small>
+                        <!--
+                        <span class="text-danger" *ngIf="valForm.controls['email'].hasError('required') && (valForm.controls['email'].dirty || valForm.controls['email'].touched)">This field is required</span>
+                        <span class="text-danger" *ngIf="valForm.controls['email'].hasError('email') && (valForm.controls['email'].dirty || valForm.controls['email'].touched)">This field must be a valid email address</span>
+                        -->
+                    </div>
+                    <div class="form-group has-feedback">
+                        <label class="text-muted">ชื่อ นามสกุล (จริง)</label>
+                        <input class="form-control" type="text" name="name" placeholder="Enter Your Name" autocomplete="off" formControlName="name"
+                            required="" [(ngModel)]="userRecord.name" />
+                        <span class="fa fa-envelope form-control-feedback text-muted"></span>
+                        <small [hidden]="userForm.controls.name.valid" class="text-danger">
+                            ชื่อต้องกรอก (ภาษาไทย) เช่น ชายนริศ ผดุงกุล
+                        </small>
+                    </div>
+
+                    <div class="form-group has-feedback">
+                        <label class="text-muted">มือถือ</label>
+                        <input class="form-control" type="text" name="mobilePhoneNo" placeholder="Enter Your Mobile No" autocomplete="off" formControlName="mobilePhoneNo"
+                            required="" [(ngModel)]="userRecord.mobilePhoneNo" />
+                        <span class="fa fa-envelope form-control-feedback text-muted"></span>
+                        <small [hidden]="userForm.controls.mobilePhoneNo.valid" class="text-danger">
+                            เบอร์มือถือต้องกรอก และ กรอกให้ถูกต้องด้วย เช่น +66816123913
+                        </small>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <div class="form-group has-feedback">
+                            <label class="text-muted">รหัสผ่าน</label>
+                            <password-strength-bar [passwordToCheck]="userRecord.password" [barLabel]="barLabel"></password-strength-bar>
+                            <input class="form-control" id="password" type="password" name="password" formControlName="password" [(ngModel)]="userRecord.password">
+                            <span class="fa fa-envelope form-control-feedback text-muted"></span>
+                            <small [hidden]="userForm.controls.password.valid" class="text-danger">
+                                รหัสผ่านต้องกรอก และ มีความยาวไม่น้อยกว่า 6 ตัวอักษร
+                            </small>
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <div class="form-group has-feedback">
+                            <label class="text-muted">ยืนยันรหัสผ่าน</label>
+                            <input class="form-control" id="confirmPassword" type="password" name="confirmPassword" formControlName="confirmPassword">
+                            <span class="fa fa-envelope form-control-feedback text-muted"></span>
+                            <small [hidden]="!userForm.errors?.mismatchedPasswords" class="text-danger">
+                                ยืนยันรหัสผ่านต้องกรอก และ ต้องเหมือนกับรหัสผ่าน
+                            </small>
+                        </div>
+                    </div>
+                    <button class="btn btn-block btn-primary mt-lg" type="submit">สร้างบัญชีสมาชิก</button>
+                </form>
+                <!-- <div class="alert alert-danger text-center"></div> -->
+                <p class="pt-lg text-center">มีบัญชีสมาชิกในระบบอยู่แล้ว?</p>
+                <a class="btn btn-block btn-default" [routerLink]="'/login'">เข้าสู่ระบบ</a>
+            </div>
+        </div>
+        <!-- END panel-->
+        <!--
+        <div class="p-lg text-center">
+            <span>&copy;</span>
+            <span>{{ settings.app.year }}</span>
+            <span>-</span>
+            <span>{{ settings.app.name }}</span>
+            <br/>
+            <span>{{ settings.app.description }}</span>
+        </div>
+        -->
+    </div>
+</div>

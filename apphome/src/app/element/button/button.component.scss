@@ -1,0 +1,23 @@
+.list-icon{
+    padding: 0;
+    margin: -2px;
+    list-style: none;
+    display: inline-block;
+
+    li{
+        float: left;
+        display: block;
+        margin: 2px;
+
+        mat-icon{
+            display: table-cell;
+            width: 40px !important;
+            height: 40px !important;
+            vertical-align: middle;
+            text-align: center;
+            border: solid 1px #eee;
+            font-size: 20px;
+            padding-left: 1px;
+        }
+    }
+}

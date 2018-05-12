@@ -1,0 +1,202 @@
+/*
+Import
+=========================== */
+@import '../../../assets/sass/css3-mixins';
+@import '../../../assets/sass/variable';
+
+/* Loading
+======================== */
+.wrap-loading{
+    position: relative;
+    width: 100%; 
+    top: 0;
+    right: 0;
+
+    mat-spinner {
+      width: 50px; 
+      height: 50px; 
+      display: block;
+      margin: auto;
+    }
+}
+
+/* Wrap Home 2
+======================== */
+.wrap-home{
+    padding: 0 45px;
+    margin: 0;
+    position: relative;
+    background: #fff;
+    background-image: url('../../../assets/images/bg/brick-wall.png');
+
+    > .wrap-slider{
+        overflow: hidden;
+
+        > .row{
+            position: relative;
+            z-index: 1;  
+            margin: 0;    
+            @include transition("all 0.3s ease-in-out");
+    
+            .col{
+                padding: 0;      
+
+                .valign-wrapper{
+                    border-left: solid 1px #d0d0d0;
+                    border-right: solid 1px #d0d0d0;
+                    margin-left: -1px; 
+
+                    .content{
+                        display: block;
+                        width: 100%;
+                        padding: 0 15px;
+                        letter-spacing: .5px;
+
+                        .material-icons{
+                            position: relative;
+                            top: 2px;
+                        }
+
+                        img{
+                            width: 100%;
+                            padding: 15px;
+                            margin-bottom: 15px;
+                        }
+                
+                        h1, h2, h3, h4, h5, h6{
+                            font-weight: 900;
+                            text-transform: none;
+                        }
+                    }
+                }
+
+                &.demo .valign-wrapper .content{
+                    padding: 55px;
+                }
+            }
+        }
+    }
+
+    .nav{
+        position: absolute;
+        background: transparent;
+        width: 45px;
+        height: 100%;
+        text-align: center !important;
+        line-height: 35px;
+        left: 0;
+        top: 0;
+        z-index: 2;
+        border: 0;
+        outline: 0;
+        display: block;
+        color: $color-content;
+        background: #fff;
+
+        &:focus{
+            background: #fff;
+        }
+
+        &.next{
+            margin-left: -45px;
+            left: 100%;
+        }
+
+        &:disabled{
+            @include opacity(0.5);
+        }
+
+        mat-icon{
+            position: relative;
+            right: 6px;
+            top: 2px;
+            font-size: 32px;
+        }
+    }
+}
+
+/* Responsive
+======================== */
+@media(max-width: 1200px){
+    .wrap-home > .wrap-slider > .row .col .valign-wrapper .content{
+        padding: 0 30px;
+    }
+}
+
+@media(max-width: 920px){
+    .wrap-home{
+        padding: 0;
+
+        > .wrap-slider {
+            border: 0;
+
+            .row{
+                width: 100% !important;
+                transform: translateX(0) !important;
+
+                .col{
+                    width: 100% !important;
+                    border-bottom: solid 1px #efefef;
+                    background: rgba(255,255,255,0.5);
+
+                    &.demo{
+                        background: transparent;
+                    }
+
+                    .valign-wrapper{
+                        height: auto !important;
+
+                        .content{
+                            padding: 55px 30px;
+                        }
+                    }
+                } 
+            } 
+        }
+
+        .nav{
+            display: none;
+        }
+    }
+}
+
+@media (min-width: 768px) and (max-width:920px){
+    .wrap-home > .wrap-slider > .row .col{
+        .valign-wrapper .content{
+            width: 80%;
+            display: table;
+            margin: auto;
+            position: relative;
+            overflow: hidden;
+            text-align: left !important;
+            padding-left: 250px;
+
+            img{
+                padding: 30px;
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 250px;
+            }
+        }
+    }
+}
+
+@media(max-width: 767px){
+    .wrap-home > .wrap-slider > .row .col{
+        .valign-wrapper{
+            border: 0;
+
+            .content{
+                padding: 55px 15px;
+
+                img{
+                    width: 250px;
+                    display: block;
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+            }
+        }
+    }
+}

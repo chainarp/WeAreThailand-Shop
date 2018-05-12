@@ -1,0 +1,46 @@
+/*
+Import
+=========================== */
+@import '../../../assets/sass/css3-mixins';
+@import '../../../assets/sass/variable';
+
+/*
+Layout
+=========================== */
+ul.list-product li{
+    padding-left: 75px;
+    padding-right: 0;
+
+    .wrap-img{
+        left: 0;
+    }
+}
+
+.col{
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+table.count{
+    margin-top: -1px;
+}
+
+.link{
+    display: inline-block;
+}
+
+/*
+Responsive
+=========================== */
+@media (max-width: 920px){
+    .btn{
+        width: 100%;
+        display: block;
+    }
+}
+
+@media (max-width: 568px){
+    form{
+        margin-bottom: 50px;
+    }
+}    

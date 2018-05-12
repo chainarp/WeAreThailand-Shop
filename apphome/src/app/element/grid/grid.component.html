@@ -1,0 +1,159 @@
+<!-- Head Section -->
+<div class="head-section bg">
+    <div class="container">
+        <h4>Grid <span class="font-light">Columns</span></h4>
+        <p>Material css</p>
+    </div>
+</div>
+<!-- End Section -->
+<div class="container-page">
+    <div class="box-page">
+        <!-- Start Pane -->
+        <div class="panel">
+            <div class="head-panel">
+                <h6>Grid CSS</h6>
+            </div>
+            <div class="body-panel">
+                <p class="margin-bottom0">
+                    To add a container just put your content inside a &lt;div&gt; tag with a <strong>container-page</strong> class. Here's an example of how your page might be set up.
+                </p>
+            </div>
+            <div class="code">
+<pre>
+&lt;div class=&quot;container-page&quot;&gt;
+    &lt;!-- Page Content goes here --&gt;
+&lt;/div&gt;
+</pre>
+            </div>
+            <div class="head-panel">
+                <h6>12 Columns</h6>
+            </div>
+            <div class="body-panel">
+                <p>
+                    Our standard grid has 12 columns. No matter the size of the browser, each of these columns will always have an equal width.
+                </p>
+                <div class="row">
+                    <div class="col s1">1</div>
+                    <div class="col s1">2</div>
+                    <div class="col s1">3</div>
+                    <div class="col s1">4</div>
+                    <div class="col s1">5</div>
+                    <div class="col s1">6</div>
+                    <div class="col s1">7</div>
+                    <div class="col s1">8</div>
+                    <div class="col s1">9</div>
+                    <div class="col s1">10</div>
+                    <div class="col s1">11</div>
+                    <div class="col s1">12</div>
+                </div>
+            </div>
+            <div class="code">
+<pre>
+&lt;div class=&quot;row&quot;&gt;
+    &lt;div class=&quot;col s1&quot;&gt;1&lt;/div&gt;
+    &lt;div class=&quot;col s1&quot;&gt;2&lt;/div&gt;
+    &lt;div class=&quot;col s1&quot;&gt;3&lt;/div&gt;
+    &lt;div class=&quot;col s1&quot;&gt;4&lt;/div&gt;
+    &lt;div class=&quot;col s1&quot;&gt;5&lt;/div&gt;
+    &lt;div class=&quot;col s1&quot;&gt;6&lt;/div&gt;
+    &lt;div class=&quot;col s1&quot;&gt;7&lt;/div&gt;
+    &lt;div class=&quot;col s1&quot;&gt;8&lt;/div&gt;
+    &lt;div class=&quot;col s1&quot;&gt;9&lt;/div&gt;
+    &lt;div class=&quot;col s1&quot;&gt;10&lt;/div&gt;
+    &lt;div class=&quot;col s1&quot;&gt;11&lt;/div&gt;
+    &lt;div class=&quot;col s1&quot;&gt;12&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+            </div>
+            <div class="head-panel">
+                <h6>Columns live inside Rows</h6>
+            </div>
+            <div class="body-panel">
+                <div class="row">
+                    <div class="col s12">This div is 12-columns wide on all screen sizes</div>
+                    <div class="col s6">6-columns (one-half)</div>
+                    <div class="col s6">6-columns (one-half)</div>
+                </div>
+            </div>
+            <div class="code">
+<pre>
+&lt;div class=&quot;row&quot;&gt;
+    &lt;div class=&quot;col s12&quot;&gt;This div is 12-columns wide on all screen sizes&lt;/div&gt;
+    &lt;div class=&quot;col s6&quot;&gt;6-columns (one-half)&lt;/div&gt;
+    &lt;div class=&quot;col s6&quot;&gt;6-columns (one-half)&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+            </div>
+            <div class="head-panel">
+                <h6>Offsets</h6>
+            </div>
+            <div class="body-panel">
+                 <div class="row">
+                    <div class="col s12"><span class="flow-text">This div is 12-columns wide on all screen sizes</span></div>
+                    <div class="col s6 offset-s6"><span class="flow-text">6-columns (offset-by-6)</span></div>
+                </div>
+            </div>
+            <div class="code">
+<pre>
+ &lt;div class=&quot;row&quot;&gt;
+    &lt;div class=&quot;col s12&quot;&gt;&lt;span class=&quot;flow-text&quot;&gt;This div is 12-columns wide on all screen sizes&lt;/span&gt;&lt;/div&gt;
+    &lt;div class=&quot;col s6 offset-s6&quot;&gt;&lt;span class=&quot;flow-text&quot;&gt;6-columns (offset-by-6)&lt;/span&gt;&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+            </div>
+            <div class="head-panel">
+                <h6>Push and Pull</h6>
+            </div>
+            <div class="body-panel">
+                  <div class="row">
+                    <div class="col s7 push-s5"><span class="flow-text">This div is 7-columns wide on pushed to the right by 5-columns.</span></div>
+                    <div class="col s5 pull-s7"><span class="flow-text">5-columns wide pulled to the left by 7-columns.</span></div>
+                  </div>
+            </div>
+            <div class="code">
+<pre>
+ &lt;div class=&quot;row&quot;&gt;
+    &lt;div class=&quot;col s7 push-s5&quot;&gt;&lt;span class=&quot;flow-text&quot;&gt;This div is 7-columns wide on pushed to the right by 5-columns.&lt;/span&gt;&lt;/div&gt;
+    &lt;div class=&quot;col s5 pull-s7&quot;&gt;&lt;span class=&quot;flow-text&quot;&gt;5-columns wide pulled to the left by 7-columns.&lt;/span&gt;&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+            </div>
+            <div class="head-panel">
+                <h6>Screen Sizes</h6>
+            </div>
+            <div class="body-panel">
+                  <table class="striped">
+                      <tr>
+                          <th></th>
+                          <th>Mobile Devices <= 600px</th>
+                          <th>Tablet Devices > 600px</th>
+                          <th>Desktop Devices > 992px</th>
+                          <th>Large Desktop Devices > 1200px</th>
+                      </tr>
+                      <tr>
+                          <td>Class Prefix</td>
+                          <td>.s</td>
+                          <td>.m</td>
+                          <td>.l</td>
+                          <td>.xl</td>
+                      </tr>
+                      <tr>
+                          <td>Container Width</td>
+                          <td>90%</td>
+                          <td>85%</td>
+                          <td>70%</td>
+                          <td>70%</td>
+                      </tr>
+                      <tr>
+                          <td>Number of Columns</td>
+                          <td>12</td>
+                          <td>12</td>
+                          <td>12</td>
+                          <td>12</td>
+                      </tr>
+                  </table>
+            </div>
+        </div>
+        <!-- Start Panel -->
+    </div>
+</div>

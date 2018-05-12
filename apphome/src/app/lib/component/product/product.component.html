@@ -1,0 +1,68 @@
+<!-- Start Product -->
+<div class="valign-wrapper" *ngIf="loadingState">
+    <mat-spinner diameter="50" strokeWidth="5"></mat-spinner>
+</div>
+
+<!-- Start Row Product -->
+<div class="row row-clear row-product" 
+    *ngIf="productState" 
+    libHeight="item-product" 
+    (mouseleave)="selectProduct = null" 
+    [class.blur]="blurproduct" #row>
+    
+    <div *ngFor="let product of products | 
+        productfilter: filter | 
+        paginate: { 
+            itemsPerPage: limit, 
+            currentPage: currentPage 
+        }; 
+        let i=index;" 
+        [@fade] 
+        class="col {{column}}" 
+        [id]="product.id" 
+        (mouseenter)="onHover(product)">
+
+        <div class="item-product">  
+            <a *ngIf="showBtnClose" mat-mini-fab class="close" (click)="selectClose(product)">
+                <mat-icon>&#xE5CD;</mat-icon>
+            </a>
+            <img [src]="product.image" [alt]="product.productName"/>
+            <div class="content">
+                <h6 class="title truncate">{{product.productName}}</h6>
+                <p>{{product.category}}</p>
+                <rating [value]="product.rate"></rating>
+                <strong class="price">{{product.price | currency:'USD':'$'}}</strong>
+                <div [@visibility]="selectProduct == product ? 'shown' : 'hidden'" class="overlay valign-wrapper">
+                    <ul>
+                        <li><a mat-mini-fab (click)="viewProduct(product.id)"><mat-icon>&#xE8FF;</mat-icon></a></li>
+                        <li><a mat-mini-fab [routerLink]="'/shop/p/' + product.slug"><mat-icon>&#xE157;</mat-icon></a></li>
+                    </ul>
+                </div>     
+            </div>
+        </div>
+    </div>
+
+    <!-- Empty Product -->
+    <div [@fade] *ngIf="(products | productfilter:filter).length === 0" class="empty-product">
+        <img src="http://via.placeholder.com/246x339" width="100" alt=""/>
+        <h5 class="margin-bottom0 margin-top20">Sorry... no product founded</h5>
+    </div>
+</div>
+<!-- End Row Product -->
+
+<!-- Start Wrap Pagintaion -->
+<div *ngIf="paginate">
+    <div *ngIf="(products | productfilter:filter).length !== 0" class="wrap-pagination">
+        <pagination-controls 
+            (pageChange)="currentPage = $event; onPageChange(currentPage)" 
+            class="pagination-product">
+        </pagination-controls>
+    </div>
+</div>
+<!-- Start Lightbox -->
+<lightbox 
+    [isShow]="togglezoom" 
+    [selectProduct]="getId" 
+    [arrayProduct]="productUpdated"
+    (close)="closeZoom()">
+</lightbox>

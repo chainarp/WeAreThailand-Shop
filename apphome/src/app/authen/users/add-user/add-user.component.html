@@ -1,0 +1,83 @@
+<div class="content-heading ">
+    Add User
+    <small>
+        <a [routerLink]=" ['/home'] ">Dashboard</a> ->
+        <a [routerLink]="['/users/manageUsers']"> Users Detail </a>-> Add User
+    </small>
+</div>
+<div class="container-md">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <div class="panel b">
+                <div class="panel-heading  text-bold bg-purple-dark">Add User</div>
+                <div class="panel-body">
+                    <form (ngSubmit)="onSubmitAddUser()" [formGroup]="userForm">
+                        <div class="form-group">
+                            <label>User 's Role(s)</label>
+                            <select class="form-control" formControlName="userRoles" name="userRoles" id="userRoles" [(ngModel)]="userRecord.userRolesString" placeholder="select user role(s)">
+                                <option  value="CUSTOMER">CUSTOMER</option>
+                                <option  value="SELLER,CUSTOMER">SELLER,CUSTOMER</option>
+                                <option  value="CUSTOMER_SERVICE,SELLER,CUSTOMER">CUSTOMER_SERVICE,SELLER,CUSTOMER</option>
+                                <option  value="ADMIN,CUSTOMER_SERVICE,SELLER,CUSTOMER">ADMIN,CUSTOMER_SERVICE,SELLER,CUSTOMER</option>
+                            </select>
+                            <small [hidden]="userForm.controls.userRoles.valid" class="text-danger">
+                                user 's role(s) is required
+                            </small>
+                        </div>
+                        <div class="form-group">
+                            <label>Email*</label>
+                            <input class="form-control" formControlName="email" type="email" email name="email" id="email" [(ngModel)]="userRecord.email"
+                                placeholder="Enter Email..." />
+                            <small [hidden]="userForm.controls.email.valid" class="text-danger">
+                                email is required and correct pattern
+                            </small>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Password*</label>
+                            <password-strength-bar [passwordToCheck]="userRecord.password" [barLabel]="barLabel"></password-strength-bar>
+                            <input class="form-control" formControlName="password" type="password" name="password" id="password" [(ngModel)]="userRecord.password"
+                                placeholder="Enter Password..." />
+                            <small [hidden]="userForm.controls.password.valid" class="text-danger">
+                                password is required and length > 6
+                            </small>
+                        </div>
+                        <div class="form-group">
+                            <label>Confirm Password*</label>
+                            <input class="form-control" formControlName="confirmPassword" type="password" name="confirmPassword" id="confirmPassword"
+                                placeholder="Enter Confirm Password..." />
+                            <small [hidden]="!userForm.errors?.mismatchedPasswords" class="text-danger">
+                                confirm password is required and must match password
+                            </small>
+                        </div>
+                        <div class="form-group">
+                            <label>Full Name*</label>
+                            <input class="form-control" formControlName="name" type="text" name="name" id="name" [(ngModel)]="userRecord.name" placeholder="Enter Name..."
+                            />
+                            <small [hidden]="userForm.controls.name.valid" class="text-danger">
+                                name is required e.g. ชายนริศ ผดุงกุล
+                            </small>
+                        </div>
+                        <div class="form-group">
+                            <label>Mobile Number*</label>
+                            <input class="form-control" formControlName="mobilePhoneNo" name="mobilePhoneNo" id="mobilePhoneNo" [(ngModel)]="userRecord.mobilePhoneNo"
+                                type="text" placeholder="Enter Contact Number..." />
+                            <small [hidden]="userForm.controls.mobilePhoneNo.valid" class="text-danger">
+                                mobilePhoneNo is required e.g. +66816123913
+                            </small>
+                        </div>
+
+                        <p>
+                            <small class="text-muted">* Required Fields</small>
+                        </p>
+                        <div class="col-md-12">
+                            <button class="btn btn-danger pull-right s-n-btn" (click)="cancel()">Cancel</button>
+                            <button class="btn btn-primary pull-right s-n-btn" [disabled]="!userForm.valid&&!isSubmitted" type="submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

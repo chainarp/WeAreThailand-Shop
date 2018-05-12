@@ -1,0 +1,929 @@
+import { Injectable } from '@angular/core';
+import { RESTClientService } from '../restclient/restclient.service';
+import { CustomerLocationInfo, AvailableItemInfo, SellerInfo, ProductItemInfo } from '../app-data-model/app-data-model';
+import * as geolocation from 'geolocation';
+import * as _ from 'lodash';
+
+
+
+
+/*
+  Generated class for the SharingDataServiceProvider provider.
+
+  See https://angular.io/guide/dependency-injection for more info on providers
+  and Angular DI.
+*/
+@Injectable()
+export class SharingDataServiceProvider {
+
+  constructor(private restClientService: RESTClientService) {
+    console.log('SharingDataServiceProvider.constructor()...started');
+    this.initialAppData();
+  }
+
+  private initialAppData(): void {
+    this.initialLocalStorage();
+  }
+
+  private initialLocalStorage(): void {
+    this.initialCustomerLocation();
+  }
+
+  private initialCustomerLocation(): void {
+    /*
+    this.initialCustomerLocationLocalStorage().then((value) => {
+      this.refreshCurrentCustomerLocation().then((value)=>{
+        return;
+      }).catch((error)=>{
+
+      });
+    }).catch((error) => {
+
+    });
+    */
+    this.initialCustomerLocationLocalStorage();
+    //this.refreshCurrentCustomerLocation();
+  }
+  /*
+  private checkPermission() : void {
+    this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION).then(
+      success => console.log('Permission granted'),
+      err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION)
+    );
+  }
+  */
+  //13.74349185255942 :long=100.49879542518465
+  private async initialCustomerLocationLocalStorage(): Promise<any> {
+    /*
+    public id: string;
+    public title: string;
+    public location: string;
+    public messageToDriver: string;
+    public receiverPhone : number;
+    public latitude: number; //13.74349185255942, 
+    public longitude: number; //100.49879542518465, 
+    public currentRadius: number; //
+    public icon: string = "pin";
+    public checked: boolean = false;
+
+    */
+
+    let customersLocations: Array<CustomerLocationInfo> =
+      [{ "id": 0, "title": "CURRENT_LOCATION", "location": "SEE_MAP", "messageToDriver": "SEE_PO", "receiverPhone": "BUYER_PHONE", "latitude": 13.74349185255942, "longitude": 100.49879542518465, "radius": 100, "icon": "pin", checked: false }]
+    //ถ้ายังไม่มี CustomerLocations ฝัง add เข้าไปใหม่เลย
+    if (localStorage.getItem("CustomerLocations") == null) {
+      localStorage.setItem('CustomerLocations', JSON.stringify(customersLocations));
+    }
+    //ตอนนี้มั่นใจแล้ว ว่ามี CustomerLocations ฝั่งไว้แล้ว ดังนั้น UPDATE CURRENT LOCATION ใหม่ตามที่อยู่ใหม่แล้วก็ฝังเก็บไว้ที่เดิม
+    await this.readGeoLocationToCurrentLocation();
+
+    //หาตัวที่ Checked ที่ฝังไว้ ถ้ามีดูว่ามี Id == 0 หรือเปล่า ถ้าใช่ UPDATE LOCATION ใหม่ไปด้วย ถ้าไม่ใช่ไม่ต้อง
+    //ถ้าไม่มี ให้เอา index == 0 ลงไปเป็น default
+    if (localStorage.getItem("CustomerLocationItemChecked") != null) {
+      //console.log("localStorage.getItem(\"CustomerLocationItemChecked\")" + localStorage.getItem("CustomerLocationItemChecked"));
+      this.customerLocationItemChecked = <CustomerLocationInfo>JSON.parse(localStorage.getItem("CustomerLocationItemChecked"));
+      if (this.customerLocationItemChecked.id == 0) {
+        this.customerLocationItemChecked = (<Array<CustomerLocationInfo>>JSON.parse(localStorage.getItem("CustomerLocations")))[0];
+      }
+    } else {
+      localStorage.setItem("CustomerLocationItemChecked", JSON.stringify((<Array<CustomerLocationInfo>>JSON.parse(localStorage.getItem("CustomerLocations")))[0]));
+      this.customerLocationItemChecked = <CustomerLocationInfo>JSON.parse(localStorage.getItem("CustomerLocationItemChecked"));
+    }
+
+    if (localStorage.getItem("Radius") != null) {
+      this.radius = Number.parseInt(localStorage.getItem("Radius"));
+    } else {
+      this.radius = (<CustomerLocationInfo>customersLocations[0]).radius;
+      localStorage.setItem("Radius", this.radius.toString());
+    }
+  }
+  //////////////////////////////////////////////////
+  private customerLocationItemChecked: CustomerLocationInfo = null;
+  public setCustomerLocationItemChecked(customerLocationItemChecked: CustomerLocationInfo): void {
+    console.log("setCustomerLocationItemChecked(customerLocationItemChecked : CustomerLocationInfo)" + JSON.stringify(customerLocationItemChecked));
+    this.customerLocationItemChecked = customerLocationItemChecked;
+    localStorage.setItem("CustomerLocationItemChecked", JSON.stringify(this.customerLocationItemChecked));
+  }
+  public getCustomerLocationItemChecked(): CustomerLocationInfo {
+    //console.log("getCustomerLocationItemChecked()");
+    return this.customerLocationItemChecked;
+  }
+  private radius: number = 10;
+  public setRadius(radius: number): void {
+    //console.log("radius="+radius);
+    this.radius = radius;
+    localStorage.setItem("Radius", this.radius.toString());
+  }
+  public getRadius(): number {
+    return this.radius;
+  }
+  ///////////////////////////////////////////////////
+
+  private readGeoLocationToCurrentLocation(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      geolocation.getCurrentPosition(function (err, position) {
+        if (err) {
+          reject(err);
+        }
+        console.log(position)
+        let customerLocationInfos: Array<CustomerLocationInfo> = JSON.parse(localStorage.getItem("CustomerLocations"));
+        customerLocationInfos[0].latitude = position.coords.latitude;
+        customerLocationInfos[0].longitude = position.coords.longitude;
+        //items[0].radius = 100000000;
+        console.log("SharingDataServiceProvider.readGeoLocationToCurrentLocation() >>> customerLocationInfos[0].latitude=" + customerLocationInfos[0].latitude + "::::customerLocationInfos[0].longitude" + customerLocationInfos[0].longitude);
+        localStorage.setItem("CustomerLocations", JSON.stringify(customerLocationInfos));
+
+        resolve("OK");
+      });
+
+    })
+  }
+
+
+  public async refreshCurrentCustomerLocation(): Promise<any> {
+
+    //console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+    /*
+    let customersLocations = JSON.parse(localStorage.getItem("CustomerLocations"));
+    if (this.customerLocationItemChecked == null) {
+      this.setCustomerLocationItemChecked(customersLocations[0]);
+    }
+    */
+    /*
+    return new Promise((resolve, reject) => {
+      this.loadNearByAvailableItems().then((value) => {
+        resolve("OK");
+      }).catch((error) => {
+        reject(error);
+      });
+    })
+    */
+    this.loadNearByAvailableItems();
+  }
+
+  ///////////////////////////////////////////////////////////////////////////////////////////////////
+  //public nearBySellers: Array<any> = new Array<any>();
+  //public allSellers: Array<any> = new Array<any>();
+
+  /*
+  public loadNearBySellers2(): void {
+    this.loadAllSellers();
+  }alertalert
+  */
+
+  private nearByCallerInterfaces: Array<NearByCallerInterface> = new Array<NearByCallerInterface>();
+
+  public registerNearByCaller(nearByCallerInterface: NearByCallerInterface): void {
+    this.nearByCallerInterfaces.push(nearByCallerInterface);
+    console.log("this.nearByCallerInterfaces.length=" + this.nearByCallerInterfaces.length);
+  }
+
+  /*  
+    public reloadNearBySellers(): Promise<any> {
+      return new Promise((resolve, reject) => {
+        this.loadNearBySellers().then((value) => {
+          this.nearByCallerInterfaces.forEach((nearByCallerInterface) => {
+            nearByCallerInterface.handleNearByServiceUpdating(value);
+          });
+          resolve(value);
+        }).catch((error) => {
+          reject("reloadNearBySellers::" + error);
+        });
+      });
+    }
+  */
+  /*
+  
+    private loadNearBySellers(): Promise<any> {
+      return new Promise((resolve, reject) => {
+        let sellersGeoFireFirebaseRef = firebase.database().ref('/geofire/').child('sellers');
+        let sellersGeoGeoFire = new GeoFire(sellersGeoFireFirebaseRef);
+        let sellersFirebaseRef = firebase.database().ref('/sellers/');
+        let productItemFirebaseRef = firebase.database().ref('/productItems/');
+  
+        //console.log("*** Creating GeoQuery With Following Data ***");
+        //console.log(JSON.stringify(this.customerLocationItemChecked));
+        //console.log(JSON.stringify(this.radius));
+  
+        var sellersGeoGeoQuery = sellersGeoGeoFire.query({
+          center: [this.customerLocationItemChecked.latitude, this.customerLocationItemChecked.longitude],
+          radius: this.radius
+        });
+  
+        var varSellers: Array<any> = new Array<any>();
+        var varProductItems: Array<any> = new Array<any>();
+        var varNearBySellersCount: number = 0;
+  
+  
+        var onKeyEnteredRegistration = sellersGeoGeoQuery.on("key_entered", function (key, location, distance) {
+          varNearBySellersCount++;
+          //console.log(key + "at >" + location + "< entered the query. Hi " + key + "(" + distance + ")!");
+          sellersFirebaseRef.child(key).once("value").then(function (snapshot_seller) {
+  
+            let seller = snapshot_seller.val();
+            seller.latlng = location;
+            seller.distance = Number.parseFloat(distance.toFixed(2));
+            seller.productItems = new Array<any>();
+            //console.log(">+>+>+>+> >+>+>+>+> >+>+>+>+> >+>+>+>+>" + JSON.stringify(seller));
+            varSellers.push(seller);
+  
+            //console.log(">>>>>snapshot.key=" + JSON.stringify(snapshot_seller.key));
+  
+            productItemFirebaseRef.orderByChild('sellerKey').equalTo(snapshot_seller.key).once('value').then(function (snapshot_product_items) {
+              var productItems: any[] = new Array<any>();
+  
+              snapshot_product_items.forEach(function (snapshot_product_item) {
+                let snapshotProductItemValue: any = snapshot_product_item.val();
+                snapshotProductItemValue.key = snapshot_product_item.key;
+                productItems.push(snapshotProductItemValue);
+                return false;
+              });
+  
+              for (let j = 0; j < productItems.length; j++) {
+                //
+                let priceCommaString: string = "";
+  
+                for (let k = 0; k < productItems[j].itemPrices.length; k++) {
+                  priceCommaString = priceCommaString + productItems[j].itemPrices[k].value + ", ";
+                }
+  
+                //console.log(priceCommaString.lastIndexOf(", "));
+                if (priceCommaString.length > 0 && priceCommaString.lastIndexOf(", ") > 0) {
+                  productItems[j].prices = priceCommaString.substring(0, priceCommaString.lastIndexOf(", "));
+                }
+                let sellerClone: any = Object.assign({}, seller);
+                let productItemClone: any = Object.assign({}, productItems[j]);
+                seller.productItems.push(productItemClone);
+                productItems[j].seller = sellerClone;
+                varProductItems.push(productItems[j]);
+              }
+              if (varNearBySellersCount == varSellers.length) {
+                resolve({ "varNearBySellersCount": varNearBySellersCount, "varNearBySellers": varSellers, "varNearByProductItems": varProductItems });
+              }
+            }).catch((error) => {
+              reject("Querying To Find a Nearby ProductItem Info::" + error);
+            });
+          }).catch(function (error) {
+            reject("Querying To Find a Nearby Seller Info::" + error);
+          })
+  
+        });
+  
+        //https://github.com/firebase/geofire-js/issues/73
+        sellersGeoGeoQuery.on("ready", function () {
+          sellersGeoGeoQuery.cancel();
+          if (varNearBySellersCount == 0) {
+            resolve({ "varNearBySellersCount": varNearBySellersCount, "varNearBySellers": varSellers, "varNearByProductItems": varProductItems });
+          }
+        });
+      });//end new Promise<any>
+    }//end method
+  
+  */
+
+
+  /*
+    
+    public loadNearBySellers(caller:Object): Promise<any> {
+      console.log("-----------------caller="+caller);
+      //nearBySellers: any[] = new Array<any>();
+   
+   
+   
+   
+      return new Promise((resolve, reject) => {
+        console.log("------------------------------------------------------------------------------------------------");
+          
+        let geofireFirebaseRef = firebase.database().ref('/geofire/');
+        let sellersGeoFireFirebaseRef = geofireFirebaseRef.child('sellers');
+        let sellersGeoGeoFire = new GeoFire(sellersGeoFireFirebaseRef);
+  
+  
+        let sellersFirebaseRef = firebase.database().ref('/sellers/');
+        //let sellersObjGeoFire = new GeoFire(sellersFirebaseRef);
+  
+  
+  
+        console.log("*** Creating GeoQuery With Following Data ***");
+        console.log(JSON.stringify(this.customerLocationItemChecked));
+        console.log(JSON.stringify(this.radius));
+  
+        var sellersGeoGeoQuery = sellersGeoGeoFire.query({
+          center: [this.customerLocationItemChecked.latitude, this.customerLocationItemChecked.longitude],
+          radius: this.radius
+        });
+  
+        var varSellers: Array<any> = new Array<any>();
+        var varProductItems: Array<any> = new Array<any>();
+        var varNearBySellersCount : number  = 0;
+  
+  
+        var onKeyEnteredRegistration = sellersGeoGeoQuery.on("key_entered", function (key, location, distance) {
+          varNearBySellersCount ++;
+          console.log(key + "at >" + location + "< entered the query. Hi " + key + "(" + distance + ")!");
+          //console.log(sellersObjGeoFire.ref());
+          //sellersObjGeoFire.
+  
+          sellersFirebaseRef.child(key).once("value").then(function (snapshot_seller) {
+  
+            let seller = snapshot_seller.val();
+            seller.latlng = location;
+            seller.distance = Number.parseFloat(distance.toFixed(2));
+            seller.productItems = new Array<any>();
+            console.log(">+>+>+>+> >+>+>+>+> >+>+>+>+> >+>+>+>+>" + JSON.stringify(seller));
+            varSellers.push(seller);
+  
+            console.log(">>>>>snapshot.key=" + JSON.stringify(snapshot_seller.key));
+            let productItemFirebaseRef = firebase.database().ref('/productItems/');
+            productItemFirebaseRef.orderByChild('sellerKey').equalTo(snapshot_seller.key).on('value', function (snapshot_product_items) {
+              //if (snapshot_product_items != null || JSON.stringify(snapshot_product_items) != 'null') {
+  
+              // console.log("snapshot_product_items===" + JSON.stringify(snapshot_product_items.);
+              var productItems: any[] = new Array<any>();
+  
+              snapshot_product_items.forEach(function (childSnapshot) {
+                // key will be "ada" the first time and "alan" the second time
+                //var key = childSnapshot.key;
+                // childData will be the actual contents of the child
+                //var childData = childSnapshot.val();
+                //console.log("key="+key+" ::: childData="+JSON.stringify(childData));
+                //childSnapshot.val().key = childSnapshot.key;
+                let childSnapeshortValue: any = childSnapshot.val();
+                childSnapeshortValue.key = childSnapshot.key;
+                productItems.push(childSnapeshortValue);
+                return false;
+              });
+              //}
+              //let copy = Object.assign({}, original );
+              for (let j = 0; j < productItems.length; j++) {
+                //
+                let priceCommaString: string = "";
+  
+                for (let k = 0; k < productItems[j].itemPrices.length; k++) {
+                  priceCommaString = priceCommaString + productItems[j].itemPrices[k].value + ", ";
+                }
+  
+                console.log(priceCommaString.lastIndexOf(", "));
+                if (priceCommaString.length > 0 && priceCommaString.lastIndexOf(", ") > 0) {
+                  productItems[j].prices = priceCommaString.substring(0, priceCommaString.lastIndexOf(", "));
+                }
+  
+  
+                //
+                let sellerClone: any = Object.assign({}, seller);
+                let productItemClone: any = Object.assign({}, productItems[j]);
+                seller.productItems.push(productItemClone);
+                productItems[j].seller = sellerClone;
+                varProductItems.push(productItems[j]);
+                //this.nearByProductItems.push(productItems[j]);
+              }
+              //console.log("productItems="+JSON.stringify(productItems));
+  
+  
+            });
+  
+            //matches.push(snapshot.val());
+  
+            /*
+            let productItemsFbLstObs: FirebaseListObservable<any> = this.angularFireDatabase.list('/productItems', {
+              query: {
+                orderByChild: 'sellerId',
+                equalTo: seller.$key
+              }
+            }
+            );
+            
+            var nearByProductItemsData: any[] = new Array<any>();
+            productItemsFbLstObs.subscribe((data) => {
+              //nearByProductItemsData = data;
+              for (let j = 0; j < data.length; j++) {
+                data[j].seller = seller;
+                this.nearByProductItems.push(data[j]);
+              }
+            });
+            * /
+          }).catch(function (error) {
+            console.log("Error fetching sellers data:", error);
+          })
+  
+        });
+  
+        //https://github.com/firebase/geofire-js/issues/73
+        sellersGeoGeoQuery.on("ready", function () {
+          // This will fire once the initial data is loaded, so now we can cancel the "key_entered" event listener
+          //console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++="+varNearBySellersCount);
+          //onKeyEnteredRegistration.cancel();
+          sellersGeoGeoQuery.cancel();
+  
+          var orderBy = function(a,b){
+            console.log("XXXXXXXXXXXXXXXXXX");
+            return a.distance - b.distance;
+          }
+          //var this_nearBySellers = varSellers;//(varSellers as Array<any>).sort(orderBy); //.sort((a,b)=>{console.log("XXXXXXXXXXXXXXXXXX");return a.distance-b.distance;});//_.sortBy(varSellers,'distance');
+          //var this_nearByProductItems = varProductItems;
+  
+          for (let i = 0; i < varProductItems.length; i++) {
+  
+            let priceCommaString: string = "";
+            for (let j = 0; j < varProductItems[i].itemPrices.length; j++) {
+              priceCommaString = priceCommaString + varProductItems[i].itemPrices[j].value + ", ";
+            }
+  
+            console.log(priceCommaString.lastIndexOf(", "));
+            if (priceCommaString.length > 0 && priceCommaString.lastIndexOf(", ") > 0) {
+              this.nearByProductItems[i].price = priceCommaString.substring(0, priceCommaString.lastIndexOf(", "));
+            }
+  
+          }
+          console.log("+++++++++++++++++++++++++++++++varNearBySellersCount="+varNearBySellersCount);
+          console.log("+++++++++++++++++++++++++++++++varNearBySellers.length="+varSellers.length);
+          console.log("+++++++++++++++++++++++++++++++varNearByProductItems.length="+varProductItems.length);
+          resolve({"varNearBySellersCount":varNearBySellersCount,"varNearBySellers":varSellers ,"varNearByProductItems":varProductItems });
+  
+        });
+  
+        
+  
+        //this.loadNearByProductItems();
+        //console.log("this.nearByProductItems=" + JSON.stringify(varProductItems));
+  
+      });//end new Promise<any>
+    }//end method
+  
+  */
+  /* 
+   public loadAllSellers(): void {
+     let sellersFbLstObs: AngularFireList<any> = this.angularFireDatabase.list('/sellers');
+     sellersFbLstObs.valueChanges().subscribe((data) => {
+       this.allSellers = data;
+       this.loadNearByProductItems();
+     });
+ 
+   }
+ 
+   public allProductItems: Array<any>;
+   public loadAllProductItems(): void {
+     console.log("loadAllProductItems()");
+     this.allProductItems = new Array<any>();
+ 
+     //https://github.com/angular/angularfire2/blob/master/docs/rtdb/querying-lists.md
+ 
+     for (let i = 0; i < this.allSellers.length; i++) {
+       console.log("this.allSellers[i].$key=" + this.allSellers[i].$key);
+       let productItemsFbLstObs: AngularFireList<any> = this.angularFireDatabase.list('/productItems', item =>
+         item.orderByChild('sellerKey').equalTo(this.allSellers[i].$key)
+ 
+ 
+       );
+ 
+       productItemsFbLstObs.valueChanges().subscribe((data) => {
+         for (let j = 0; j < data.length; j++) {
+           data[j].seller = this.allSellers[i];
+           this.allProductItems.push(data[j]);
+         }
+       });
+     }
+ 
+     console.log(this.nearByProductItems);
+ 
+   }
+ */
+  /*
+ private nearByAvailableItems: Array<AvailableItemInfo> = new Array<AvailableItemInfo>();
+ public getLoadedNearByAvailableItems(): Promise<any> {
+     return new Promise((resolve, reject) => {
+         if (this.nearByAvailableItems.length == 0) {
+             this.loadNearByAvailableItems().then((value) => {
+                 resolve(this.nearByAvailableItems);
+             }).catch((error) => {
+                 reject(error);
+             });
+
+         } else {
+             resolve(this.nearByAvailableItems);
+         }
+     });
+ }
+ */
+
+  public async reloadNearByAvailableItems(): Promise<any> {
+    //await this.refreshCurrentCustomerLocation();
+    return new Promise((resolve, reject) => {
+      this.loadNearByAvailableItems().then((value) => {
+        this.nearByCallerInterfaces.forEach((nearByCallerInterface) => {
+          nearByCallerInterface.handleNearByServiceUpdating(value);
+        });
+        resolve(value);
+      }).catch((error) => {
+        reject("reloadNearBySellers::" + error);
+      });
+    });
+  }
+
+  public loadNearByAvailableItems(): Promise<any> {
+    let customerLocation: CustomerLocationInfo = this.customerLocationItemChecked;
+    customerLocation.radius = this.radius;
+    let nearByAvailableItems: Array<AvailableItemInfo> = new Array<AvailableItemInfo>();
+    return new Promise((resolve, reject) => {
+      let functionInfo: any = {
+        "functionInfo": {
+          "classPathFileName": "./availableItems.service",
+          "className": "AvailableItemService",
+          "functionName": "findNearByAvailableItems", //"findAllAvailableItems",
+          "functionArgument": customerLocation
+        }
+      };
+      this.restClientService.findByFunction(functionInfo).then((value) => {
+        console.log("value=" + JSON.stringify(value));
+        //let availableItems: Array<AvailableItemInfo> = new Array<AvailableItemInfo>();
+        Array.from(value).forEach((element, i) => {
+          //console.log(JSON.stringify(element));
+          if ((<any>element).productItems == null) {
+            (<any>element).productItems = new Array<any>();
+          }
+          Array.from((<any>element).productItems).forEach((subelement, j) => {
+            let availableItem: AvailableItemInfo = Object.assign({}, <AvailableItemInfo>element);
+
+            availableItem.productItems = null;
+            availableItem.productItemKey = (<ProductItemInfo>subelement).key;
+            availableItem.productItem = <ProductItemInfo>subelement;
+            availableItem.key = availableItem.key + ":" + availableItem.productItemKey;
+            nearByAvailableItems.push(availableItem);
+            //console.log(">>>>>>>>>>" + i + "." + j + ") >> " + JSON.stringify(availableItem));
+          });
+        });
+        resolve(nearByAvailableItems);
+      }).catch((error) => {
+        reject(error);
+      });
+    });
+  }
+
+  public loadAllAvailableItems(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      let functionInfo: any = {
+        "functionInfo": {
+          "classPathFileName": "./availableItems.service",
+          "className": "AvailableItemService",
+          "functionName": "findAllAvailableItems",
+          "functionArgument": {}
+        }
+      };
+      this.restClientService.findByFunction(functionInfo).then((value) => {
+        let availableItems: Array<AvailableItemInfo> = new Array<AvailableItemInfo>();
+        Array.from(value).forEach((element, i) => {
+          //console.log(JSON.stringify(element));
+          if ((<any>element).productItems == null) {
+            (<any>element).productItems = new Array<any>();
+          }
+          Array.from((<any>element).productItems).forEach((subelement, j) => {
+            let availableItem: AvailableItemInfo = Object.assign({}, <AvailableItemInfo>element);
+
+            availableItem.productItems = null;
+            availableItem.productItemKey = (<ProductItemInfo>subelement).key;
+            availableItem.productItem = <ProductItemInfo>subelement;
+            availableItem.key = availableItem.key + ":" + availableItem.productItemKey;
+            availableItems.push(availableItem);
+            //console.log(">>>>>>>>>>"+i+"."+j+") >> "+JSON.stringify(availableItem));
+          });
+        });
+        resolve(availableItems);
+      }).catch((error) => {
+        reject(error);
+      });
+    });
+  }
+
+  //private productItemsFbLstObs: FirebaseListObservable<any>;
+  public nearByProductItems: Array<any>;
+  public loadNearByProductItems(): void {
+    console.log("loadNearByProductItems()");
+    this.nearByProductItems = new Array<any>();
+    /*
+    var loadNearByProductItemsDataSnapShot : any[];
+    let productItemsFirebaseRef = firebase.database().ref('/productItems/');
+    productItemsFirebaseRef.once('value').then(function(dataSnapshot){
+      //console.log(JSON.stringify(dataSnapshot));
+      this.nearByProductItems = dataSnapshot;
+    });
+    this.nearByProductItems = loadNearByProductItemsDataSnapShot;
+    console.log("xxxxxxxxxx00000000 this.nearByProductItems="+JSON.stringify(this.nearByProductItems));
+    */
+
+    //let sellFirebaseRef = firebase.database().ref('/productItems/');
+    //let sellersObjGeoFire = new GeoFire(sellersFirebaseRef);
+    //let productItemsFbLstObs: FirebaseListObservable<any> = this.angularFireDatabase.list('/productItems');
+    //productItemsFbLstObs.subscribe((data) => {
+    //  this.nearByProductItems = data;
+    //});
+    //var nearByProductItemsDate: any;
+    //console.log("this.nearBySellers="+JSON.stringify(this.nearBySellers));
+
+
+    /* &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&   
+       for (let i = 0; i < this.nearBySellers.length; i++) {
+         console.log("this.nearBySellers[i].$key=" + this.nearBySellers[i].$key);
+         let productItemsFbLstObs: AngularFireList<any> = this.angularFireDatabase.list('/productItems', item =>
+           item.orderByChild('sellerKey').
+             equalTo(this.nearBySellers[i].$key)
+   
+         );
+         //var nearByProductItemsData: any[] = new Array<any>();
+         productItemsFbLstObs.valueChanges().subscribe((data) => {
+           //nearByProductItemsData = data;
+           for (let j = 0; j < data.length; j++) {
+             data[j].seller = this.nearBySellers[i];
+             this.nearByProductItems.push(data[j]);
+           }
+         });
+         /*
+         console.log("nearByProductItemsData="+JSON.stringify(nearByProductItemsData));
+         for(let j = 0; j < nearByProductItemsData.length ; j++){
+           this.nearByProductItems.push(nearByProductItemsData[j]);
+         }
+         * /
+       }
+   
+       console.log(this.nearByProductItems);
+   
+       &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& * /
+   
+   
+       //let productItemsFbLstObs: FirebaseListObservable<any> = this.angularFireDatabase.list('/productItems');
+       //productItemsFbLstObs.subscribe((data) => {
+   
+       /*
+       console.log("data.length=" + data.length);
+       
+       this.nearByProductItems = data;
+   
+       console.log("this.nearByProductItems="+JSON.stringify(this.nearByProductItems))
+       
+       console.log('this.productItems.length=' + this.nearByProductItems.length);
+       
+       
+       for (let i = 0; i < this.nearByProductItems.length; i++) {
+         //this.productItems[i].specialPrice = (this.itemPrices[i].value - (this.productItem.offerPercentage * this.itemPrices[i].value) / 100);
+         //console.log("this.productItem=" + JSON.stringify(this.productItems[i]));
+         var sellersFbObjObs: FirebaseObjectObservable<any>;
+         sellersFbObjObs = this.angularFireDatabase.object('/sellers/' + this.nearByProductItems[i].sellerId);
+         sellersFbObjObs.subscribe(
+           (response) => {
+             this.nearByProductItems[i].seller = response;
+             //this.productItems[i].sellerImage = this.productItems[i].sellerObj.image;
+             //this.productItems[i].sellerTitle = this.productItems[i].sellerObj.title;
+             console.log("xoxoxoxoxoxox ...this.productItems[i].seller.image" + JSON.stringify(this.nearByProductItems[i].seller.image));
+           }
+         )
+         let priceCommaString: string = "";
+    
+         for (let j = 0; j < this.nearByProductItems[i].itemPrices.length; j++) {
+           priceCommaString = priceCommaString + this.nearByProductItems[i].itemPrices[j].value + ", ";
+         }
+    
+         console.log(priceCommaString.lastIndexOf(", "));
+         if (priceCommaString.length > 0 && priceCommaString.lastIndexOf(", ") > 0) {
+           this.nearByProductItems[i].price = priceCommaString.substring(0, priceCommaString.lastIndexOf(", "));
+         }
+    
+       } 
+       
+     }  */
+
+    //);
+
+
+
+    //console.log("nearByProductItemsDate="+JSON.stringify(nearByProductItemsDate))
+    //this.nearByProductItems = nearByProductItemsDate;
+    //console.log("this.nearByProductItems=" + JSON.stringify(this.nearByProductItems));
+  }
+
+
+
+
+
+
+
+
+
+  ///////////////////// GET SET DATA /////////////////////////
+  private environments: any[] = [{ "title": "Development" }, { "title": "Testing" }, { "title": "Production" }];
+  public getEnvironment(): any {
+    return this.environments[0];
+  }
+
+
+  private sharingData: any;
+  public setSharingData(sharingData: any): void {
+    this.sharingData = sharingData;
+  }
+  public getSharingData(): any {
+    return this.sharingData;
+  }
+
+
+
+  private currentTabIndexes: any[] = new Array<any>();
+  public setCurrentTabIndex(currentTabIndex: any): void {
+    console.log("setCurrentTabIndex(any)...this.currentTabIndexes BEFORE =" + JSON.stringify(this.currentTabIndexes));
+    let isFound: boolean = false;
+    for (let i = 0; i < this.currentTabIndexes.length; i++) {
+      console.log("this.currentTabIndexes[i].tabsName=" + this.currentTabIndexes[i].tabsName + "::currentTabIndex.tabsName=" + currentTabIndex.tabsName);
+      if (this.currentTabIndexes[i].tabsName == currentTabIndex.tabsName) {
+        isFound = true;
+        this.currentTabIndexes[i].index = currentTabIndex.index;
+        break;
+      }
+
+    }
+    if (!isFound) {
+      console.log("!isFound=" + this.currentTabIndexes.length);
+      this.currentTabIndexes.push(currentTabIndex);
+    }
+    console.log("setCurrentTabIndex(any)...this.currentTabIndexes AFTER =" + JSON.stringify(this.currentTabIndexes));
+  }
+  public getCurrentTabIndex(tabsName: string): number {
+    console.log("getCurrentTabIndex(string)...this.currentTabIndexes BEFORE =" + JSON.stringify(this.currentTabIndexes));
+    let currentTabIndex: any = this.currentTabIndexes.find(currentTabIndex => {
+      return currentTabIndex.tabsName == tabsName;
+    });
+    if (currentTabIndex == null) {
+      currentTabIndex = { "tabsName": tabsName, "index": 0 };
+      this.setCurrentTabIndex(currentTabIndex);
+    }
+    console.log("getCurrentTabIndex(string)...this.currentTabIndexes AFTER =" + JSON.stringify(this.currentTabIndexes));
+
+    return currentTabIndex.index;
+  }
+
+  /*
+  public reloadNearBySellers(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      resolve("CHECK THIS FUNCTION");
+      / *
+      this.loadNearBySellers().then((value) => {
+        this.nearByCallerInterfaces.forEach((nearByCallerInterface) => {
+          nearByCallerInterface.handleNearByServiceUpdating(value);
+        });
+        resolve(value);
+      }).catch((error) => {
+        reject("reloadNearBySellers::" + error);
+      });
+      * /
+    });
+  }
+  */
+
+}
+
+
+/*
+
+public loadNearBySellers(): void {
+    //nearBySellers: any[] = new Array<any>();
+    let geofireFirebaseRef = firebase.database().ref('/geofire/');
+    let sellersGeoFireFirebaseRef = geofireFirebaseRef.child('sellers');
+    let sellersGeoGeoFire = new GeoFire(sellersGeoFireFirebaseRef);
+
+
+    let sellersFirebaseRef = firebase.database().ref('/sellers/');
+    //let sellersObjGeoFire = new GeoFire(sellersFirebaseRef);
+
+
+
+    console.log("*** Creating GeoQuery With Following Data ***");
+    console.log(JSON.stringify(this.customerLocationItemChecked));
+    console.log(JSON.stringify(this.radius));
+
+    var sellersGeoGeoQuery = sellersGeoGeoFire.query({
+      center: [this.customerLocationItemChecked.latitude, this.customerLocationItemChecked.longitude],
+      radius: this.radius
+    });
+
+    var varSellers: Array<any> = new Array<any>();
+    var varProductItems: Array<any> = new Array<any>();
+
+
+
+    var onKeyEnteredRegistration = sellersGeoGeoQuery.on("key_entered", function (key, location, distance) {
+      console.log(key + "at >" + location + "< entered the query. Hi " + key + "(" + distance + ")!");
+      //console.log(sellersObjGeoFire.ref());
+      //sellersObjGeoFire.
+
+      sellersFirebaseRef.child(key).once("value").then(function (snapshot_seller) {
+
+        let seller = snapshot_seller.val();
+        seller.latlng = location;
+        seller.distance = distance.toFixed(2);
+        seller.productItems = new Array<any>();
+        //console.log(">>>>>" + JSON.stringify(seller));
+        varSellers.push(seller);
+
+        console.log(">>>>>snapshot.key=" + JSON.stringify(snapshot_seller.key));
+        let productItemFirebaseRef = firebase.database().ref('/productItems/');
+        productItemFirebaseRef.orderByChild('sellerKey').equalTo(snapshot_seller.key).on('value', function (snapshot_product_items) {
+          //if (snapshot_product_items != null || JSON.stringify(snapshot_product_items) != 'null') {
+
+          // console.log("snapshot_product_items===" + JSON.stringify(snapshot_product_items.);
+          var productItems: any[] = new Array<any>();
+
+          snapshot_product_items.forEach(function (childSnapshot) {
+            // key will be "ada" the first time and "alan" the second time
+            //var key = childSnapshot.key;
+            // childData will be the actual contents of the child
+            //var childData = childSnapshot.val();
+            //console.log("key="+key+" ::: childData="+JSON.stringify(childData));
+            //childSnapshot.val().key = childSnapshot.key;
+            let childSnapeshortValue: any = childSnapshot.val();
+            childSnapeshortValue.key = childSnapshot.key;
+            productItems.push(childSnapeshortValue);
+            return false;
+          });
+          //}
+          //let copy = Object.assign({}, original );
+          for (let j = 0; j < productItems.length; j++) {
+            //
+            let priceCommaString: string = "";
+
+            for (let k = 0; k < productItems[j].itemPrices.length; k++) {
+              priceCommaString = priceCommaString + productItems[j].itemPrices[k].value + ", ";
+            }
+
+            console.log(priceCommaString.lastIndexOf(", "));
+            if (priceCommaString.length > 0 && priceCommaString.lastIndexOf(", ") > 0) {
+              productItems[j].prices = priceCommaString.substring(0, priceCommaString.lastIndexOf(", "));
+            }
+
+
+            //
+            let sellerClone: any = Object.assign({}, seller);
+            let productItemClone: any = Object.assign({}, productItems[j]);
+            seller.productItems.push(productItemClone);
+            productItems[j].seller = sellerClone;
+            varProductItems.push(productItems[j]);
+            //this.nearByProductItems.push(productItems[j]);
+          }
+          //console.log("productItems="+JSON.stringify(productItems));
+
+
+        });
+
+        //matches.push(snapshot.val());
+
+        /*
+        let productItemsFbLstObs: FirebaseListObservable<any> = this.angularFireDatabase.list('/productItems', {
+          query: {
+            orderByChild: 'sellerId',
+            equalTo: seller.$key
+          }
+        }
+        );
+        
+        var nearByProductItemsData: any[] = new Array<any>();
+        productItemsFbLstObs.subscribe((data) => {
+          //nearByProductItemsData = data;
+          for (let j = 0; j < data.length; j++) {
+            data[j].seller = seller;
+            this.nearByProductItems.push(data[j]);
+          }
+        });
+        * /
+      }).catch(function (error) {
+        console.log("Error fetching sellers data:", error);
+      })
+
+    });
+
+    //https://github.com/firebase/geofire-js/issues/73
+    sellersGeoGeoQuery.on("ready", function () {
+      // This will fire once the initial data is loaded, so now we can cancel the "key_entered" event listener
+      onKeyEnteredRegistration.cancel();
+    });
+
+    this.nearBySellers = varSellers;
+    this.nearByProductItems = varProductItems;
+
+    for (let i = 0; i < this.nearByProductItems.length; i++) {
+
+      let priceCommaString: string = "";
+      for (let j = 0; j < this.nearByProductItems[i].itemPrices.length; j++) {
+        priceCommaString = priceCommaString + this.nearByProductItems[i].itemPrices[j].value + ", ";
+      }
+
+      console.log(priceCommaString.lastIndexOf(", "));
+      if (priceCommaString.length > 0 && priceCommaString.lastIndexOf(", ") > 0) {
+        this.nearByProductItems[i].price = priceCommaString.substring(0, priceCommaString.lastIndexOf(", "));
+      }
+
+    }
+    //this.loadNearByProductItems();
+    console.log("this.nearByProductItems=" + JSON.stringify(varProductItems));
+  }
+
+
+*/
+
+export interface NearByCallerInterface {
+  handleNearByServiceUpdating(value: any): void;
+}

@@ -1,0 +1,8 @@
+<ul class="location" #location>
+    <li><a routerLink="/home">Home</a></li>
+    <li *ngFor="let segment of segments; let i=index; let l=last;">
+        <a *ngIf="i != segementLength && i == 0" routerLink=".">{{segment.path}}</a>
+        <a *ngIf="i != segementLength && i != 0 && i != l" [routerLink]="segment.path">{{segment.path}}</a>
+        <span *ngIf="l">{{segment.path}}</span>
+    </li>
+</ul>

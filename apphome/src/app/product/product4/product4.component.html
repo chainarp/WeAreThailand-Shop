@@ -1,0 +1,98 @@
+<!-- Head Section -->
+<div class="head-section bg">
+    <div class="container">
+        <h4>Product <span class="font-light">Four</span></h4>
+        <p>Angushop Product Style Four</p>
+    </div>
+</div>
+<div class="container-page">
+    <div class="box-page">
+        <!-- Start Wrap Product -->
+        <div class="row wrap-product">
+            <div class="col m8 l9 push-l3 push-m4 s12 main-product">
+                <!-- Start Product -->
+                <app-product 
+                    [filter]="{
+                        productName: search,
+                        category: category,
+                        color: color,
+                        price: price,
+                        size: sizes
+                    }"
+                    [column]="'l4 s6'"
+                    [setlimit]="9" 
+                    [paginate]="true"
+                    [currentPage]="currentPage"
+                    (pageChange)="onPageChange($event)">
+                </app-product>
+                <!-- End Product -->  
+            </div>
+            <div class="col m4 l3 pull-l9 pull-m8 s12 side-product">
+                <!-- Wrap Filter -->
+                <div class="wrap-filter">
+                    <!-- Search -->
+                    <div class="content-filter search">
+                        <input type="text" placeholder="Search Product..." [value]="valueSearch" (keyup)="onSearch($event)"/>
+                        <mat-icon class="icon">&#xE8B6;</mat-icon>
+                    </div>
+                    <!-- Category -->
+                    <div class="content-filter">
+                        <h6 class="title">Categories</h6>
+                        <ul class="categories">
+                            <li (click)="resetCategory()" [class.active]="allCategory"><a>All</a></li>
+                            <li *ngFor="let category of categories" [class.active]="selectedCategory === category">
+                                <a (click)="selectCategory(category)">{{category.categoryName}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- Price -->
+                    <div class="content-filter">
+                        <h6 class="title">Price</h6>
+                        <div *ngIf="priceToggle" class="center-align">
+                            <p>
+                                <button mat-mini-fab (click)="refreshPrice()">
+                                    <mat-icon>&#xE5D5;</mat-icon>
+                                </button>
+                            </p>
+                            <strong>{{price | currency:'USD':'$'}}</strong>
+                        </div>
+                        <mat-slider 
+                            min="100"
+                            max="1000" 
+                            value="550" 
+                            [(ngModel)]="price" 
+                            (change)="onChangeprice($event)">
+                        </mat-slider>
+                    </div>
+                    <!-- Color -->
+                    <div class="content-filter">
+                        <h6 class="title">Color</h6>
+                        <ul class="colors">
+                            <li *ngFor="let color of colors" 
+                                class="{{color.nameColor}}" 
+                                [class.active]="selectedColor === color">
+                                <button mat-mini-fab (click)="selectColor(color)"></button>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- Size -->
+                    <div class="content-filter">
+                        <h6 class="title">Size</h6>
+                        <div class="row">
+                            <div *ngFor="let size of sizeProduct" class="col s4 margin-bottom10">
+                                <mat-checkbox 
+                                    [checked]="size.check" 
+                                    (change)="size.check = !size.check" 
+                                    (click)="selectSize(size.size,size.check)">
+                                        {{size.size}}
+                                </mat-checkbox>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Filter -->
+            </div>
+        </div>
+        <!-- End Wrap Product -->
+    </div>
+</div>

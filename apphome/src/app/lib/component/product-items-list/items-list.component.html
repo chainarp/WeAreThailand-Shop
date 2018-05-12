@@ -1,0 +1,93 @@
+<!--
+<div class="center-align">
+    <p>
+        <button mat-mini-fab (click)="gotoHomePage()">
+            <mat-icon>shopping_basket</mat-icon>
+        </button>
+    </p>
+    <!-- <strong>{{radius}} Km.</strong> - ->
+</div>
+-->
+<div [@focusPanel]="state" class="wrap-lightbox">
+
+    <button mat-mini-fab class="close" (click)="closeList()">
+        <mat-icon>&#xE5CD;</mat-icon>
+    </button>
+    <button mat-mini-fab class="shop_now" (click)=" gotoDetail(currentTransformedAvailableItem)">
+            <mat-icon>shopping_basket</mat-icon>
+        </button>
+    <div *ngIf="currentTransformedAvailableItem">
+        <div class="content">
+            <h5 class="title">{{currentTransformedAvailableItem.productItem.title}}</h5>
+        </div>
+    </div>
+    <div class="content valign-wrapper" #contentwrap>
+        <button mat-mini-fab class="nav left" (click)="goPrevTransfromedAvailableItem()" [disabled]="currentTransformedAvailableItemIndex == 0">
+            <mat-icon>&#xE314;</mat-icon>
+        </button>
+        <button mat-mini-fab class="nav right" (click)="goNextTransformedAvailableItem()" [disabled]="currentTransformedAvailableItemIndex == (maxTransformedAvailableItemLength - 1)">
+            <mat-icon>&#xE315;</mat-icon>
+        </button>
+
+        <div *ngIf="loadingState" class="spinner">
+            <mat-spinner diameter="50" strokeWidth="5"></mat-spinner>
+        </div>
+        <!-- <div *ngIf="product" class="wrap-img"> -->
+        <div *ngIf="currentTransformedAvailableItem" class="wrap-image">
+            <!-- <img [src]="product.image" [alt]="product.productName" /> -->
+            <ul>
+                <li *ngFor="let image of currentTransformedAvailableItem.productItem.images" (click)="selectImage(image)" [class.active]="currentAvailableItemProductItemImage === image">
+                    <img [src]="image" class="responsive-img" alt="" />
+                </li>
+                <!-- 
+                            <li *ngFor="let image of availableItem.productItem.images" (click)="selectImage(image)" [class.active]="selectedImage === image">
+                                <img [src]="image.thumbnail" class="responsive-img" alt=""/>
+                            </li>
+                        -->
+            </ul>
+            <img [src]="currentAvailableItemProductItemImage" class="img-detail" [alt]="currentTransformedAvailableItem.productItem.title"
+            />
+
+        </div>
+
+    </div>
+
+    <div *ngIf="currentTransformedAvailableItem" class="description">
+        <div class="content">
+            <h5 class="title">{{currentTransformedAvailableItem.productItem.title}}</h5>
+            <h6 class="title">{{currentTransformedAvailableItem.productItem.description}}</h6>
+        </div>
+    </div>
+
+</div>
+<!--
+<div [@focusPanel]="state" class="wrap-lightbox">
+        <button mat-mini-fab class="close" (click)="closeZoom()">
+            <mat-icon>&#xE5CD;</mat-icon>
+        </button>
+        <div class="content valign-wrapper" #contentwrap>
+            <button mat-mini-fab class="nav left" (click)="prev()" [disabled]="currentProductItemImageIndex == 0">
+                <mat-icon>&#xE314;</mat-icon>
+            </button>
+            <button mat-mini-fab class="nav right" (click)="next()" [disabled]="currentProductItemImageIndex == (maxProductItemImageLength - 1)">
+                <mat-icon>&#xE315;</mat-icon>
+            </button>
+            <div *ngIf="loadingState" class="spinner">
+                <mat-spinner diameter="50" strokeWidth="5"></mat-spinner>
+            </div>
+            <!-- <div *ngIf="product" class="wrap-img"> -->
+<!--
+            <div *ngIf="currentProductItemImage" class="wrap-img">
+                <!-- <img [src]="product.image" [alt]="product.productName" /> - - >
+                <img [src]="currentProductItemImage" [alt]="" />
+            </div>
+        - - >
+        </div>
+        <div *ngIf="selectProduct" class="description">
+            <div class="content">
+                <h4 class="title">{{selectProduct.productItems[0].title}}</h4>
+                <h6 class="title">{{selectProduct.productItems[0].description}}</h6>
+            </div>
+        </div>
+    </div>
+-->

@@ -1,0 +1,28 @@
+[{
+    "id": 11,
+    "categoryName": "party",
+    "description": "Lorem ipsum dolor sit amet, in erant aliquando percipitur",
+    "image": "http://via.placeholder.com/640x640",
+    "rate": 3
+},
+{
+    "id": 12,
+    "categoryName": "natural",
+    "description": "Lorem ipsum dolor sit amet, in erant aliquando percipitur",
+    "image": "http://via.placeholder.com/640x640",
+    "rate": 5
+},
+{
+    "id": 13,
+    "categoryName": "cute alay banget",
+    "description": " Fuisset lobortis elaboraret ne est, odio posse propriae",
+    "image": "http://via.placeholder.com/640x640",
+    "rate": 2
+},
+{
+    "id": 14,
+    "categoryName": "woman",
+    "description": "Nonumy equidem luptatum has in usu elitr facete latine id",
+    "image": "http://via.placeholder.com/640x640",
+    "rate": 4
+}]

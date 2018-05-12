@@ -1,0 +1,50 @@
+<!-- Head Section -->
+<div class="head-section bg">
+    <div class="container">
+        <h4>Product <span class="font-light">Three</span></h4>
+        <p>Angushop Product Style Three</p>
+    </div>
+</div>
+<div class="container-page">
+    <div class="box-page">
+        <div class="row margin-bottom50">
+            <div class="col l8 m7 s12">
+                <!-- Start Categories -->
+                <h5>Categories</h5>
+                <ul class="categories">
+                    <li (click)="resetCategory()" [class.active]="allCategory"><a>All</a></li>
+                    <li *ngFor="let category of categories" [class.active]="selectedCategory === category">
+                        <a (click)="selectCategory(category)">{{category.categoryName}}</a>
+                    </li>
+                </ul>
+                <!-- End Categories -->
+            </div>
+            <div class="col l4 m5 s12 padding-top30">
+                <!-- Search -->
+                <div class="search">
+                    <input type="text" placeholder="Search Product..." [value]="valueSearch" (keyup)="onSearch($event)"/>
+                    <mat-icon class="icon">&#xE8B6;</mat-icon>
+                </div>
+            </div>
+        </div>
+
+        <!-- Start Product -->
+        <div class="wrap-product">
+            <app-product 
+                [filter]="{
+                    productName: search,
+                    category: category,
+                    color: color,
+                    price: price,
+                    size: sizes
+                }"
+                [column]="'l3 s6'"
+                [setlimit]="12" 
+                [paginate]="true"
+                [currentPage]="currentPage"
+                (pageChange)="onPageChange($event)">
+            </app-product>
+        </div>
+        <!-- End Product -->  
+    </div>
+</div>

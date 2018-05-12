@@ -1,0 +1,247 @@
+<!-- Head Section -->
+<div class="head-section bg">
+    <div class="container">
+        <h1>รายการอาหาร
+<!--            <span class="font-light">Seduction</span>-->
+        </h1>
+<!--        <h4>It is salivate, isn't it?</h4>-->
+    </div>
+</div>
+
+<!-- Loading -->
+<div class="valign-wrapper" *ngIf="loadingState">
+    <mat-spinner diameter="50" strokeWidth="5"></mat-spinner>
+</div>
+
+<div class="container-page" *ngIf="productState">
+    <div class="box-page">
+        <!-- <h3 class="title">{{product.productName}}</h3> -->
+        <h3 class="title">{{availableItem.productItem.title}}</h3>
+        <div class="row">
+            <div class="col l7 s12">
+                <div class="wrap-image">
+                    <!-- [src2]="availableItem.productItem.images[0]" <img [src]="productImage" class="img-detail" [alt]="product.productName"/> -->
+                    <img [src]="selectedImage"  class="img-detail" [alt]="availableItem.productItem.title" />
+                    <!--
+                    <div style="position: relative; left: 0; top: 0;">
+                        <img [src]="selectedImage" class="img-detail product-image" />
+                        <img [src]="availableItem.seller.images[0]" class="seller-image" style="border-radius:90%;" />
+                    </div>
+                    -->
+                    <ul>
+                        <li  (click)="selectImage(availableItem.seller.images[0])" [class.active]="selectedImage === availableItem.seller.images[0]">
+                            <img [src]="availableItem.seller.images[0]" class="responsive-img" alt="" />
+                        </li>
+                        <li *ngFor="let image of availableItem.productItem.images" (click)="selectImage(image)" [class.active]="selectedImage === image">
+                            <img [src]="image" class="responsive-img" alt="" />
+                        </li>
+                        <!-- 
+                            <li *ngFor="let image of availableItem.productItem.images" (click)="selectImage(image)" [class.active]="selectedImage === image">
+                                <img [src]="image.thumbnail" class="responsive-img" alt=""/>
+                            </li>
+                        -->
+                    </ul>
+                </div>
+            </div>
+            <div class="col l5 s12">
+                <div class="price">
+                    <div class="row">
+                        <div class="col m6 s12">
+                            <h4 class="value">
+                                <!--{{product.price | currency:'USD':'$'}} 5 บาท-->
+                            </h4>
+                        </div>
+                        <div class="col m6 s12">
+                            <a class="link" (click)="addWishlist('wishlist',productWishlist)">
+                                <mat-icon>&#xE87E;</mat-icon> Add to Wishlist</a>
+                            <!-- <a class="link" (click)="addCompare('compare',productCompare)">
+                                <mat-icon>&#xE6E1;</mat-icon> Compare</a> -->
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col m6 s12">
+                            <h5 class="value">
+                                ทานวันไหนดีนะ
+                            </h5>
+                        </div>
+                        <div class="col m6 s12">
+
+                            <mat-form-field>
+                                <!--  -->
+                                <mat-select [(value)]="selectedAvailableDate" placeholder="Required Date" (change)="requiredDateChangeHandler()">
+                                    <mat-option *ngFor="let availableDate of allAvailableDates; let i= index" [value]="availableDate">
+                                        {{ availableDate.Date.dateString }}
+                                    </mat-option>
+                                </mat-select>
+
+                            </mat-form-field>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col m6 s12">
+                            <h5 class="value">
+                                มาส่งช่วงเวลา
+                            </h5>
+                        </div>
+                        <div class="col m6 s12">
+                            <mat-form-field>
+
+                                <mat-select [(value)]="selectedTimeRangeRequired " placeholder="Required Time Range">
+                                    <mat-option *ngFor="let requiredTimeRange of requiredTimeRanges; let i= index" [value]="requiredTimeRange">
+                                        {{ requiredTimeRange }}
+                                    </mat-option>
+                                </mat-select>
+
+                            </mat-form-field>
+
+                            <!--    
+                            <mat-form-field>
+                                <mat-select [(value)]="timeRequired" placeholder="Required Time">
+                                    <mat-option value="8:00-10:00">8-10</mat-option>
+                                    <mat-option value="10:00-12:00">10-12</mat-option>
+                                    <mat-option value="12:00-14:00">12-14</mat-option>
+                                    <mat-option value="14:00-16:00">14-16</mat-option>
+                                    <mat-option value="16:00-18:00">16-18</mat-option>
+                                    <mat-option value="18:00-20:00">18-20</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        -->
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col m12 s12">
+                        ({{calculatedTotalPrice.pricePerSet}}+{{calculatedTotalPrice.extraOptionsPerSet}}) x {{calculatedTotalPrice.requiredQuantity}}
+                        = {{calculatedTotalPrice.totalAmount}} บาท
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col m6 s12">
+                        <h6 class="value">
+                            Size and prices
+                        </h6>
+                    </div>
+                    <!--
+                    <div class="col m6 s12">
+                        <mat-radio-group>
+                            <tr *ngFor="let itemPrice of availableItem.productItem.itemPrices; let i= index" class="size-list-item">
+                                <label *ngIf="itemPrice.specialPrice"> {{itemPrice.name}}
+                                    <span class="cut">{{itemPrice.value}}</span>
+                                    <span class="offer-p">{{itemPrice.specialPrice |number:0}}</span>
+                                    บาท
+                                </label>
+                                <label *ngIf="!itemPrice.specialPrice"> {{itemPrice.name}} {{itemPrice.value}}</label>
+                                <!-- <ion-radio class="checked" (ionSelect)="handlePriceRadioChecked(itemPrice)"></ion-radio> - - >
+                                <mat-radio-button (click)="handlePriceRadioChecked(itemPrice)"></mat-radio-button>
+                            </tr>
+                        </mat-radio-group>
+                    </div>
+                -->
+                    <div class="col m6 s12">
+                        <mat-radio-group class="example-radio-group" [(ngModel)]="selectedItemPrice">
+                            <mat-radio-button class="example-radio-button" *ngFor="let itemPrice of availableItem.productItem.itemPrices; let i= index"
+                                [value]="itemPrice" (change)="handlePriceRadioChecked(itemPrice)">
+                                <label *ngIf="itemPrice.specialPrice"> {{itemPrice.name}}
+                                    <span class="cut">{{itemPrice.value}}</span>
+                                    <span class="offer-p">{{itemPrice.specialPrice |number:0}} บาท</span>
+                                </label>
+                                <label *ngIf="!itemPrice.specialPrice"> {{itemPrice.name}} {{itemPrice.value}} บาท </label>
+                            </mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col m6 s12">
+                        <h6 class="value">Add extra choice</h6>
+                    </div>
+                    <div class="col m6 s12">
+                        <div class="extra-list" *ngIf="availableItem.productItem.extraOptions != null">
+                            <tr *ngFor="let option of availableItem.productItem.extraOptions; let i= index" class="list-item">
+                                <mat-slide-toggle (change)="handleExtraChoiceOptionsChanged(option)"></mat-slide-toggle>
+                                <div>{{option.name}} ({{option.value}} บาท) </div>
+                            </tr>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col m6 s12">
+                        <div class="count">
+                            <!--
+                            <button mat-button class="btn btn-default">
+                                -
+                            </button>
+                            <button mat-button class="btn btn-primary">
+                                10
+                            </button>
+                            <button mat-button class="btn btn-default">
+                                +
+                            </button>
+                            -->
+
+                            <span class="item-count" (click)="removeQuantity()">
+                                -
+                            </span>
+                            <span class="item-count show-count">
+                                {{availableItem.productItem.requiredQuantity}}
+                            </span>
+                            <span class="item-count" (click)="addQuantity()">
+                                +
+                            </span>
+
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="col m6 s12">
+                        <button mat-button class="btn btn-primary" (click)="addToCart()">
+                            <mat-icon>&#xE8CC;</mat-icon>เพิ่มลงตะกร้าสินค้า
+                        </button>
+                    </div>
+                </div>
+                <!--
+                <table class="bordered">
+                    <tbody>
+                        <tr>
+                            <td>Stock</td>
+                            <td>
+                                <!--{{product.stock}}- - >10</td>
+                        </tr>
+                        <tr>
+                            <td>color</td>
+                            <td>
+                                <!--{{product.color}}- - >Red</td>
+                        </tr>
+                        <tr>
+                            <td>size</td>
+                            <td>
+                                <!-- {{product.size}} - - >XL</td>
+                        </tr>
+                    </tbody>
+                </table>
+                -->
+                <h5>Description</h5>
+                <p class="margin-bottom10">
+                    {{availableItem.productItem.description}}
+                    <!--{{product.description}}-->
+                </p>
+                <p>
+                    <rating [value]="availableItem.productItem.rating"></rating>
+                </p>
+
+                <!-- Tag -->
+                <!--
+                <mat-chip-list>
+                    <mat-chip>Angushop</mat-chip>
+                    <mat-chip>Shop</mat-chip>
+                    <mat-chip>Ecommerce</mat-chip>
+                    <mat-chip>Angular 2</mat-chip>
+                </mat-chip-list>
+                -->
+            </div>
+        </div>
+    </div>
+</div>

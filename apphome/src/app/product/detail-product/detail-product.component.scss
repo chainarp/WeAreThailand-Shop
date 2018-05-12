@@ -1,0 +1,173 @@
+/*
+Import
+=========================== */
+@import '../../../assets/sass/css3-mixins';
+@import '../../../assets/sass/variable';
+
+/*
+Detail Product
+=========================== */
+.title{
+    text-transform: capitalize;
+    margin-bottom: 30px;
+    margin-top: -5px;
+}
+
+.price{
+    margin-bottom: 25px;
+
+    .value{
+        margin-bottom: 0;
+        font-weight: 400;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+}
+
+.wrap-image{
+    display: block;
+    position: relative;
+
+    ul{
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+        li{
+            display: block;
+            width: 85px;
+            overflow: hidden;
+            border: solid 1px #efefef;
+            background: #fff;
+            cursor: pointer;
+            position: relative;
+            float: left;
+            margin-right: 5px;
+
+            &:before{
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                border: solid 5px #fff;
+                z-index: 2;
+            }
+
+            img{
+                width: 100%;
+                z-index: 1;
+            }
+        }
+    }
+}
+
+img.img-detail{
+    width: 100%;
+    border: solid 1px #efefef;
+    background: #fff;
+    padding: 10px;
+}
+
+button{
+    width: 100%;
+}
+
+table{
+    margin: 15px 0 25px;
+    text-transform: capitalize;
+
+    tr:last-child{
+        border: 0;
+    }
+
+    tr:nth-child(even){
+        background: #f9f9f9;
+    }
+
+    td{
+        padding: 10px 15px;
+        border: solid 1px $color-gray;
+
+        &:first-child{
+            width: 120px;
+            font-weight: bold;
+        }
+    }
+
+    .label{
+        width: 120px;
+    }
+}
+
+p:last-child{
+    margin-bottom: 0;
+}
+
+/*
+Loading
+=========================== */
+.valign-wrapper{
+    position: relative;
+    width: 100%; 
+    top: 0;
+    right: 0;
+    background: #fff;
+
+    mat-spinner {
+      width: 50px; 
+      height: 50px; 
+      display: block;
+      margin: auto;
+    }
+}
+
+/*
+Responsive
+=========================== */
+
+@media (max-width:920px){
+    .wrap-image{
+        padding-left: 0;
+
+        ul{
+            display: inline-block;
+            position: relative;
+
+            li{
+                float: left;
+                display: block;
+                width: 75px;
+                margin-bottom: 5px;
+                margin-right: 5px;
+
+                img{
+                    width: 100%;
+                }
+            }
+        }
+    }
+    
+    img.img-detail{
+        width: auto;
+        max-width: 100%;
+    }
+
+    .price{
+        margin-top: 25px;
+    }
+}
+
+@media (max-width:767px){
+
+    .value{
+        padding-bottom: 15px;
+        padding-left: 5px;
+    }
+
+
+    .link{
+        padding-left: 5px;
+    }
+}

@@ -1,0 +1,25 @@
+<!-- Start Wrap -->
+<div class="wrap" [class.on]="mainclass">
+    <app-side (toggle)="mainclass = !mainclass"></app-side>
+    <div class="main">
+        <router-outlet></router-outlet>
+        <!-- Start Footer -->
+        <footer>
+            <div class="container">
+                <ul class="list-inline social">
+                    <li><a><img src="../../assets/images/social-media/facebook-icon.png" alt=""/></a></li>
+                    <li><a><img src="../../assets/images/social-media/google+logo.png" alt=""/></a></li>
+                    <li><a><img src="../../assets/images/social-media/Twitter-icon.png" alt=""/></a></li>
+                    <li><a><img src="../../assets/images/social-media/line-logo.png" alt=""/></a></li>
+                </ul>
+                <p class="margin-bottom0">2018 © Copyright <a href="http://www.wechefthailand.com/" target="_BLANK">WeChef (Thailand)</a>. All rights Reserved.</p>
+            </div>
+        </footer>
+        <!-- End Footer -->
+    </div>
+</div>
+<!-- End Wrap -->
+<!-- Loading Slim -->
+<div class="loading-slim">
+    <ng2-slim-loading-bar [color]="'#FF1744'" [height]="'2px'"></ng2-slim-loading-bar>
+</div>

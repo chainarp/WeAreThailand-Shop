@@ -1,0 +1,94 @@
+<!--
+<ion-list-header>
+    <ion-item>
+        <ion-range [(ngModel)]="rangeValue" min="10" max="50" step="10" pin="true" (ionChange)="rangeValueChange(event)">
+            <ion-icon range-left big name="pin"></ion-icon>
+            <ion-icon range-right small name="pin"></ion-icon>
+        </ion-range>
+    </ion-item>
+    <button item-end ion-button icon-only clear (click)="addItem()">
+        <ion-icon color="primary" name="add-circle"></ion-icon>
+    </button>
+    <button item-end ion-button icon-only clear (click)="removeCheckedItem()">
+        <ion-icon color="danger" name="remove-circle"></ion-icon>
+    </button>
+</ion-list-header>
+
+<ion-list *ngFor="let item of items; let rowId = index; " [(ngModel)]="radioCheckedId" radio-group>
+    <ion-item>
+        <ion-label>
+            <ion-icon [name]="item.icon" item-start> </ion-icon>
+            <b>{{item.title}}</b>
+            <p>{{item.detail1}}</p>
+            <p>{{item.detail2}}</p>
+            <  ! - -  <p>{{item.LatLng}}</p> - - >
+        </ion-label>
+        <ion-radio [value]="item.id" (click)='radioclick(item,rowId,radioCheckedId)'></ion-radio>
+    </ion-item>
+</ion-list>
+[(ngModel)]="radioCheckedId"
+
+ public id: number;
+    public title: string;
+    public location: string;
+    public messageToDriver: string;
+    public receiverPhone : string;
+    public latitude: number; //13.74349185255942, 
+    public longitude: number; //100.49879542518465, 
+    public radius: number; //
+    public icon: string = "pin";
+    public checked: boolean = false;
+
+-->
+<div class="content-filter">
+    <h6 class="title">ระยะทาง</h6>
+    <!-- *ngIf="radiusToggle" -->
+    <div class="center-align">
+        <p>
+            <button mat-mini-fab (click)="gotoHomePage()">
+                <mat-icon>home</mat-icon>
+            </button>
+        </p>
+        <!-- <strong>{{radius}} Km.</strong> -->
+    </div>
+    <!-- <input matInput type="number" placeholder="Value" [(ngModel)]="rangeValue"> -->
+    <mat-slider min="10" max="100" step="5" thumb-label="true" value="" [(ngModel)]="rangeValue" (change)="rangeValueChange()">
+            
+    </mat-slider>
+    <button item-end ion-button icon-only clear (click)="addItem()">
+        <mat-icon>add_circle_outline</mat-icon>
+        <!-- <ion-icon color="primary" name="add-circle"></ion-icon> -->
+    </button>
+    <button item-end ion-button icon-only clear (click)="removeCheckedItem()">
+        <mat-icon>remove_circle_outline</mat-icon>
+        <!--[value]="item.id" <ion-icon color="danger" name="remove-circle"></ion-icon> -->
+    </button>
+</div>
+
+<div class="row">
+    <div class="col l12 s12">
+        <mat-radio-group class="example-radio-group" [(ngModel)]="radioCheckedId">
+            <div *ngFor="let item of items; let rowId = index;" >
+                <tr>
+                    <label>
+                        <td>
+                            <mat-icon>{{item.icon}}</mat-icon>
+                        </td>
+                        <td>
+                            <b>{{item.title}}</b>
+                            <p>{{item.location}}</p>
+                            <p>{{item.messageToDriver}}</p>
+                            <p>{{item.receiverPhone}}</p>
+                        </td>
+                        <td>
+                            <mat-radio-button class="example-radio-button" (click)="radioclick(item,rowId,radioCheckedId)" [value]="item.id" >
+                            </mat-radio-button>
+                        </td>
+                    </label>
+                </tr>
+            </div>
+
+        </mat-radio-group>
+    </div>
+</div>
+ 

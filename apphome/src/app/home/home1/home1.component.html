@@ -1,0 +1,141 @@
+<!-- Start Banner -->
+<div class="banner" >
+    <div class="container" >
+        <div class="row">
+            <div class="col l6 m12 content center">
+               
+                <h1 class="sub-title">We Chef
+                    <span class="sub-title2">(Thailand)</span></h1>
+                <h2 class="title">
+                    "เชื่อมผู้คนจากบ้านสู่บ้าน<br>ด้วยอาหารที่ปรุงจากใจ"
+                </h2>
+                
+                <a mat-button routerLink="/shop" class="btn btn-default btn-lg">เลือกอาหารเลย!</a>
+                <a mat-button routerLink="/seller" class="btn btn-primary btn-lg">รู้จักเชฟกันก่อน</a>
+                
+            </div>
+            <div class="col l4 m12">
+                <div class="wrap-demo">
+                    <img src="assets/images/brand/wechef-logo-new.svg" class="responsive-img" alt="" />
+                </div>
+            </div>
+            
+            <div class="col l2 s6">
+                <div class="call-center">
+<!--
+                    <mat-icon class="font-light">&#xE8CC;</mat-icon>
+                    <mat-icon class="bg">&#xE8CC;</mat-icon>
+-->
+<!--                   <center>-->
+<!--                    <h5 class="title center">Callcenter</h5>-->
+                     <img src="assets/images/call-center.png" class="responsive-img" alt="" />
+                     <img src="assets/images/linewechef.jpg" class="responsive-img" alt="" />
+                    <p class="center">
+                        ติดต่อสอบถามที่ Line @wechefthaild ค่ะ
+                    </p>
+<!--                    </center>-->
+                </div>
+            </div>
+<!--
+            <div class="callcenter col l3 m12">
+                <div class="wrap-demo">
+                    <img src="/assets/images/call-center.png" class="responsive-img" alt="" />
+                </div>
+            </div>
+            <div class="callcenter col l2 m12">
+                <div class="wrap-demo">
+                   <img src="/assets/images/linewechef.jpg" class="responsive-img" alt="" />
+                </div>
+            </div>
+-->
+        </div>
+    </div>
+</div>
+<!-- End Banner -->
+<!-- Start feature -->
+<div class="wrap-feature">
+    <div class="container">
+        <div class="row" myMatchHeight="col">
+            
+<!--
+            <div class="col l3 s12">
+                <div class="item-feature">
+                    <mat-icon class="font-light">&#xE8CC;</mat-icon>
+                    <mat-icon class="bg">&#xE8CC;</mat-icon>
+                    <h5 class="title">WeChef FoodDelivery</h5>
+                
+                    <p>
+                        คัดสรร อาหารจากพ่อครัวชั้นนำ นำส่งจากห้องครัว สู่มื้ออาหารคุณโดยตรง
+                    </p>
+                </div>
+            </div>
+-->
+           
+            <!--
+            <div class="col l4 s12">
+                <div class="item-feature">
+                    <mat-icon class="font-light">&#xE163;</mat-icon>
+                    <mat-icon class="bg">&#xE163;</mat-icon>
+                    <h5 class="title">WeChef Catering</h5>
+                    <p>
+                        บริการจัดเลี้ยง นอกสถานที่ โดยผู้มีประสบการณ์
+                    </p>
+                </div>
+            </div>
+            <div class="col l4 s12">
+                <div class="item-feature">
+                    <mat-icon class="font-light">&#xE8D1;</mat-icon>
+                    <mat-icon class="bg">&#xE8D1;</mat-icon>
+                    <h5 class="title">WeChef FoodMarketPlace</h5>
+                    <p>
+                        ตลาดอาหารสำเร็จรูปทางเลือกใหม่ พร้อมรับทาน
+                    </p>
+                </div>
+            </div>
+            -->
+
+        </div>
+    </div>
+</div>
+<!-- End feature -->
+<!-- Head Section -->
+<div class="head-section">
+    <div class="container">
+       
+        <h2>รายการอาหาร รอบตัวใกล้ๆคุณ</h2>
+        
+<!--
+        <p>คัดสรรมาด้วยขบวนการมาตราฐานพิถีพิถัน</p>
+        <p>โดย WeChef</p>
+-->
+
+        <!-- <button mat-button routerLink="/shop" class="btn btn-default margin-bottom5">Shop Now</button> -->
+    </div>
+</div>
+<!-- End Section -->
+<!-- Start Product -->
+<div class="product-home">
+    <!--
+    <app-product 
+        [setlimit]="8" 
+        [paginate]="false"
+        [showBtnClose]="false"
+        (detail)="detailProduct($event)"
+    ></app-product>
+    -->
+    <app-shelf [setlimit]="8" [paginate]="false" [showBtnClose]="false" (detail)="detailProduct($event)"></app-shelf>
+
+</div>
+<!-- End Product -->
+<!-- Head Section -->
+<div class="head-section">
+    <div class="container">
+        <h3>ผู้สนับสนุน</h3>
+        <!-- <p class="margin-bottom0">Delectus aliquando incorrupte ne sea qui cu iudicabit.</p> -->
+    </div>
+</div>
+<!-- End Section -->
+<!-- Start Vendor -->
+<grid-logo [setlimit]="4"></grid-logo>
+
+<!-- End Vendor -->

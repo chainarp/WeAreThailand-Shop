@@ -1,0 +1,201 @@
+/*
+Import
+=========================== */
+@import '../../../assets/sass/css3-mixins';
+@import '../../../assets/sass/variable';
+
+
+/*
+Compare Product
+=========================== */
+.compare-product{
+    > .box-page > .row{
+        display: block;
+        margin: 0;
+
+        > .col{
+            padding: 0;
+
+            > .row{
+                margin: 0;
+                padding: 0;
+
+                .col{
+                    padding: 0 1px;
+                }
+            }
+        }
+    }
+
+    .wrap-table{
+        width: 100%;
+    }
+
+    table.table-compare{
+      margin: 0;
+      border: solid 1px #efefef;     
+      width: auto;  
+
+        tr{
+            td{
+                border-left: solid 1px #efefef; 
+                border-right: solid 1px #efefef; 
+                border-bottom: dashed 1px #efefef; 
+                padding: 15px 20px;
+                vertical-align: top;
+                text-align: center;
+                @include transition("all 0.5s ease-in-out");                
+
+                &:first-child{
+                    font-weight: bold;
+                }
+
+                &.empty{
+                    text-align: center;
+                    vertical-align: middle;
+                    width: 100%;
+
+                    .title{
+                        margin-bottom: 0;
+                        margin-top: 20px;
+                        text-transform: none;
+                        color: #999;
+                    }
+                }
+
+                &.info{
+                    width: 200px;
+                    max-width: 200px;
+                    min-width: 200px;
+                    text-align: center;
+                    background: #fff;
+                    vertical-align: middle;
+                    padding: 25px 30px;
+
+                    p{
+                        font-weight: normal;
+                    }
+
+                    .counter{
+                        margin-bottom: 5px;
+                        letter-spacing: 0;
+                        text-transform: none;
+                    }
+
+                    button{
+                        width: 30px;
+                        height: 30px;
+
+                        mat-icon{
+                            position: relative;
+                            top: -2px;
+                        }
+                    }
+                }
+
+                &.wrap-img{
+                    position: relative;
+                    padding: 0;
+                    overflow: hidden;
+
+                    img{
+                        width: 100%;   
+                        margin-bottom: -10px;
+                    }
+
+                    a.close{
+                        position: absolute;
+                        top: 10px;
+                        right: 10px;
+                        width: 29px !important;
+                        height: 29px !important;
+                        @include opacity(0.5);
+                        background: #fff !important;
+                        color: $color-content;
+                        border: solid 1px #efefef;
+                
+                        .material-icons.mat-icon{
+                            padding: 0;
+                            position: relative;
+                            top: -4px;
+                        }
+                
+                        &:hover{
+                            @include opacity(1);
+                        }
+                    }
+                }
+
+                .title{
+                    margin-bottom: 5px;
+                    text-transform: capitalize;
+                    padding-left: 20px;
+                    padding-right: 20px;
+                    text-transform: capitalize;
+                    text-align: center;
+
+                    a{
+                        text-decoration: none !important;
+                        color: $color-title;
+                    }
+                }
+        
+                p:last-child{
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+}
+
+/*
+Loading
+=========================== */
+.valign-wrapper{
+    position: relative;
+    width: 100%; 
+    top: 0;
+    right: 0;
+    background: #fff;
+
+    mat-spinner {
+      width: 50px; 
+      height: 50px; 
+      display: block;
+      margin: auto;
+    }
+}
+
+/*
+Input Slider 
+=========================== */
+.wrap-slider{
+    padding-left: 180px;
+    margin-bottom: 0;
+    margin-top: 15px;
+
+    mat-slider{
+        width: 200px;
+        display: block;
+        margin: auto;
+    }
+
+    small{
+        display: table;
+        margin: auto;
+        margin-top: -10px;
+        margin-bottom: 0;
+    }
+}
+
+/*
+Responsive
+=========================== */
+@media (max-width:480px){
+    table.table-compare tr td.info{
+        width: 130px !important;
+        max-width: 130px !important;
+        padding-right: 5px !important;
+        padding-left: 5px !important;
+    }
+}

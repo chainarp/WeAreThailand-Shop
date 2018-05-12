@@ -1,0 +1,81 @@
+<!-- Head Section -->
+<div class="head-section bg">
+    <div class="container">
+        <h4>Product <span class="font-light">Detail</span></h4>
+        <p>Angushop Product Detail</p>
+    </div>
+</div>
+
+<!-- Loading -->
+<div class="valign-wrapper" *ngIf="loadingState">
+    <mat-spinner diameter="50" strokeWidth="5"></mat-spinner>
+</div>
+
+<div class="container-page" *ngIf="productState">
+    <div class="box-page">
+        <h3 class="title">{{product.productName}}</h3>
+
+        <div class="row">
+            <div class="col l7 s12">
+                <div class="wrap-image">
+                    <img [src]="productImage" class="img-detail" [alt]="product.productName" />
+                    <ul>
+                        <li *ngFor="let image of product.gallery" (click)="selectImage(image)" [class.active]="selectedImage === image">
+                            <img [src]="image.thumbnail" class="responsive-img" alt="" />
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col l5 s12">
+                <div class="price">
+                    <div class="row">
+                        <div class="col m6 s12">
+                            <h4 class="value">{{product.price | currency:'USD':'$'}}</h4>
+                        </div>
+                        <div class="col m6 s12">
+                            <a class="link" (click)="addWishlist('wishlist',productWishlist)">
+                                <mat-icon>&#xE87E;</mat-icon> Add to Wishlist</a>
+                            <a class="link" (click)="addCompare('compare',productCompare)">
+                                <mat-icon>&#xE6E1;</mat-icon> Compare</a>
+                        </div>
+                    </div>
+                </div>
+                <button [disabled]="procustCount >= product.stock" mat-button class="btn btn-primary" (click)="addCart('products',productsOrder)">
+                    <mat-icon>&#xE8CC;</mat-icon>เพิ่มในตระกร้าสินค้า({{procustCount}}) 
+                </button>
+
+                <table class="bordered">
+                    <tbody>
+                        <tr>
+                            <td>Stock</td>
+                            <td>{{product.stock}}</td>
+                        </tr>
+                        <tr>
+                            <td>color</td>
+                            <td>{{product.color}}</td>
+                        </tr>
+                        <tr>
+                            <td>size</td>
+                            <td>{{product.size}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h5>Description</h5>
+                <p class="margin-bottom10">{{product.description}}</p>
+                <p>
+                    <rating [value]="product.rate"></rating>
+                </p>
+
+                <!-- Tag -->
+                <!-- <mat-chip-list>
+                    <mat-chip>Angushop</mat-chip>
+                    <mat-chip>Shop</mat-chip>
+                    <mat-chip>Ecommerce</mat-chip>
+                    <mat-chip>Angular 2</mat-chip>
+                </mat-chip-list> -->
+
+            </div>
+        </div>
+    </div>
+</div>

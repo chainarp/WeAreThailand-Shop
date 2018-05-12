@@ -1,0 +1,275 @@
+<!-- Head Section -->
+<div class="head-section bg">
+    <div class="container">
+        <h4>Shopping
+            <span class="font-light">Cart</span>
+        </h4>
+        <p>WeChef (Thailand) - Shopping Cart</p>
+    </div>
+</div>
+
+<div class="container-page">
+    <div class="box-page">
+        <!-- Start List -->
+
+        <ul class="row list-justify">
+            <li class="col s4 active">
+                Cart
+            </li>
+            <!-- <li class="col s3 disabled">
+                Payment
+            </li> -->
+            <li class="col s4 disabled">
+                Delivery
+            </li>
+            <li class="col s4 disabled">
+                Receipt
+            </li>
+        </ul>
+
+        <!-- End List -->
+        <div class="row margin-top30">
+            <div class="col l8 s12">
+                <div *ngIf="!isCartContainedThing()">
+
+                    <h4>ตระกร้าสินค้าว่างเปล่า!</h4>
+                    <button mat-button routerLink="/shop/product1/" class="btn btn-primary">เริ่มซื้ออาหารกัน</button>
+
+                </div>
+                <div *ngIf="isCartContainedThing()">
+
+                    <button mat-button routerLink="/shop/product1/" class="btn btn-primary">สั่งซื้ออาหารอื่นๆเพิ่ม</button>
+
+                </div>
+                <table class="table-cart">
+                    <tbody>
+                        <tr *ngFor="let cart of cartServiceProvider.shoppingCart.cartElements">
+                            <td>
+                                <span class="item-count">
+                                    <p class="item-name">{{cart.sellerTitle}} ({{cart.sellerCode}})</p>
+                                    <p class="item-detail" text-wrap>ที่จัดส่ง : {{cart.customerLocationTitle}} ({{cart.sellerDistance}} กม.)</p>
+                                    <p class="item-detail" text-wrap>เวลา : {{cart.selectedDeliveryTimePreroid.selectedDateRequired.Date.dateString }} ({{cart.selectedDeliveryTimePreroid.selectedTimeRangeRequired}})
+                                    </p>
+                                    <p class="item-detail" text-wrap>ค่าจัดส่ง (โดย {{cart.deliveryServiceProvider}}) : {{ cart.totalCostOfDelivery }} บาท</p>
+                                    <p class="item-detail" text-wrap>ราคารวม : {{cart.totalCostOfGoods}} บาท</p>
+                                </span>
+
+
+                                <table class="table-cart">
+                                    <tr *ngFor="let selectedProductItem of cart.selectedProductItems">
+                                        <td col-2>
+                                            <!--
+                                            <button (click)="cartServiceProvider.removeFromShoppingCart(selectedProductItem,true)">
+                                                <mat-icon>delete_forever</mat-icon>
+                                            </button>
+                                            -->
+                                            <a mat-mini-fab class="close" (click)="cartServiceProvider.removeFromShoppingCart(selectedProductItem,true)">
+                                                <mat-icon>&#xE5CD;</mat-icon>
+                                            </a>
+                                            <!--
+                                            <button mat-mini-fab class="shop_now" (click)="cartServiceProvider.removeFromShoppingCart(selectedProductItem,true)">
+                                                <mat-icon>delete_forever</mat-icon>
+                                                <!-- <ion-icon color="primary" name="add-circle"></ion-icon> - - >
+                                            </button>
+                                            -->
+                                        </td>
+                                        <td col-10>
+
+                                            <tr>
+                                                <td col-4>
+                                                    <!-- class="responsive-img" -->
+                                                    <img width="300" alt="" src={{selectedProductItem.productItemImage}} alt="">
+                                                </td>
+                                                <td col-6>
+                                                    <p class="item-name">{{selectedProductItem.productItemTitle}}</p>
+                                                    <p class="item-detail" text-wrap>{{selectedProductItem.selectedItemPrice.name}}</p>
+
+                                                    <p class="item-detail" text-wrap>เพิ่ม: {{selectedProductItem.selectedExtraOptionsComma}}</p>
+
+                                                    <p class="item-detail" text-wrap>ราคา/ชุด: {{selectedProductItem.totalPricePerSet}} บาท</p>
+                                                    <p class="item-detail" text-wrap>จำนวน: {{selectedProductItem.requiredQuantity}} ชุด</p>
+                                                    <p class="item-detail" text-wrap>ราคารวม: {{selectedProductItem.totalAmount}} บาท</p>
+                                                    <tr class="count">
+
+                                                        <span class="item-count" (click)="cartServiceProvider.removeFromShoppingCart(selectedProductItem,false)">
+                                                            -
+                                                        </span>
+                                                        <span class="item-count show-count">
+                                                            {{selectedProductItem.requiredQuantity}}
+                                                        </span>
+                                                        <span class="item-count" (click)="cartServiceProvider.addToShoppingCart(selectedProductItem,true)">
+                                                            +
+                                                        </span>
+
+                                                        <!--
+                                                        <button mat-mini-fab class="shop_now" (click)="cartServiceProvider.removeFromShoppingCart(selectedProductItem,false)">
+                                                            <mat-icon>remove_circle_outline</mat-icon>
+                                                            <!-- <ion-icon color="primary" name="add-circle"></ion-icon> - ->
+                                                        </button>
+                                                        <span class="item-count show-count">
+                                                            {{selectedProductItem.requiredQuantity}}
+                                                        </span>
+                                                        <button mat-mini-fab class="shop_now" (click)="cartServiceProvider.addToShoppingCart(selectedProductItem,true)">
+                                                            <mat-icon>add_circle_outline</mat-icon>
+                                                            <!--[value]="item.id" <ion-icon color="danger" name="remove-circle"></ion-icon> - ->
+                                                        </button>
+                                                        -->
+                                                    </tr>
+                                                </td>
+                                            </tr>
+
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!--
+                            <tr *ngFor="let selectedProductItem of cart.selectedProductItems">
+
+                                <td col-2>
+                                    <button (click)="cartServiceProvider.removeFromShoppingCart(selectedProductItem,true)">
+                                    </button>
+                                </td>
+                                <td col-10>
+                                    <!--
+                                    <tr>
+                                        <td col-4>
+                                            <!-- item-image - - >
+                                            <img class="responsive-img" src={{selectedProductItem.productItemImage}} alt="">
+                                        </td>
+                                        <td col-6>
+                                            <p class="item-name">{{selectedProductItem.productItemTitle}}</p>
+                                            <p class="item-detail" text-wrap>{{selectedProductItem.selectedItemPrice.name}}</p>
+
+                                            <p class="item-detail" text-wrap>เพิ่ม: {{selectedProductItem.selectedExtraOptionsComma}}</p>
+                                            <!-- <p class="item-detail" text-wrap>จำนวน: {{selectedProductItem.requiredQuantity}}</p> - - >
+                                            <p class="item-detail" text-wrap>ราคา/ชุด: {{selectedProductItem.totalPricePerSet}} บาท</p>
+                                            <p class="item-detail" text-wrap>จำนวน: {{selectedProductItem.requiredQuantity}} ชุด</p>
+                                            <p class="item-detail" text-wrap>ราคารวม: {{selectedProductItem.totalAmount}} บาท</p>
+                                            <tr>
+                                                <span class="item-count" (click)="cartServiceProvider.removeFromShoppingCart(selectedProductItem,false)">
+                                                    -
+                                                </span>
+                                                <span class="item-count show-count">
+                                                    {{selectedProductItem.requiredQuantity}}
+                                                </span>
+                                                <span class="item-count" (click)="cartServiceProvider.addToShoppingCart(selectedProductItem,true)">
+                                                    +
+                                                </span>
+                                            </tr>
+                                        </td>
+                                    </tr>
+                                - ->
+                                </td>
+                            </tr> -->
+
+                    </tbody>
+                </table>
+            </div>
+            <!--
+            <div class="col l8 s12">
+
+                <!-- Start Table Cart - - >
+            <table class="table-cart">
+                <thead>
+                    <tr>
+                        <th>Added Items</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Remove</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngIf="productsOrder.length == 0">
+                        <td class="empty" colspan="4">
+                            <img src="http://via.placeholder.com/246x339" width="100" alt="" />
+                            <h6 class="content">No Product</h6>
+                        </td>
+                    </tr>
+                    <tr *ngFor="let product of productsOrder">
+                        <td class="item">
+                            <div class="wrap-img">
+                                <img [src]="product.image" alt="" />
+                            </div>
+                            <h6 class="title">
+                                <a [routerLink]="['/shop/p/' + product.slug]">{{product.productName}}</a>
+                            </h6>
+                            <p>Stock: {{product.stock}}</p>
+                        </td>
+                        <td>
+                            <input type="number" class="input-counter" [(ngModel)]="product.quantity" [value]="product.quantity" (change)="onChage(product)"
+                            />
+                        </td>
+                        <td>{{product.quantity * product.price | currency:'USD':'$'}}</td>
+                        <td>
+                            <button mat-mini-fab (click)="deleteProduct(product.id)">
+                                <mat-icon>&#xE5CD;</mat-icon>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- End Table Cart - - > 
+        </div>
+        -->
+            <div class="col l4 s12">
+
+                <!-- Coupon -->
+                <div class="input-group">
+                    <input [disabled]="productsOrder.length == 0" type="text" [value]="promoInit" placeholder="Add Promo Code" #promo />
+                    <mat-icon (click)="checkPromo(promo.value)" class="icon">&#xE145;</mat-icon>
+                </div>
+
+                <div class="promo-error">
+                    ขออภัยกำลังปรับปรุงระบบคูปองส่วนลดค่ะ
+                </div>
+
+                <div *ngIf="productsOrder.length != 0" class="margin-bottom20 margin-top20">
+                    <p class="margin-bottom10">
+                        <em>
+                            <small>try promo code for test</small>
+                        </em>
+                    </p>
+                    <div class="alert alert-info">
+                        <strong class="right">4234OPD</strong> Free 20%
+                        <hr />
+                        <strong class="right">12312B</strong> Free $100
+                    </div>
+                </div>
+
+                <div class="margin-top20 margin-bot20">
+                    <table class="count">
+                        <tr>
+                            <td>ค่าอาหารทั้งสิ้น</td>
+                            <td class="right-align">{{cartServiceProvider.shoppingCart.grandTotalCostOfGoods}} บาท</td>
+                        </tr>
+                        <tr>
+                            <td>ค่าจัดส่งเบื้องต้น</td>
+                            <td class="right-align">{{cartServiceProvider.shoppingCart.grandTotalCostOfDelivery}} บาท</td>
+                        </tr>
+                        <tr>
+                            <td>ค่าธรรมเนียมชำระทั้งสิ้น</td>
+                            <td class="right-align">{{cartServiceProvider.shoppingCart.grandTotalCostOfPayment}} บาท</td>
+                        </tr>
+                        <tr>
+                            <td>ส่วนลดแทนคำขอบคุณทั้งสิ้น</td>
+                            <td class="right-align  text-danger">{{cartServiceProvider.shoppingCart.grandTotalDiscount}} บาท</td>
+                        </tr>
+                        <tr>
+                            <td>รวมราคาเบื้องต้น</td>
+                            <td class="right-align">
+                                <strong>{{cartServiceProvider.shoppingCart.grandTotal}} บาท</strong>
+                                <!-- <strong>{{cartServiceProvider.shoppingCart.grandTotalCostOfGoods + cartServiceProvider.shoppingCart.grandTotalCostOfDelivery + cartServiceProvider.shoppingCart.grandTotalCostOfPayment + cartServiceProvider.shoppingCart.grandTotalDiscount}} บาท</strong> -->
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="margin-top20">
+                    <button [disabled]="cartServiceProvider.shoppingCart.cartElements.length == 0" mat-button routerLink="/shop/deliverylist"
+                        class="btn btn-primary btn-block">ขั้นตอนจัดส่งและชำระเงิน</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,22 @@
+<!-- Head Section -->
+<div class="head-section bg">
+    <div class="container">
+        <h4>Product <span class="font-light">Element</span></h4>
+        <p>Angushop product element</p>
+    </div>
+</div>
+<div class="container-page">
+    <div class="box-page padding-bottom40">
+        <div class="wrap-product">
+            <!-- App Product -->
+            <app-product 
+                [setlimit]="4" 
+                [paginate]="false"
+                (detail)="detailProduct($event)"
+            ></app-product>
+        </div>
+        <blockquote class="margin-top50">
+            Documentation product element included in angushop file package
+        </blockquote>
+    </div>
+</div>

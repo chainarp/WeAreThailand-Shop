@@ -1,0 +1,154 @@
+<!-- Head Section -->
+<div class="head-section bg">
+    <div class="container">
+        <h1>เชฟ <span class="font-light">คุณภาพ</span></h1>
+        <h4>Selected & Certified Chefs</h4>
+    </div>
+</div>
+<div class="row wrap-product" myMatchHeight="layout">
+    <div class="col m8 l9 s12 push-l3 push-m4 layout main-product">
+        <!-- Start Product -->
+        <person-stand [filter]= "{
+            productItem_title : search,
+            seller_sellerGroup : category,
+            radius : radius
+        }" [column]="'l4 s6'" [setlimit]="12" [paginate]="true" [currentPage]="currentPage" (pageChange)="onPageChange($event)">
+        </person-stand>
+        <!--
+        <app-product 
+            [filter]="{
+                productName: search,
+                category: category,
+                color: color,
+                price: price,
+                size: sizes
+            }"
+            [column]="'l4 s6'"
+            [setlimit]="12" 
+            [paginate]="true"
+            [currentPage]="currentPage"
+            (pageChange)="onPageChange($event)">
+        </app-product>
+        -->
+        <!-- End Product -->  
+    </div>
+    <div class="col m4 l3 s12 pull-l9 pull-m8 layout side-product">
+        <mat-tab-group>
+            <mat-tab label="Filter">
+                <!-- Wrap Filter -->
+                <div class="wrap-filter">
+                    <!-- Search -->
+                    <div class="content-filter search">
+                        <input type="text" placeholder="Search Product..." [value]="valueSearch" (keyup)="onSearch($event)"/>
+                        <mat-icon class="icon">&#xE8B6;</mat-icon>
+                    </div>
+                    <!-- Category -->
+                    <div class="content-filter">
+                        <h6 class="title">กลุ่มของเชฟ</h6>
+                        <ul class="categories">
+                            <li (click)="resetCategory()" [class.active]="allCategory"><a>ทั้งหมด</a></li>
+                            <li *ngFor="let category of categories" [class.active]="selectedCategory === category">
+                                <a (click)="selectCategory(category)">{{category.title}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- Price -->
+                    <!--
+                    <div class="content-filter">
+                        <h6 class="title">Price</h6>
+                        <div *ngIf="priceToggle" class="center-align">
+                            <p>
+                                <button mat-mini-fab (click)="refreshPrice()">
+                                    <mat-icon>&#xE5D5;</mat-icon>
+                                </button>
+                            </p>
+                            <strong>{{price | currency:'USD':'$'}}</strong>
+                        </div>
+                        <mat-slider 
+                            min="100"
+                            max="1000" 
+                            value="550" 
+                            [(ngModel)]="price" 
+                            (change)="onChangeprice($event)">
+                        </mat-slider>
+                    </div>
+                    -->
+                    <!-- Color -->
+                    <!--
+                    <div class="content-filter">
+                        <h6 class="title">Color</h6>
+                        <ul class="colors">
+                            <li *ngFor="let color of colors" 
+                                class="{{color.nameColor}}" 
+                                [class.active]="selectedColor === color">
+                                <button mat-mini-fab (click)="selectColor(color)"></button>
+                            </li>
+                        </ul>
+                    </div>
+                    -->
+                    <!-- Size -->
+                    <!--
+                    <div class="content-filter padding-bottom0">
+                        <h6 class="title">Size</h6>
+                        <div class="row row-size">
+                            <div *ngFor="let size of sizeProduct" class="col s4 margin-bottom10">
+                                <mat-checkbox 
+                                    [checked]="size.check" 
+                                    (change)="size.check = !size.check" 
+                                    (click)="selectSize(size.size,size.check)">
+                                        {{size.size}}
+                                </mat-checkbox>
+                            </div>
+                        </div>
+                    </div>
+                    -->
+                </div>
+                <!-- End Filter -->
+            </mat-tab>
+            <mat-tab label="Recently">
+                <!-- Start Recently -->
+                <ul class="list-product">
+                <!--
+                    <li>
+                        <div class="wrap-img">
+                            <img src="http://via.placeholder.com/640x500" class="img-responsive" alt=""/> 
+                        </div>
+                        <h6 class="title"><a>Lorem ipsum dolor</a></h6>
+                        <p>Lorem ipsum dolor sit amet</p>
+                    </li>
+                    <li>
+                        <div class="wrap-img">
+                            <img src="http://via.placeholder.com/640x500" class="img-responsive" alt=""/> 
+                        </div> 
+                        <h6 class="title"><a>vocent tractatos vel</a></h6>
+                        <p>Lorem ipsum dolor sit amet</p>
+                    </li>
+                    <li>
+                        <div class="wrap-img">
+                            <img src="http://via.placeholder.com/640x500" class="img-responsive" alt=""/>  
+                        </div>
+                        <h6 class="title"><a>ridens doctus fabellas</a></h6>
+                        <p>Lorem ipsum dolor sit amet</p>
+                    </li>
+                    <li>
+                        <div class="wrap-img">
+                            <img src="http://via.placeholder.com/640x500" class="img-responsive" alt=""/>  
+                        </div>
+                        <h6 class="title"><a>Usu an impetus</a></h6>
+                        <p>Lorem ipsum dolor sit amet</p>
+                    </li>
+                    <li>
+                        <div class="wrap-img">
+                            <img src="http://via.placeholder.com/640x500" class="img-responsive" alt=""/>  
+                        </div>
+                        <h6 class="title"><a>Graeco feugiat ne</a></h6>
+                        <p>Lorem ipsum dolor sit amet</p>
+                    </li>
+                -->
+                </ul>
+                
+                <!-- End Recently -->
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+</div>

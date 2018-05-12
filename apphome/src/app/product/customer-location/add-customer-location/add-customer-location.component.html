@@ -1,0 +1,334 @@
+<!--
+<ion-header>
+        <ion-navbar>
+            <ion-title class="title">Add Location
+                <!--
+                    <span class="cart-icon-nav">
+                        <ion-icon ios="ios-cart" md="md-cart" (click)="navcart()"></ion-icon>
+                        <ion-badge class="carts" item-right color="danger">{{noOfItems}}</ion-badge>
+                    </span>
+                -->
+<!--
+                    <ion-buttons end>
+                        <button id="cart-button" ion-button clear (click)="gotoCartPage()">
+                            <ion-icon name="ios-cart">
+                                <ion-badge id="cart-badge" color="danger">{{noOfItems}}</ion-badge>
+                            </ion-icon>
+                        </button>
+                    </ion-buttons>
+                - - >
+            </ion-title>
+        </ion-navbar>
+    </ion-header>
+    
+    <ion-content padding>
+        <ion-card>
+            <ion-card-content>
+                <ion-list>
+                    <ion-item>
+                        <ion-label stacked>Location Name</ion-label>
+                        <ion-input type="text" placeholder="________________________" required  [(ngModel)]="blankCustomerLocationItem.title"></ion-input>
+                    </ion-item>
+    
+                    <ion-item>
+                        <ion-label stacked>Location Detail</ion-label>
+                        <ion-input type="text" placeholder="________________________" required [(ngModel)]="blankCustomerLocationItem.detail1"></ion-input>
+                    </ion-item>
+    
+                    <ion-item>
+                        <ion-label stacked>Landmark</ion-label>
+                        <ion-input type="text" placeholder="________________________" required [(ngModel)]="blankCustomerLocationItem.detail2"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label stacked>LatLng</ion-label>
+                        <ion-input id="latlngTxtInp" type="text" required [(ngModel)]="blankCustomerLocationItem.LatLng"></ion-input>
+                    </ion-item>
+                    <button ion-button full color="success" (click)="gotoOKPress()">OK!</button>
+                </ion-list>
+            </ion-card-content>
+        </ion-card>
+        <div #map id="map"></div>
+    </ion-content>
+-->
+<!-- Head Section -->
+<!-- Head Section -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+<!-- <input type="button" class="btn  pull-right map-btn" value="btn " onclick="javascript:showlocation()" /> -->
+<!--
+<input type="textbox" class="" id="placeToSearch"  value="กรอก...ดิ กรอก" />
+<input type="button" class="" id="doSearch" value="ค้นหา" (click)="geocodeAddress()" />
+-->
+<!--
+<input type="button" class="btn  pull-right map-btn" value="btn " (click)="showlocation()" />
+
+
+<div #mapcanvas id="map-canvas" style="height: 300px"></div>
+
+<input type="text" id="default_latitude" placeholder="Latitude" />
+<input type="text" id="default_longitude" placeholder="Longitude" />
+-->
+<div class="head-section bg">
+    <div class="container">
+        <h4>Customer
+            <span class="font-light">Location</span>
+        </h4>
+        <p>tell us where you are</p>
+    </div>
+</div>
+<div class="container-page">
+    <div class="box-page">
+        <ul class="row list-justify">
+            <li class="col s6 disabled">
+                เลือกสถานที่จัดส่ง
+            </li>
+            <li class="col s6 active">
+                เพิ่มสถานที่จัดส่ง
+            </li>
+
+        </ul>
+
+        <form #formRef="ngForm" (ngSubmit)="onSubmit(formRef)">
+            <div class="alert alert-info">
+                <div class="row">
+                    <div class="col m6 s12">
+                        <mat-form-field>
+                            <input matInput type="text" placeholder="ชื่อสถานที่จัดส่ง" value="" name="title" [(ngModel)]="customerLocationInfo.title"
+                                #titleRef="ngModel" required>
+                        </mat-form-field>
+
+                        <small class="error" *ngIf="titleRef.errors?.required && titleRef.touched">required error</small>
+                        <small class="error" *ngIf="titleRef.errors?.required && titleRef.dirty">required error</small>
+
+                    </div>
+
+                    <div class="col m6 s12">
+                        <mat-form-field>
+                            <input matInput type="text" placeholder="รายละเอียดสถานที่ส่ง" value="" name="placedetail1" [(ngModel)]="customerLocationInfo.location"
+                                #placedetail1Ref="ngModel" (blur)="onBlurMethod($event.target.value)" required>
+                        </mat-form-field>
+
+                        <small class="error" *ngIf="placedetail1Ref.errors?.required && placedetail1Ref.touched">required error</small>
+                        <small class="error" *ngIf="placedetail1Ref.errors?.required && placedetail1Ref.dirty">required error</small>
+
+                    </div>
+                    <div class="col m6 s12">
+                        <mat-form-field>
+                            <input matInput type="text" placeholder="จุดสังเกตสำคัญ" value="" name="placedetail2" [(ngModel)]="customerLocationInfo.messageToDriver"
+                                #placedetail2Ref="ngModel" required>
+                        </mat-form-field>
+
+                        <small class="error" *ngIf="placedetail2Ref.errors?.required && placedetail2Ref.touched">required error</small>
+                        <small class="error" *ngIf="placedetail2Ref.errors?.required && placedetail2Ref.dirty">required error</small>
+
+                    </div>
+                    <div class="col m6 s12">
+                        <mat-form-field>
+                            <input matInput type="text" placeholder="เบอร์โทรผู้รับอาหาร" value="" name="receiverphone" [(ngModel)]="customerLocationInfo.receiverPhone"
+                                #receiverphoneRef="ngModel" required phone="ID">
+                        </mat-form-field>
+
+                        <small class="error" *ngIf="receiverphoneRef.errors?.required && receiverphoneRef.touched">required error</small>
+                        <small class="error" *ngIf="receiverphoneRef.errors?.required && receiverphoneRef.dirty">required error</small>
+                        <small class="error" *ngIf="receiverphoneRef.errors?.phone && receiverphoneRef.dirty">phone not valid</small>
+                    </div>
+
+                    <div class="col m6 s12">
+                        <mat-form-field>
+
+                            <input matInput id="latlngTxtInp" type="text" placeholder="LatLng" value="" name="LatLng" [(ngModel)]="latLng"
+                                #LatLngRef="ngModel" readonly>
+
+                        </mat-form-field>
+                        <!--
+                        <small class="error" *ngIf="LatLngRef.errors?.required && LatLngRef.touched">required error</small>
+                        <small class="error" *ngIf="LatLngRef.errors?.required && LatLngRef.dirty">required error</small>
+                        -->
+                    </div>
+
+                </div>
+                <div class="row margin-top20">
+                    <div class="col l6 push-l6 s12 right-align">
+                        <button [disabled]="formRef.invalid" type="submit" mat-button class="btn btn-primary margin-bottom10">
+                            <span> OK !</span>
+                            <!--
+                        <span *ngIf="nottouched">Continue to Checkout</span>
+                        <span *ngIf="touched">Loading...</span>
+                        -->
+                        </button>
+                    </div>
+                    <div class="col l6 pull-l6 s12">
+                        <a mat-button routerLink="/shop/customerlocation" class="btn btn-default">Back</a>
+                    </div>
+                </div>
+                <!--
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col m6 s12">
+                <mat-form-field>
+                    <input matInput type="email" placeholder="email - จัดส่งใบเสร็จ" value="" name="email" [(ngModel)]="email" #emailRef="ngModel"
+                        required email>
+                </mat-form-field>
+                <small class="error" *ngIf="emailRef.errors?.required && emailRef.touched">required error</small>
+                <small class="error" *ngIf="emailRef.errors?.required && emailRef.dirty">required error</small>
+                <small class="error" *ngIf="emailRef.errors?.email && emailRef.dirty">email not valid</small>
+            </div>
+            <div class="col m6 s12">
+                <mat-form-field>
+                    <input matInput type="text" placeholder="มือถือ" value="" name="phone" [(ngModel)]="phone" #phoneRef="ngModel" required phone="ID">
+                </mat-form-field>
+                <small class="error" *ngIf="phoneRef.errors?.required && phoneRef.touched">required error</small>
+                <small class="error" *ngIf="phoneRef.errors?.required && phoneRef.dirty">required error</small>
+                <small class="error" *ngIf="phoneRef.errors?.phone && phoneRef.dirty">phone not valid</small>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col s12">
+                <mat-form-field>
+                    <input matInput type="text" placeholder="สถานที่จัดส่ง" value="" name="address" [(ngModel)]="address" #addressRef="ngModel"
+                        required>
+                </mat-form-field>
+                <small class="error" *ngIf="addressRef.errors?.required && addressRef.touched">required error</small>
+                <small class="error" *ngIf="addressRef.errors?.required && addressRef.dirty">required error</small>
+            </div>
+        </div>
+    -->
+            </div>
+
+            <div class="clearfix"></div>
+            <h5>โปรดตรวจสอบตำแหน่งจัดส่ง</h5>
+            <div class="clearfix"></div>
+
+            <div #map id="map" style="width:100%;height:480px;"></div>
+            <!--
+            <input class="form-control" type="text" name="latlng" id="latlng" [(ngModel)]="latlng" />
+            -->
+            <!-- style="width:640px;height:480px;"
+        <div class="clearfix"></div>
+        
+        <div class="row">
+            <div class="col m6 s12">
+                <mat-form-field>
+                    <input matInput 
+                        type="text"
+                        placeholder="City" 
+                        value=""
+                        name="city" 
+                        [(ngModel)]="city" 
+                        #cityRef="ngModel" 
+                        required>
+                </mat-form-field>
+                <small class="error" *ngIf="cityRef.errors?.required && cityRef.touched">required error</small>                                                                                                                                            
+                <small class="error" *ngIf="cityRef.errors?.required && cityRef.dirty">required error</small>                                                                                                                                            
+            </div>
+            <div class="col m6 s12">
+                <mat-form-field>
+                    <input matInput 
+                        type="text"
+                        placeholder="Zipcode" 
+                        value=""
+                        name="zipcode" 
+                        [(ngModel)]="zipcode" 
+                        #zipcodeRef="ngModel" 
+                        maxlength="5"
+                        required
+                        number>
+                </mat-form-field>
+                <small class="error" *ngIf="zipcodeRef.errors?.required && zipcodeRef.touched">required error</small>                                                                                                                                            
+                <small class="error" *ngIf="zipcodeRef.errors?.required && zipcodeRef.dirty">required error</small>                                                                                                                                            
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col m6 s12">
+                <mat-form-field>
+                    <input matInput 
+                        type="text"
+                        placeholder="State" 
+                        value=""
+                        name="state"
+                        [(ngModel)]="state" 
+                        #stateRef="ngModel">
+                </mat-form-field>
+            </div>
+            <div class="col m6 s12">
+                <mat-form-field>
+                <input matInput 
+                    type="text"
+                    placeholder="Country" 
+                    value=""
+                    name="country" 
+                    [(ngModel)]="country" 
+                    #countryRef="ngModel" 
+                    required>
+                </mat-form-field>
+                <small class="error" *ngIf="countryRef.errors?.required && countryRef.touched">required error</small>                                                                                                                                                                                                    
+                <small class="error" *ngIf="countryRef.errors?.required && countryRef.dirty">required error</small>                                                                                                                                                                                                    
+            </div>
+        </div>
+        -->
+            <div class="clearfix"></div>
+            <!--
+        <p class="margin-bottom10">
+            <em>
+                <small>Test dummy, click
+                    <a href="https://stripe.com/docs/testing" target="_BLANK" class="link">here</a> for more test</small>
+            </em>
+        </p>
+        -->
+            <!--
+    <div class="row margin-top20">
+        <div class="col l6 push-l6 s12 right-align">
+            <!--
+                <button [disabled]="formRef.invalid || touched" type="submit" mat-button class="btn btn-primary margin-bottom10">
+                    <span *ngIf="nottouched">Continue to Checkout</span>
+                    <span *ngIf="touched">Loading...</span>
+                </button>
+                - - >
+            <button [disabled]="formRef.invalid || touched" type="submit" mat-button class="btn btn-primary margin-bottom10">
+                <span *ngIf="nottouched">Continue to Checkout</span>
+                <span *ngIf="touched">Loading...</span>
+            </button>
+        </div>
+        <div class="col l6 pull-l6 s12">
+            <a mat-button routerLink="/shop/shoppingcart" class="btn btn-default">Back To Cart</a>
+        </div>
+    </div>
+-->
+        </form>
+
+
+
+        <!-- Loading -->
+        <!--
+        <div class="valign-wrapper" *ngIf="loadingState">
+            <mat-spinner diameter="50" strokeWidth="5"></mat-spinner>
+        </div>
+        -->
+        <!--
+<div class="container-page" *ngIf="true">
+    <div class="box-page">
+        <h3 class="title">Customer Location</h3>
+
+        <div class="row">
+            <div class="col l12 s12">
+                <input class="form-control" type="text" name="latlng" id="latlng" [(ngModel)]="latlng" />
+                <div #map id="map" style="width:100%;height:480px;"></div>
+            </div>
+        </div>
+        <div #list>
+            <adddeleteitem (radioCheckedIdChangeEvent)="handleRadioCheckedIdChangeEvent($event)" (removeCheckedItemPressEvent)="handleRemoveCheckedItemPressEvent($event)"
+                (addItemPressEvent)="handleAddItemPressEvent($event)" (rangeChangeEvent)="handleRangeChangeEvent($event)" [items]=items
+                [rangeValue]=rangeValue [checkedItem]="customerLocationItemChecked"></adddeleteitem>
+        </div>
+    </div>
+</div>
+-->
+    </div>
+</div>

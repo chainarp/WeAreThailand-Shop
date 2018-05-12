@@ -1,0 +1,205 @@
+<!--
+<div class="col-md-6 col-md-offset-3">
+    <h1>Home</h1>
+    <p>{{bodyText}}</p>
+    <button (click)="openModal('custom-modal-1')">Open Modal 1</button>
+    <button (click)="openModal('custom-modal-2')">Open Modal 2</button>
+</div>
+
+
+<modal id="custom-modal-1" >
+    <div class="modal" style="display: inline;">
+        <div class="modal-body">
+            <h1>A Custom Modal!</h1>
+            <p>
+                Home page text:
+                <input type="text" [(ngModel)]="bodyText" />
+            </p>
+            <button (click)="closeModal('custom-modal-1');">Close</button>
+        </div>
+    </div>
+    <div class="modal-background"></div>
+</modal>
+<modal id="custom-modal-2">
+    <div class="modal" style="display: inline;">
+        <div class="modal-body">
+            <h1 style="height:1000px">A Tall Custom Modal!</h1>
+            <button (click)="closeModal('custom-modal-2');">Close</button>
+        </div>
+    </div>
+    <div class="modal-background"></div>
+</modal>
+-->
+<div class="content-heading">Orders
+    <small>
+        <a [routerLink]=" ['/home'] ">Dashboard</a> -> Production Orders</small>
+</div>
+<div class="panel panel-default">
+
+    <div class="panel-heading">Order list</div>
+    <div class="table-responsive b0">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th class="text-center">
+                        <strong>Order Id</strong>
+                    </th>
+                    <th class="text-center">
+                        <strong>Seller</strong>
+                    </th>
+                    <th class="text-center">
+                        <strong>DateTime</strong>
+                    </th>
+                    <th class="text-center">
+                        <strong>Customer</strong>
+                    </th>
+                    <th class="text-center">
+                        <strong>ProdItems</strong>
+                    </th>
+                    <th class="text-center">
+                        <strong>Payment</strong>
+                    </th>
+                    <th class="text-center">
+                        <strong>Delivery</strong>
+                    </th>
+                    <th class="text-center">
+                        <strong></strong>
+                    </th>
+                    <th class="text-center">
+                        <strong>Order</strong>
+                    </th>
+                    <th class="text-center">
+                        <strong>Main</strong>
+                    </th>
+                    <!--
+                    <th class="text-center">
+                        <strong>ACTION</strong>
+                    </th>
+                    -->
+                    <th class="text-center">
+                        <strong>View</strong>
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="text-center" *ngFor="let productionOrder of productionOrders">
+                    <td>{{productionOrder.orderId}}</td>
+                    <td>{{productionOrder.sellerName}}</td>
+                    <td>{{getRequiredDateTime(productionOrder.selectedDeliveryTimeStamp)}}</td>
+                    <td>{{productionOrder.customerName}} ({{productionOrder.customerMobilePhone}})</td>
+
+                    <td>{{productionOrder.selectedProductItems.length}}</td>
+                    <!--
+                <td>{{productionOrder.paymentStatusLogs[productionOrder.paymentStatusLogs.length-1].value}}</td>
+                <td>{{productionOrder.deliveryStatusLogs[productionOrder.deliveryStatusLogs.length-1].value}}</td>
+                <td>{{productionOrder.orderStatusLogs[productionOrder.orderStatusLogs.length-1].value}}</td>
+                <td>{{productionOrder.mainStatusLogs[productionOrder.mainStatusLogs.length-1].value}}</td>
+                -->
+                    <td class="text-center">
+                        <select class="input-sm form-control" [(ngModel)]="productionOrder.allAboutOrderStatus.paymentDisplayStatus" (change)="OnChangePaymentStatus(productionOrder,$event)">
+                            <option [value]="paymentStatus.en" *ngFor="let paymentStatus of paymentStatuses">{{paymentStatus.en}}</option>
+                        </select>
+                    </td>
+                    <td class="text-center">
+                        <select class="input-sm form-control" [(ngModel)]="productionOrder.allAboutOrderStatus.deliveryDisplayStatus" (change)="OnChangeDeliveryStatus(productionOrder,$event)">
+                            <option [value]="deliveryStatus.en" *ngFor="let deliveryStatus of deliveryStatuses">{{deliveryStatus.en}}</option>
+                        </select>
+                    </td>
+                    <!--
+                    <modal id="{{productionOrder.key}}">
+                        <div class="modal" style="display: inline;">
+                            <div class="modal-body">
+
+                                <h4>Delivery Responses</h4>
+                                <button class="btn btn-primary pull-right" (click)="closeModal($event,productionOrder)">close</button>
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">
+                                                <strong>เวลา</strong>
+                                            </th>
+                                            <th class="text-center">
+                                                <strong>คำขอ</strong>
+                                            </th>
+                                            <th class="text-center">
+                                                <strong>สำเร็จ?</strong>
+                                            </th>
+                                            <th class="text-center">
+                                                <strong>ผลลัพธ์</strong>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="text-center" *ngFor="let response of deliveryResponseX(productionOrder)">
+                                            <td>{{response.createdAt}}</td>
+                                            <td>{{response.responseName}}</td>
+                                            <td>{{response.isSuccessResponse?"สำเร็จ":"ไม่สำเร็จ"}}</td>
+                                            <td>{{response.responseData}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                        <div class="modal-background"></div>
+                    </modal>
+                    -->
+                    <td class="text-center">
+                        <button class="btn btn-sm btn-default" type="button" (click)="openModal($event,productionOrder)">
+                            <em class="fa fa-search"></em>
+                        </button>
+                    </td>
+                    <td class="text-center">
+                        <select class="input-sm form-control" [(ngModel)]="productionOrder.allAboutOrderStatus.orderDisplayStatus" (change)="OnChangeOrderStatus(productionOrder,$event)">
+                            <option [value]="orderStatus.en" *ngFor="let orderStatus of orderStatuses">{{orderStatus.en}}</option>
+                        </select>
+                    </td>
+                    <td class="text-center">
+                        <select class="input-sm form-control" [(ngModel)]="productionOrder.allAboutOrderStatus.mainDisplayStatus" (change)="OnChangeMainStatus(productionOrder,$event)">
+                            <option [value]="mainStatus.en" *ngFor="let mainStatus of mainStatuses">{{mainStatus.en}}</option>
+                        </select>
+                    </td>
+                    <td class="text-center">
+                        <button class="btn btn-sm btn-default" type="button" (click)="ordersShow(productionOrder.key)">
+                            <em class="fa fa-search"></em>
+                        </button>
+                    </td>
+                    <!-- let mainStatus of productionOrderInfo.mainStatuses
+                <td>{{order.userDetails.mobileNo}}</td>
+                <td class="text-center">
+                    <span class="label label-success" *ngIf="order.status=='Delivered'">{{order.status}}
+                    </span>
+                    <span class="label label-warning" *ngIf="order.status =='pending'">{{order.status}}</span>
+                    <span class="label label-purple" *ngIf="order.status=='On the Way'">{{order.status}}
+                    </span>
+                    <span class="label label-danger" *ngIf="order.status=='Canceled'">{{order.status}}</span>
+                </td>
+                <td>COD</td>
+                <td>${{order.grandTotal}}</td>
+                <td class="text-center">
+                    <select class="input-sm form-control" (change)="OnChangeStatus(order.$key,$event)">
+                        <option>Select Status</option>
+                        <option value="pending">Pending</option>
+                        <option value="On the Way">On the Way</option>
+                        <option value="Canceled">Canceled</option>
+                        <option value="Delivered">Delivered</option>
+                    </select>
+                </td>
+                <td class="text-center">
+                    <button class="btn btn-sm btn-default" type="button" (click)="ordersShow(order.$key)">
+                        <em class="fa fa-search"></em>
+                    </button>
+                </td>
+            -->
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="panel-footer">
+        <div class="row">
+
+        </div>
+    </div>
+</div>

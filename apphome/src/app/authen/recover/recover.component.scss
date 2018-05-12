@@ -1,0 +1,176 @@
+/*
+Import
+=========================== */
+@import '../../../assets/sass/css3-mixins';
+@import '../../../assets/sass/variable';
+
+/*
+Banner
+=========================== */
+.banner{
+    padding: 60px 0 0 0;
+    background-color: $color-bg-gray3;
+    background-image: url('/assets/images/bg/brick-wall.png');
+    position: relative;
+    
+    &:before{
+        content: '';
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        @include background-gradient(rgba(0,0,0,0.1),$color-bg-gray3);
+    }
+
+    .row{
+        margin-top: 0;
+        margin-bottom: 0;
+        position: relative;
+        z-index: 2;
+
+        .content{
+            padding-top: 115px;
+            margin-bottom: 25px;
+
+            .sub-title{
+                text-transform: uppercase;
+            }
+
+            .title{
+                margin: 15px 0 40px 0;
+                text-transform: none;
+            }
+        }
+    }
+
+    .wrap-demo{
+        height: auto;
+        padding: 0 15px;
+    }
+
+    img{
+        display: block;
+    }
+}
+
+/*
+Category
+=========================== */
+.wrap-feature{
+    display: block;
+    position: relative;
+    
+    .container{
+        position: relative;
+        z-index: 2;
+    }
+
+    .row{
+        margin: 0;
+    }
+
+    .col{
+        padding: 0;
+        margin: -0.5px;
+    }
+
+    .item-feature{
+        padding: 20px 35px 20px 65px;
+        border: solid 1px #efefef;
+        background: #fff;
+        position: relative;
+        @include box-shadow(0, 1px, 15px, 1px, rgba(147, 147, 147, 0.10));
+        overflow: hidden;
+
+        mat-icon{
+            position: absolute;
+            font-size: 24px;
+            top: 25px; 
+            left: 25px;
+            @include opacity(0.7);
+
+            &.bg{
+                color: $color-content;
+                @include opacity(0.1);
+                font-size: 100px;
+                left: 100%;
+                top: 100%;
+                margin: -50px 0 0 -80px;
+                z-index: 1;
+            }
+        }
+
+        .title{
+            text-transform: capitalize;
+            position: relative;
+            z-index: 2;
+        }
+
+        p{
+            margin-bottom: 0;
+            position: relative;
+            z-index: 2;
+        }
+    }
+
+    &:before{
+        content: '';
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 50%;
+        background-color: $color-bg-gray3;
+        border-bottom: solid 1px #efefef;
+    }
+}
+
+/*
+Responsive
+=========================== */
+@media(max-width:1200px){
+    .banner .row{ 
+        .content{
+            padding-top: 70px;
+        }
+
+        img{
+            max-width: 300px;
+            margin: 0 auto !important;
+        }
+    }
+}
+
+@media(max-width:767px){
+    .banner{
+        .row{
+            .content{
+                text-align: center;
+                padding-top: 0;
+                margin-bottom: 55px;
+            }
+
+            .col{
+                width: 100%;
+            }
+        }
+    }
+
+    .product-home{
+        padding: 0 25px;
+    }
+}
+
+@media(max-width:360px){
+    .banner .row{ 
+        img{
+            max-width: 200px;
+        }
+    }
+}
+.wd-xl{
+  width: 320px;
+}

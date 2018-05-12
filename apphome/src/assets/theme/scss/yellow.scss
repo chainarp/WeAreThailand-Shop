@@ -1,0 +1,109 @@
+@import '../../../node_modules/@angular/material/theming';
+@include mat-core();
+
+// Variable
+$color-accent1: color("yellow", "accent-1");
+$color-accent2: color("yellow", "accent-2");
+$color-accent3: color("yellow", "accent-3");
+$color-accent4: color("yellow", "accent-4");
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue.
+$candy-app-primary: mat-palette($mat-yellow);
+$candy-app-accent:  mat-palette($mat-yellow, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$candy-app-warn: mat-palette($mat-yellow);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-app-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($candy-app-theme);
+
+// Theme Style Color
+a,
+.mat-list-item-content mat-icon,
+.item-feature mat-icon,
+a.link:hover,
+strong.price,
+.item-product .title a:hover,
+.item-product .title a:focus,
+.item-product .p a:hover,
+.item-product .p a:focus,
+.item-product .price,
+ul.menu li a:hover,
+.side li a.active,
+.side li a:hover{
+    color: $color-accent3;
+}
+
+.title a:hover,
+.recently li a:hover,
+ul.categories a:hover,
+ul.categories li.active a,
+.pagination-product ul li a:hover,
+.wrap-pagination ul li.current span{
+    color: $color-accent3 !important;
+}
+
+// Theme Style Color Important
+.pagination-product ul li a.current,
+.wrap-menu > nav > ul > li > a.active,
+ul.drop-down > li > a.active,
+ul.drop-down > li > a:hover{
+    color: $color-accent3 !important;
+}
+
+.table-cart a,
+footer a,
+ul.location li a,
+.light,
+.sub-title,
+.font-light{
+    color: #F9A825;
+}
+
+// Background
+.item-product.style-1{
+    background-color: $color-accent1;
+}
+
+.badge,
+ul.list-justify li.active,
+.btn-order.active.mat-menu-item{
+    background-color: $color-accent2 !important;
+}
+
+.wrap-list-product > ul > li.active:after,
+.ngx-pagination .current span,
+.item-product.style-2,
+.item-product.style-3,
+.btn-primary{
+    background-color: $color-accent2;
+}
+
+.item-product.style-4{
+    background-color: $color-accent4;
+}
+
+// Border
+.wrap-list-product > ul > li.active:before,
+.wrap-image ul li.active,
+.wrap-image ul li:hover{
+    border-color: $color-accent4 !important;
+}
+
+table.table-compare{
+    border-top: solid 5px $color-accent2 !important;
+}
+
+.badge,
+ul.list-justify li.active,
+.btn-primary{
+    color: #3f3f3f !important;
+}
+

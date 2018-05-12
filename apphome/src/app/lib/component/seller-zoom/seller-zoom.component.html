@@ -1,0 +1,27 @@
+<div [@focusPanel]="state" class="wrap-lightbox">
+    <button mat-mini-fab class="close" (click)="closeZoom()">
+        <mat-icon>&#xE5CD;</mat-icon>
+    </button>
+    <div class="content valign-wrapper" #contentwrap>
+        <button mat-mini-fab class="nav left" (click)="prev()" [disabled]="currentSellerImageIndex == 0">
+            <mat-icon>&#xE314;</mat-icon>
+        </button>
+        <button mat-mini-fab class="nav right" (click)="next()" [disabled]="currentSellerImageIndex == (maxSellerImageLength - 1)">
+            <mat-icon>&#xE315;</mat-icon>
+        </button>
+        <div *ngIf="loadingState" class="spinner">
+            <mat-spinner diameter="50" strokeWidth="5"></mat-spinner>
+        </div>
+        <!-- <div *ngIf="product" class="wrap-img"> -->
+        <div *ngIf="currentSellerImage" class="wrap-img">
+            <!-- <img [src]="product.image" [alt]="product.productName" /> -->
+            <img [src]="currentSellerImage" [alt]="" />
+        </div>
+    </div>
+    <div *ngIf="selectSeller" class="description">
+        <div class="content">
+            <h4 class="title">{{selectSeller.seller.title}} - {{selectSeller.seller.code}}</h4>
+            <h6 class="title">{{selectSeller.seller.portfolio}}</h6>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,202 @@
+<!-- Head Section -->
+<div class="head-section bg">
+    <div class="container">
+        <h4>Button <span class="font-light">Element</span></h4>
+        <p>Material Button, Indicator & Icons</p>
+    </div>
+</div>
+<!-- End Section -->
+<div class="container-page">
+    <div class="box-page">
+        <!-- Start Panel -->
+        <div class="panel">
+            <div class="head-panel">
+                <h6>Button</h6>
+            </div>
+            <div class="body-panel">
+                <!-- Button -->
+                <h6>Normal Buttons</h6>
+                <button mat-button>Flat button</button>
+                <button mat-fab><mat-icon>check</mat-icon></button>
+                <button mat-mini-fab><mat-icon>check</mat-icon></button>
+            </div>
+            <div class="code">
+<pre>
+&#x3C;button mat-button&#x3E;Flat button&#x3C;/button&#x3E;
+&#x3C;button mat-fab&#x3E;&#x3C;mat-icon&#x3E;check&#x3C;/mat-icon&#x3E;&#x3C;/button&#x3E;
+&#x3C;button mat-mini-fab&#x3E;&#x3C;mat-icon&#x3E;check&#x3C;/mat-icon&#x3E;&#x3C;/button&#x3E;
+</pre>
+            </div>
+            <div class="body-panel">
+
+                <h6 class="margin-top20">Link Buttons</h6>
+                <a mat-button routerLink=".">Flat button</a>
+                <a mat-fab routerLink="."><mat-icon>check</mat-icon></a>
+                <a mat-mini-fab routerLink="."><mat-icon>check</mat-icon></a>
+            </div>
+            <div class="code">
+<pre>
+&#x3C;a mat-button routerLink=&#x22;.&#x22;&#x3E;Flat button&#x3C;/a&#x3E;
+&#x3C;a mat-fab routerLink=&#x22;.&#x22;&#x3E;&#x3C;mat-icon&#x3E;check&#x3C;/mat-icon&#x3E;&#x3C;/a&#x3E;
+&#x3C;a mat-mini-fab routerLink=&#x22;.&#x22;&#x3E;&#x3C;mat-icon&#x3E;check&#x3C;/mat-icon&#x3E;&#x3C;/a&#x3E;
+</pre>
+            </div>
+            <div class="body-panel">
+                <h6 class="margin-top20">Button Default</h6>
+                <button mat-button class="btn btn-default">Button Default</button>
+                <button mat-button class="btn btn-primary">Button Primary</button>
+            </div>
+            <div class="code">
+<pre>
+&#x3C;button mat-button class=&#x22;btn btn-default&#x22;&#x3E;Button Default&#x3C;/button&#x3E;
+&#x3C;button mat-button class=&#x22;btn btn-primary&#x22;&#x3E;Button Primary&#x3C;/button&#x3E;
+</pre>
+            </div>
+            <div class="body-panel">
+                <h6 class="margin-top20">Button Small</h6>
+                <button mat-button class="btn btn-default btn-sm">Button Default</button>
+                <button mat-button class="btn btn-primary btn-sm">Button Primary</button>
+            </div>
+            <div class="code">
+<pre>
+&#x3C;button mat-button class=&#x22;btn btn-default btn-sm&#x22;&#x3E;Button Default&#x3C;/button&#x3E;
+&#x3C;button mat-button class=&#x22;btn btn-primary btn-sm&#x22;&#x3E;Button Primary&#x3C;/button&#x3E;
+</pre>
+            </div>
+            <div class="body-panel">
+                <h6 class="margin-top20">Button Large</h6>
+                <button mat-button class="btn btn-default btn-lg">Button Default</button>
+                <button mat-button class="btn btn-primary btn-lg">Button Primary</button>
+            </div>
+            <div class="code">
+<pre>
+&#x3C;button mat-button class=&#x22;btn btn-default btn-lg&#x22;&#x3E;Button Default&#x3C;/button&#x3E;
+&#x3C;button mat-button class=&#x22;btn btn-primary btn-lg&#x22;&#x3E;Button Primary&#x3C;/button&#x3E;
+</pre>
+            </div>
+            <div class="body-panel">
+                <h6 class="margin-top20">Button Toggle</h6>
+                <mat-button-toggle>Toggle me!</mat-button-toggle>
+            </div>
+            <div class="code">
+<pre>
+&#x3C;mat-button-toggle&#x3E;Toggle me!&#x3C;/mat-button-toggle&#x3E;
+</pre>
+            </div>
+        </div>
+
+        <!-- Start Panel -->
+        <div class="panel">
+            <div class="head-panel">
+                <h6>Chips</h6>
+            </div>
+            <div class="body-panel">
+                <!-- Chip -->
+                <mat-chip-list>
+                    <mat-chip>One fish</mat-chip>
+                    <mat-chip>Two fish</mat-chip>
+                    <mat-chip color="primary" selected="true">Primary fish</mat-chip>
+                </mat-chip-list>
+            </div>
+            <div class="code">
+<pre>
+&#x3C;mat-chip-list&#x3E;
+    &#x3C;mat-chip&#x3E;One fish&#x3C;/mat-chip&#x3E;
+    &#x3C;mat-chip&#x3E;Two fish&#x3C;/mat-chip&#x3E;
+    &#x3C;mat-chip color=&#x22;primary&#x22; selected=&#x22;true&#x22;&#x3E;Primary fish&#x3C;/mat-chip&#x3E;
+&#x3C;/mat-chip-list&#x3E;
+</pre>
+            </div>
+        </div>
+
+        <!-- Start Panel -->
+        <div class="panel">
+            <div class="head-panel">
+                <div class="right">
+                    <a href="https://material.io/icons/" mat-button class="btn btn-sm btn-default" target="_BLANK">More Icons</a>
+                </div>
+                <h6>Icons</h6>
+            </div>
+            <div class="body-panel">
+                <!-- Icons -->
+                <ul class="list-icon">
+                    <li><mat-icon>&#xE84D;</mat-icon></li>
+                    <li><mat-icon>&#xE84E;</mat-icon></li>
+                    <li><mat-icon>&#xE914;</mat-icon></li>
+                    <li><mat-icon>&#xE84F;</mat-icon></li>
+                    <li><mat-icon>&#xE850;</mat-icon></li>
+                    <li><mat-icon>&#xE851;</mat-icon></li>
+                    <li><mat-icon>&#xE854;</mat-icon></li>
+                    <li><mat-icon>&#xE853;</mat-icon></li>
+                    <li><mat-icon>&#xE854;</mat-icon></li>
+                    <li><mat-icon>&#xE855;</mat-icon></li>
+                    <li><mat-icon>&#xE856;</mat-icon></li>
+                    <li><mat-icon>&#xE857;</mat-icon></li>
+                    <li><mat-icon>&#xE858;</mat-icon></li>
+                    <li><mat-icon>&#xE90B;</mat-icon></li>
+                </ul>
+            </div>
+            <div class="code">
+<pre>
+&#x3C;mat-icon&#x3E;&#x26;#xE856;&#x3C;/mat-icon&#x3E;
+</pre>
+            </div>
+        </div>
+
+        <!-- Start Panel -->
+        <div class="panel">
+            <div class="head-panel">
+                <h6>Progress spinner</h6>
+            </div>
+            <div class="body-panel">
+                <!-- Progress spinner -->
+                <mat-spinner></mat-spinner>
+            </div>
+            <div class="code">
+<pre>
+&#x3C;mat-spinner&#x3E;&#x3C;/mat-spinner&#x3E;
+</pre>
+            </div>
+        </div>
+
+        <!-- Start Panel -->
+        <div class="panel">
+            <div class="head-panel">
+                <h6>Progress Bar</h6>
+            </div>
+            <div class="body-panel">
+                <!-- Progress Bar -->
+                <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+            </div>
+            <div class="code">
+<pre>
+&#x3C;mat-progress-bar mode=&#x22;indeterminate&#x22;&#x3E;&#x3C;/mat-progress-bar&#x3E;
+</pre>
+            </div>
+        </div>
+
+        <!-- Start Panel -->
+        <div class="panel">
+            <div class="head-panel">
+                <div class="right">
+                    <a href="https://material.angular.io/components/snack-bar/overview" mat-button class="btn btn-sm btn-default" target="_BLANK">Read Doc</a>
+                </div>
+                <h6>Snackbar</h6>
+            </div>
+            <div class="body-panel">
+              
+                <!-- Snackar -->
+                <mat-form-field>
+                    <input matInput value="Disco party!" placeholder="Message" #message>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input matInput value="Dance" placeholder="Action" #action>
+                </mat-form-field>
+
+                <button mat-button class="btn btn-primary" (click)="openSnackBar(message.value, action.value)">Show snack-bar</button>
+            </div>
+        </div>
+
+    </div>
+</div>

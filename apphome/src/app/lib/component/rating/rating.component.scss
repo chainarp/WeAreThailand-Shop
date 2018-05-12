@@ -1,0 +1,22 @@
+// Icons
+.wrap-rating{
+    margin: 0 0 -5px 0;
+    padding: 0;
+    list-style: 0;
+    display: inline-block;
+
+    li{
+        display: block;
+        float: left;
+
+        &:before{
+            font-family: 'Material Icons';
+            content: '\e83a';
+            color: #f1c40f;
+        }
+
+        &.full:before{
+            content: '\e838';
+        }
+    }
+}

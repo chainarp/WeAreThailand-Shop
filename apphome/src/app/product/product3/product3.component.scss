@@ -1,0 +1,61 @@
+/*
+Import
+=========================== */
+@import '../../../assets/sass/css3-mixins';
+@import '../../../assets/sass/variable';
+
+/*
+Product
+=========================== */
+.box-page{
+    padding-bottom: 25px;
+}
+
+.wrap-product{
+    padding: 0 15px;
+}
+
+// Search
+.search{
+    position: relative;
+    padding: 0;
+
+    input{
+        width: 100%;
+        border: 0;
+        outline: 0;
+        padding-right: 35px;
+        background: #fff;
+        border: solid 1px #cfcfcf;
+        @include border-radius(20px);
+        padding: 10px 50px 10px 20px;
+    }
+
+    .icon{
+        position: absolute;
+        right: 10px;
+        top: 9px;
+        font-size: 20px;
+    }
+}
+
+// Categories
+ul.categories{
+    padding: 0;
+    margin: 0 -15px;
+    list-style: none;
+    display: inline-block;
+
+    li{
+        display: block;
+        float: left;
+        padding: 0 15px;
+
+        a{
+            color: $color-content;
+            text-transform: capitalize;
+            text-decoration: none !important;
+        }
+    }
+}
+

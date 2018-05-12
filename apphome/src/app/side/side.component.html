@@ -1,0 +1,100 @@
+<!-- Start Side -->
+<div class="side">
+    
+    <div class="wrap-brand" [class.on]="wrapbrand">
+        <a href="#" class="brand">
+            <!-- <img src="./assets/images/logo.png" alt=""> -->
+            <!-- <img class="mobile" src="./assets/images/brand/logo-mobile.png" alt=""> -->
+            <img src="./assets/images/brand/wechef-logo-new.svg" alt="" />
+        </a>
+    </div>
+    
+    <nav>
+        <div>
+            <ul>
+                <li>
+                    <a mat-button (click)="toggleBar()" [class.active]="activebar">
+                        <mat-icon>&#xE8FE;</mat-icon>
+                    </a>
+                </li>
+                <li>
+                        <a mat-button routerLink="/shop/shoppingcart" routerLinkActive="active">
+                            <span *ngIf="cartServiceProvider.goodsCountInCart != 0" class="badge">{{cartServiceProvider.goodsCountInCart}}</span>
+                            <mat-icon>&#xE8CC;</mat-icon>
+                        </a>
+                    </li>
+                <li>
+                    <a mat-button routerLink="/seller/list" routerLinkActive="active">
+                        <!-- <span *ngIf="wishlistLength != 0" class="badge">{{wishlistLength}}</span> -->
+                        <mat-icon>account_circle</mat-icon>
+                    </a>
+                </li>
+                <li>
+                    <a mat-button routerLink="/shop/product1" routerLinkActive="active">
+                        <!-- <span *ngIf="wishlistLength != 0" class="badge">{{wishlistLength}}</span> -->
+                        <mat-icon>restaurant_menu</mat-icon>
+                    </a>
+                </li>
+
+                <li>
+                    <a mat-button routerLink="/shop/customerlocation" routerLinkActive="active">
+                        <!-- <span *ngIf="wishlistLength != 0" class="badge">{{wishlistLength}}</span> -->
+                        <mat-icon>location_on</mat-icon>
+                    </a>
+                </li>
+
+                <li>
+                    <a mat-button routerLink="/home" routerLinkActive="active">
+                        <!-- <span *ngIf="wishlistLength != 0" class="badge">{{wishlistLength}}</span> -->
+                        <mat-icon>home</mat-icon>
+                    </a>
+                </li>
+
+                <!--
+                <li>
+                    <a mat-button routerLink="/shop/wishlist" routerLinkActive="active">
+                        <span *ngIf="wishlistLength != 0" class="badge">{{wishlistLength}}</span>
+                        <mat-icon>&#xE87E;</mat-icon>
+                    </a>
+                </li>
+                -->
+                <!-- <i class="material-icons">account_circle</i>
+                    <i class="material-icons">shopping_basket</i>
+                    <i class="material-icons">location_on</i>
+                    <i class="material-icons">restaurant_menu</i>
+                <li>
+                    <a mat-button routerLink="/shop/compare" routerLinkActive="active">
+                        <span *ngIf="comapreLength != 0" class="badge">{{comapreLength}}</span>
+                        <mat-icon>&#xE6E1;</mat-icon>
+                    </a>
+                </li>
+                <li>
+                    <a mat-button routerLink="/shop/cart" routerLinkActive="active">
+                        <span *ngIf="cartLength != 0" class="badge">{{cartLength}}</span>
+                        <mat-icon>&#xE8CC;</mat-icon>
+                    </a>
+                </li>
+                -->
+                
+            </ul>
+        </div>
+    </nav>
+</div>
+<!-- End Side -->
+<!-- Start Wrap Menu -->
+<div class="wrap-menu">
+    <nav #navmenu>
+        <ul class="menu">
+            <li *ngFor="let menu of menus">
+                <a *ngIf="menu.children != null" (click)="selectMenu(menu)" [class.active]="menu == selectedMenu">{{menu.label}}</a>
+                <a *ngIf="menu.children == null" [routerLink]="menu.link" routerLinkActive="active">{{menu.label}}</a>
+                <ul class="drop-down" [@slideUp] *ngIf="menu == selectedMenu">
+                    <li *ngFor="let child of menu.children">
+                        <a [routerLink]="child.link" routerLinkActive="active">{{child.label}}</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</div>
+<!-- End Wrap Menu -->

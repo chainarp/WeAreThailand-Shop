@@ -1,0 +1,171 @@
+<!-- Head Section -->
+<div class="head-section bg">
+    <div class="container">
+        <h4>Layout</h4>
+        <p>Material layout</p>
+    </div>
+</div>
+<div class="container-page">
+    <div class="box-page">
+        <!-- Start Panel -->
+        <div class="panel">
+            <div class="head-panel">
+                <h6>Tab</h6>
+            </div>
+            <div class="body-panel">
+                <!-- Start Tab -->
+                <mat-tab-group>
+                    <mat-tab label="Tab 1">Content 1</mat-tab>
+                    <mat-tab label="Tab 2">Content 2</mat-tab>
+                </mat-tab-group>
+            </div>
+            <div class="code">
+<pre>
+&#x3C;mat-tab-group&#x3E;
+  &#x3C;mat-tab label=&#x22;Tab 1&#x22;&#x3E;Content 1&#x3C;/mat-tab&#x3E;
+  &#x3C;mat-tab label=&#x22;Tab 2&#x22;&#x3E;Content 2&#x3C;/mat-tab&#x3E;
+&#x3C;/mat-tab-group&#x3E;
+</pre>
+            </div>
+        </div>
+
+        <!-- Start Panel -->
+        <div class="panel">
+            <div class="head-panel">
+                <h6>List</h6>
+            </div>
+            <div class="body-panel">
+                <!-- Start Tab -->
+                <mat-list>
+                    <mat-list-item>Item 1</mat-list-item>
+                    <mat-list-item>Item 2</mat-list-item>
+                    <mat-list-item>Item 3</mat-list-item>
+                </mat-list>
+            </div>
+            <div class="code">
+<pre>
+&#x3C;mat-list&#x3E;
+    &#x3C;mat-list-item&#x3E;Item 1&#x3C;/mat-list-item&#x3E;
+    &#x3C;mat-list-item&#x3E;Item 2&#x3C;/mat-list-item&#x3E;
+    &#x3C;mat-list-item&#x3E;Item 3&#x3C;/mat-list-item&#x3E;
+&#x3C;mat-list&#x3E;
+</pre>
+            </div>
+            <div class="body-panel">
+                <!-- Start Tab -->
+                <mat-list>
+                    <mat-list-item>
+                        <mat-icon mat-list-icon>&#xE55F;</mat-icon>
+                        <h6 mat-line>Office</h6>
+                        <p mat-line>Jl.Kampung Nagrogjaya RT 12/003</p>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <mat-icon mat-list-icon>&#xE551;</mat-icon>
+                        <h6 mat-line>Phone</h6>
+                        <p mat-line>+6289664755286</p>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <mat-icon mat-list-icon>&#xE0BE;</mat-icon>
+                        <h6 mat-line>Phone</h6>
+                        <p mat-line>adamnurdin01@gmail.com</p>
+                    </mat-list-item>
+                </mat-list>
+            </div>
+            <div class="code">
+<pre>
+&#x3C;mat-list&#x3E;
+    &#x3C;mat-list-item&#x3E;
+        &#x3C;mat-icon mat-list-icon&#x3E;&#x26;#xE55F;&#x3C;/mat-icon&#x3E;
+        &#x3C;h6 mat-line&#x3E;Office&#x3C;/h6&#x3E;
+        &#x3C;p mat-line&#x3E;Jl.Kampung Nagrogjaya RT 12/003&#x3C;/p&#x3E;
+    &#x3C;/mat-list-item&#x3E;
+    &#x3C;mat-list-item&#x3E;
+        &#x3C;mat-icon mat-list-icon&#x3E;&#x26;#xE551;&#x3C;/mat-icon&#x3E;
+        &#x3C;h6 mat-line&#x3E;Phone&#x3C;/h6&#x3E;
+        &#x3C;p mat-line&#x3E;+6289664755286&#x3C;/p&#x3E;
+    &#x3C;/mat-list-item&#x3E;
+    &#x3C;mat-list-item&#x3E;
+        &#x3C;mat-icon mat-list-icon&#x3E;&#x26;#xE0BE;&#x3C;/mat-icon&#x3E;
+        &#x3C;h6 mat-line&#x3E;Phone&#x3C;/h6&#x3E;
+        &#x3C;p mat-line&#x3E;adamnurdin01@gmail.com&#x3C;/p&#x3E;
+    &#x3C;/mat-list-item&#x3E;
+&#x3C;/mat-list&#x3E;
+</pre>
+            </div>
+        </div>
+
+        <!-- Start Panel -->
+        <div class="panel">
+            <div class="head-panel">
+                <h6>Breadcumb</h6>
+            </div>
+            <div class="body-panel">
+                <breadcumb></breadcumb>
+            </div>
+            <div class="code">
+<pre>
+&#x3C;breadcumb&#x3E;&#x3C;/breadcumb&#x3E;
+</pre>
+            </div>
+        </div>
+
+        <!-- Start Panel -->
+        <div class="panel">
+            <div class="head-panel">
+                <h6>Rating</h6>
+            </div>
+            <div class="body-panel">
+                <rating [value]="3"></rating>
+            </div>
+            <div class="code">
+<pre>
+&#x3C;rating [value]=&#x22;3&#x22;&#x3E;&#x3C;/rating&#x3E;
+</pre>
+            </div>
+        </div>
+
+        <!-- Start Panel -->
+        <div class="panel">
+            <div class="head-panel">
+                <h6>Alert Box</h6>
+            </div>
+            <div class="body-panel">
+                <div class="alert alert-success margin-bottom15">
+                    <strong>Success!</strong> Indicates a successful or positive action.
+                </div>
+                
+                <div class="alert alert-info margin-bottom15">
+                    <strong>Info!</strong> Indicates a neutral informative change or action.
+                </div>
+                
+                <div class="alert alert-warning margin-bottom15">
+                    <strong>Warning!</strong> Indicates a warning that might need attention.
+                </div>
+                
+                <div class="alert alert-danger">
+                    <strong>Danger!</strong> Indicates a dangerous or potentially negative action.
+                </div>
+            </div>
+            <div class="code">
+<pre>
+&#x3C;div class=&#x22;alert alert-success&#x22;&#x3E;
+    &#x3C;strong&#x3E;Success!&#x3C;/strong&#x3E; Indicates a successful or positive action.
+&#x3C;/div&#x3E;
+
+&#x3C;div class=&#x22;alert alert-info&#x22;&#x3E;
+    &#x3C;strong&#x3E;Info!&#x3C;/strong&#x3E; Indicates a neutral informative change or action.
+&#x3C;/div&#x3E;
+
+&#x3C;div class=&#x22;alert alert-warning&#x22;&#x3E;
+    &#x3C;strong&#x3E;Warning!&#x3C;/strong&#x3E; Indicates a warning that might need attention.
+&#x3C;/div&#x3E;
+
+&#x3C;div class=&#x22;alert alert-danger&#x22;&#x3E;
+    &#x3C;strong&#x3E;Danger!&#x3C;/strong&#x3E; Indicates a dangerous or potentially negative action.
+&#x3C;/div&#x3E;
+</pre>
+            </div>
+        </div>
+
+    </div>
+</div>

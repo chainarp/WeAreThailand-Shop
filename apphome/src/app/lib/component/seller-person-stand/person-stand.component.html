@@ -1,0 +1,75 @@
+<!-- Start Product -->
+<div class="valign-wrapper" *ngIf="!isDataLoadingDone">
+        <mat-spinner diameter="50" strokeWidth="5"></mat-spinner>
+    </div>
+    
+    <!-- Start Row Product -->
+    <div class="row row-clear row-product" *ngIf="isDataLoadingDone" libHeight="item-product" (mouseleave)="selectedAvailableItem = null"
+        [class.blur]="isShelfBlur" #row>
+    
+        <div *ngFor="let availableItem of availableItems | 
+            SellerFilter: filter | 
+            paginate: { 
+                itemsPerPage: limit, 
+                currentPage: currentPage 
+            }; 
+            let i=index;" [@fade] class="col {{column}}" [id]="availableItem.key" (mouseenter)="onHover(availableItem)">
+    
+            <div class="item-product">
+                <a *ngIf="showBtnClose" mat-mini-fab class="close" (click)="selectClose(availableItem)">
+                    <mat-icon>&#xE5CD;</mat-icon>
+                </a>
+                <img [src]="availableItem.seller!=null?availableItem.seller.images[0]:''" [alt]="availableItem.seller!=null?availableItem.seller.title:''" />
+                <div class="content">
+                    <h4 class="title truncate">{{availableItem.seller!=null?availableItem.seller.title:""}} - {{availableItem.seller!=null?availableItem.seller.code:""}}</h4>
+                    <h6 class="title truncate">" {{availableItem.seller!=null?availableItem.seller.slogan:""}} "</h6>
+                    <p>{{availableItem.seller!=null?availableItem.seller.sellerGroup:""}}</p>
+                    <!-- <p>({{availableItem.seller.title}} - {{availableItem.seller.code}})</p> -->
+                    
+                    <p>{{availableItem.distance}} Km. - {{customerLocationServiceProvider.currentCustomerLocationInfo.title}}</p>
+                    
+                    <rating [value]="availableItem.seller!=null?availableItem.seller.rating:0"></rating>
+
+                    <p>{{getProductItemsTitleComman(availableItem)}}</p>
+                    <strong class="price">
+                        <!--{{product.price | currency:'USD':'$'}}-->
+                    </strong>
+                    <div [@visibility]="selectedAvailableItem == availableItem ? 'shown' : 'hidden'" class="overlay valign-wrapper">
+                        <ul>
+                            <li>
+                                <a mat-mini-fab (click)="showZoomSeller(availableItem)">
+                                    <mat-icon>&#xE8FF;</mat-icon>
+                                </a>
+                            </li>
+                            <li>
+                                <!-- <a mat-mini-fab [routerLink]="'/shop/p/' + availableItem.slug"> -->
+                                <a mat-mini-fab (click)="showItemsList(availableItem)">
+                                    <mat-icon>restaurant</mat-icon>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Empty Product -->
+        <div [@fade] *ngIf="(availableItems | SellerFilter:filter).length === 0" class="empty-product">
+            <img src="http://via.placeholder.com/246x339" width="100" alt="" />
+            <h5 class="margin-bottom0 margin-top20">Sorry ... No Chef Found</h5>
+        </div>
+    </div>
+    <!-- End Row Product -->
+    
+    <!-- Start Wrap Pagintaion -->
+    <div *ngIf="paginate">
+        <div *ngIf="(availableItems | SellerFilter:filter).length !== 0" class="wrap-pagination">
+            <pagination-controls (pageChange)="currentPage = $event; onPageChange(currentPage)" class="pagination-product">
+            </pagination-controls>
+        </div>
+    </div>
+    <!-- Start Lightbox -->
+    <!-- [selectProduct]="getId" -->
+    <sellerzoom [isShow]="togglezoom" [selectSeller]="zoomSeller" [arrayProduct]="productUpdated" (close)="closeZoom()">
+    </sellerzoom>
+    <itemslist  [isShow]="togglelist" [selectedAvailableItem]="zoomSeller" [arrayProduct]="productUpdated" (close)="closeItemsList()"></itemslist>

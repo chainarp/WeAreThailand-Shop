@@ -1,0 +1,8 @@
+<div class="row row-clear" libHeight="item-vendor">
+    <div *ngFor="let logo of logos | slice:0:limit" [@fade] class="col l3 m6 s12">
+        <div class="item-vendor">
+            <img [src]="logo.image" [alt]="logo.title"/>
+            <a mat-button class="link-full" [href]="logo.link" target="_blank"></a>
+        </div>
+    </div>
+</div>

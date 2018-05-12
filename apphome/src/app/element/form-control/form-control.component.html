@@ -1,0 +1,120 @@
+<!-- Head Section -->
+<div class="head-section bg">
+    <div class="container">
+        <h4>Input <span class="font-light">Element</span></h4>
+        <p>Material form controls</p>
+    </div>
+</div>
+<!-- End Section -->
+<div class="container-page">
+    <div class="box-page">
+        <div class="panel">
+            <div class="head-panel">
+                <h6>Basic Input</h6>
+            </div>
+            <div class="body-panel">
+                <mat-form-field>
+                    <input matInput placeholder="Favorite food" value="Sushi">
+                </mat-form-field>
+            </div>
+            <div class="code">
+<pre>
+&#x3C;mat-form-field&#x3E;
+  &#x3C;input matInput placeholder=&#x22;Favorite food&#x22; value=&#x22;Sushi&#x22;&#x3E;
+&#x3C;/mat-form-field&#x3E;
+</pre>
+            </div>
+        </div>
+
+        <!-- Start Panel -->
+        <div class="panel">
+            <div class="head-panel">
+                <h6>Checkbox</h6>
+            </div>
+            <div class="body-panel">
+                <!-- Checkbox -->
+                <mat-checkbox>Check me!</mat-checkbox><br />
+                <mat-checkbox>Check me!</mat-checkbox><br />
+                <mat-checkbox>Check me!</mat-checkbox><br />
+                <mat-checkbox>Check me!</mat-checkbox><br />
+                <mat-checkbox>Check me!</mat-checkbox>
+            </div>
+            <div class="code">
+<pre>
+&#x3C;mat-checkbox&#x3E;Check me!&#x3C;/mat-checkbox
+</pre>
+            </div>
+        </div>
+
+        <!-- Start Panel -->
+        <div class="panel">
+            <div class="head-panel">
+                <h6>Slider</h6>
+            </div>
+            <div class="body-panel">
+                <!-- Slider -->
+                <mat-slider></mat-slider>
+            </div>
+            <div class="code">
+<pre>
+&#x3C;mat-slider&#x3E;&#x3C;/mat-slider&#x3E;
+</pre>
+            </div>
+        </div>
+
+        <!-- Start Panel -->
+        <div class="panel">
+            <div class="head-panel">
+                <h6>Radio button</h6>
+            </div>
+            <div class="body-panel">
+                <!-- Input Radio -->
+                <mat-radio-group>
+                    <mat-radio-button value="1">Option 1</mat-radio-button>
+                    <mat-radio-button value="2">Option 2</mat-radio-button>
+                </mat-radio-group>
+            </div>
+            <div class="code">
+<pre>
+&#x3C;mat-radio-group&#x3E;
+  &#x3C;mat-radio-button value=&#x22;1&#x22;&#x3E;Option 1&#x3C;/mat-radio-button&#x3E;
+  &#x3C;mat-radio-button value=&#x22;2&#x22;&#x3E;Option 2&#x3C;/mat-radio-button&#x3E;
+&#x3C;/mat-radio-group&#x3E;
+</pre>
+            </div>
+        </div>
+
+        <!-- Start Select -->
+        <div class="panel">
+            <div class="head-panel">
+                <div class="right">
+                    <a href="https://material.angular.io/components/select/overview" mat-button class="btn btn-default btn-sm" target="_BLANK">Read Doc</a>
+                </div>
+                <h6>Select</h6>
+            </div>
+            <div class="body-panel">
+                <mat-select placeholder="Favorite food">
+                    <mat-option *ngFor="let food of foods" [value]="food.value">
+                        {{ food.viewValue }}
+                    </mat-option>
+                </mat-select>
+            </div>
+        </div>
+
+        <!-- Start Slide Toggle -->
+        <div class="panel">
+            <div class="head-panel">
+                <h6>Slide Toggle</h6>
+            </div>
+            <div class="body-panel">
+                <mat-slide-toggle>Slide me!</mat-slide-toggle>
+            </div>
+            <div class="code">
+<pre>
+&#x3C;mat-slide-toggle&#x3E;Slide me!&#x3C;/mat-slide-toggle&#x3E;
+</pre>
+            </div>
+        </div>
+
+    </div>
+</div>

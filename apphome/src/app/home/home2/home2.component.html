@@ -1,0 +1,44 @@
+<!-- Start Wrap Loading -->
+<div *ngIf="loadingState" class="wrap-loading valign-wrapper">
+    <mat-spinner diameter="50" strokeWidth="5"></mat-spinner>
+</div>
+
+<!--  Start Wrap -->
+<div *ngIf="homeState" class="wrap-home">
+    <!-- Navigation -->
+    <button class="nav prev" [disabled]="position == 0" (click)="prevSlide()"><mat-icon>&#xE5CB;</mat-icon></button>
+    <button class="nav next" [disabled]="position < widthRow" (click)="nextSlide()"><mat-icon>&#xE5CC;</mat-icon></button>
+
+    <!-- Wrap Slider -->
+    <div homeslide [position]="position" [initialized]="init" class="wrap-slider">
+        <div class="row" #row>
+
+            <div class="col l6 s12 demo">
+                <div class="valign-wrapper">
+                    <div class="content">
+                        <h4>Extra Wow Woo!</h4><h1> <span class="font-light">We Chef</span> Thailand</h1>
+                        <p>
+                            Lorem ipsum dolor sit amet, mel et dicant utinam efficiendi, sea harum elaboraret at.
+                        </p>
+                        <a mat-button class="btn btn-default margin-bottom10" routerLink="/shop/product1">Shop Now</a>
+                        <a mat-button class="btn btn-primary">Most Popular</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div *ngFor="let category of categories" class="col l3 s12">
+                <div class="valign-wrapper">
+                    <div class="content center-align">
+                        <img [src]="category.image" [alt]="category.categoryName" />
+                        <h5 class="text-uppercase">{{category.categoryName}}</h5>
+                        <rating [value]="category.rate"></rating>                        
+                        <p>{{category.description}}</p>
+                        <a mat-mini-fab (click)="selectCategory(category.categoryName)"><mat-icon>&#xE157;</mat-icon></a>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+<!--  End Wrap -->

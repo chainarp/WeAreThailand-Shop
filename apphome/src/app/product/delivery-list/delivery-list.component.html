@@ -1,0 +1,336 @@
+<!-- Head Section -->
+<div class="head-section bg">
+    <div class="container">
+        <h4>WeChef
+            <span class="font-light">Happier</span>
+        </h4>
+        <p>Delivery & Payment</p>
+    </div>
+</div>
+
+<div class="container-page">
+    <div class="box-page">
+        <!-- Start List -->
+        <ul class="row list-justify">
+            <li class="col s4">
+                Cart
+            </li>
+            <li class="col s4 active">
+                Delivery
+            </li>
+            <li class="col s4 disabled">
+                Receipt
+            </li>
+        </ul>
+        <!-- End List -->
+
+        <div class="row margin-top30">
+            <div class="col l8 m7 s12">
+
+                <h5>โปรดเลือกวิธีการชำระ</h5>
+                <div class="alert alert-info">
+                    <strong class="Left">Payment Methods</strong>
+                    <hr/>
+                    <mat-radio-group name="payment-radio" [(ngModel)]="cartServiceProvider.paymentMethod" (change)="onPaymentRadioChange($event)">
+                        <mat-radio-button value="COD">จ่ายเมื่อรับอาหาร (COD)</mat-radio-button>
+                        <!-- <hr/> -->
+                        <!--
+                        <mat-radio-button disabled=true value="CREDIT_CARD">บัตรเครดิต (+3.65%)</mat-radio-button>
+                        -->
+                        <!--
+                        <div disabled="true">
+                            <form (ngSubmit)="onSubmit(formRef)">
+                                <tr>
+                                    <td>
+                                        <mat-form-field>
+                                            <input matInput type="text" placeholder="ชื่อ" value="" name="firstname" [(ngModel)]="firstname" #firstnameRef="ngModel"
+                                                required>
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                            <mat-form-field>
+                                                    <input matInput type="text" placeholder="ชื่อ" value="" name="firstname" [(ngModel)]="firstname" #firstnameRef="ngModel"
+                                                        required>
+                                                </mat-form-field>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <mat-form-field>
+                                            <input matInput type="text" placeholder="ชื่อ" value="" name="firstname" [(ngModel)]="firstname" #firstnameRef="ngModel"
+                                                required>
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <mat-form-field>
+                                            <input matInput type="text" placeholder="ชื่อ" value="" name="firstname" [(ngModel)]="firstname" #firstnameRef="ngModel"
+                                                required>
+                                        </mat-form-field>
+                                    </td>
+
+                                </tr>
+                            </form>
+                        </div>
+                        -->
+                        <!-- <hr/> -->
+                        <!--
+                        <mat-radio-button disabled=true value="OTHERS">ชำระด้วยวิธีอื่นๆ</mat-radio-button>
+                        -->
+                    </mat-radio-group>
+                </div>
+
+                <div class="clearfix"></div>
+                <div class="clearfix"></div>
+
+                <h5>โปรดกรอกข้อมูลจัดส่ง</h5>
+
+                <!-- Start Form -->
+                <form #formRef="ngForm" (ngSubmit)="onSubmit(formRef)">
+                    <div class="alert alert-info">
+                        <div class="row">
+                            <div class="col m6 s12">
+                                <mat-form-field>
+                                    <input disabled=true matInput type="email" placeholder="email - จัดส่งใบเสร็จ" value="" name="email" [(ngModel)]="email"
+                                        #emailRef="ngModel" required email>
+                                </mat-form-field>
+                                <small class="error" *ngIf="emailRef.errors?.required && emailRef.touched">required error</small>
+
+                            </div>
+                            <div class="col m6 s12">
+                                <mat-form-field>
+                                    <input disabled=true matInput type="text" placeholder="ชื่อ สกุล" value="" name="name" [(ngModel)]="name" #nameRef="ngModel"
+                                        required>
+                                </mat-form-field>
+                                <small class="error" *ngIf="nameRef.errors?.required && nameRef.touched">required error</small>
+
+
+                            </div>
+
+
+                            <div class="col m6 s12">
+                                <mat-form-field>
+                                    <input disabled=true matInput type="text" placeholder="มือถือ" value="" name="mobilePhoneNo" [(ngModel)]="mobilePhoneNo"
+                                        #mobilePhoneNoRef="ngModel" required phone="ID">
+                                </mat-form-field>
+                                <small class="error" *ngIf="mobilePhoneNoRef.errors?.required && mobilePhoneNoRef.touched">required error</small>
+
+                            </div>
+
+
+                        </div>
+
+                        <div class="clearfix"></div>
+
+
+
+                        <div class="clearfix"></div>
+                        <!--
+export class CustomerLocationInfo { //"id": "0.00000000000000000", "title": "CURRENT_LOCATION", "detail1": "", "detail2": "", "latitude": 13.74349185255942, "longitude": 100.49879542518465, "icon": "pin", "checked": true }
+    public id: number;
+    public title: string;
+    public location: string;
+    public messageToDriver: string;
+    public receiverPhone: string;
+    public latitude: number; //13.74349185255942, 
+    public longitude: number; //100.49879542518465, 
+    public LatLng: string;
+    public radius: number; //
+    public icon: string = "pin_drop";
+    public checked: boolean = false;
+}
+
+                        -->
+                        <div class="row">
+                            <div class="col s12">
+                                <mat-form-field>
+                                    <input disabled=true matInput type="text" placeholder="ชื่อสถานที่จัดส่ง" value="" name="customerLocationTitle" [(ngModel)]="customerLocationTitle"
+                                        #customerLocationTitleRef="ngModel" required>
+                                </mat-form-field>
+                                <small class="error" *ngIf="customerLocationTitleRef.errors?.required && customerLocationTitleRef.touched">required error</small>
+                                <small class="error" *ngIf="customerLocationTitleRef.errors?.required && customerLocationTitleRef.dirty">required error</small>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12">
+                                <mat-form-field>
+                                    <input ng-disabled="(!customerLocationTitle=='CURRENT_LOCATION')" matInput type="text" placeholder="โปรด!! บรรยายตำแหน่งที่ตั้ง"
+                                        value="" name="customerLocationLocation" [(ngModel)]="customerLocationLocation" #customerLocationLocationRef="ngModel"
+                                        required>
+                                </mat-form-field>
+                                <small class="error" *ngIf="customerLocationLocationRef.errors?.required && customerLocationLocationRef.touched">required error</small>
+                                <small class="error" *ngIf="customerLocationLocationRef.errors?.required && customerLocationLocationRef.dirty">required error</small>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12">
+                                <mat-form-field>
+                                    <input ng-disabled="(!customerLocationTitle=='CURRENT_LOCATION')" matInput type="text" placeholder="โปรด!! เขียนข้อความถึงผู้ส่งอาหาร"
+                                        value="" name="customerLocationMessageToDriver" [(ngModel)]="customerLocationMessageToDriver"
+                                        #customerLocationMessageToDriverRef="ngModel" required>
+                                </mat-form-field>
+                                <small class="error" *ngIf="customerLocationMessageToDriverRef.errors?.required && customerLocationMessageToDriverRef.touched">required error</small>
+                                <small class="error" *ngIf="customerLocationMessageToDriverRef.errors?.required && customerLocationMessageToDriverRef.dirty">required error</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+                    <h5>โปรดตรวจสอบตำแหน่งจัดส่ง</h5>
+                    <a (click)="showMsgWrongLocation()">หากตำแหน่งไม่ถูกต้อง?</a>
+                    <div class="clearfix"></div>
+
+                    <div #map id="map" style="width:100%;height:480px;"></div>
+                    <input class="form-control" type="hidden" name="latlng" id="latlng" [(ngModel)]="latlng" />
+
+                    <!-- style="width:640px;height:480px;"
+                    <div class="clearfix"></div>
+                    
+                    <div class="row">
+                        <div class="col m6 s12">
+                            <mat-form-field>
+                                <input matInput 
+                                    type="text"
+                                    placeholder="City" 
+                                    value=""
+                                    name="city" 
+                                    [(ngModel)]="city" 
+                                    #cityRef="ngModel" 
+                                    required>
+                            </mat-form-field>
+                            <small class="error" *ngIf="cityRef.errors?.required && cityRef.touched">required error</small>                                                                                                                                            
+                            <small class="error" *ngIf="cityRef.errors?.required && cityRef.dirty">required error</small>                                                                                                                                            
+                        </div>
+                        <div class="col m6 s12">
+                            <mat-form-field>
+                                <input matInput 
+                                    type="text"
+                                    placeholder="Zipcode" 
+                                    value=""
+                                    name="zipcode" 
+                                    [(ngModel)]="zipcode" 
+                                    #zipcodeRef="ngModel" 
+                                    maxlength="5"
+                                    required
+                                    number>
+                            </mat-form-field>
+                            <small class="error" *ngIf="zipcodeRef.errors?.required && zipcodeRef.touched">required error</small>                                                                                                                                            
+                            <small class="error" *ngIf="zipcodeRef.errors?.required && zipcodeRef.dirty">required error</small>                                                                                                                                            
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="row">
+                        <div class="col m6 s12">
+                            <mat-form-field>
+                                <input matInput 
+                                    type="text"
+                                    placeholder="State" 
+                                    value=""
+                                    name="state"
+                                    [(ngModel)]="state" 
+                                    #stateRef="ngModel">
+                            </mat-form-field>
+                        </div>
+                        <div class="col m6 s12">
+                            <mat-form-field>
+                            <input matInput 
+                                type="text"
+                                placeholder="Country" 
+                                value=""
+                                name="country" 
+                                [(ngModel)]="country" 
+                                #countryRef="ngModel" 
+                                required>
+                            </mat-form-field>
+                            <small class="error" *ngIf="countryRef.errors?.required && countryRef.touched">required error</small>                                                                                                                                                                                                    
+                            <small class="error" *ngIf="countryRef.errors?.required && countryRef.dirty">required error</small>                                                                                                                                                                                                    
+                        </div>
+                    </div>
+                    -->
+                    <div class="clearfix"></div>
+                    <!--
+                    <p class="margin-bottom10">
+                        <em>
+                            <small>Test dummy, click
+                                <a href="https://stripe.com/docs/testing" target="_BLANK" class="link">here</a> for more test</small>
+                        </em>
+                    </p>
+                    -->
+
+                    <div class="row margin-top20">
+                        <div class="col l6 push-l6 s12 right-align">
+                            <!--
+                            <button [disabled]="formRef.invalid || touched" type="submit" mat-button class="btn btn-primary margin-bottom10">
+                                <span *ngIf="nottouched">Continue to Checkout</span>
+                                <span *ngIf="touched">Loading...</span>
+                            </button>
+                            -->
+                            <button [disabled]="formRef.invalid || touched" type="submit" mat-button class="btn btn-primary margin-bottom10">
+                                <span *ngIf="nottouched">ยืนยันคำสั่งซื้อ</span>
+                                <span *ngIf="touched">Loading...</span>
+                            </button>
+                        </div>
+                        <div class="col l6 pull-l6 s12">
+                            <a mat-button routerLink="/shop/shoppingcart" class="btn btn-default">กลับสู่หน้าตระกร้าอาหาร</a>
+                        </div>
+                    </div>
+                </form>
+                <!-- End Form -->
+                <!-- <div>{{formRef.value | json}}</div> -->
+            </div>
+            <div class="col l4 m5 s12">
+
+                <!-- Start List Produt -->
+                <!--
+                <ul class="list-product">
+                    <li *ngFor="let product of productsOrder">
+                        <div class="wrap-img">
+                            <img [src]="product.image" class="img-responsive" alt="" />
+                        </div>
+                        <h6 class="title">
+                            <a [routerLink]="['/shop/p/' + product.slug]">{{product.productName}}</a>
+                        </h6>
+                        <p class="margin-top10">
+                            <span class="right">{{product.quantity * product.price | currency:'USD':'$'}}</span> {{product.quantity}}x
+                        </p>
+                    </li>
+                </ul>
+                -->
+                <!-- End List Produt -->
+                <h5>รายการค่าใช้จ่าย</h5>
+                <table class="count">
+                    <tr>
+                        <td>ค่าอาหารทั้งสิ้น</td>
+                        <td class="right-align">{{cartServiceProvider.shoppingCart.grandTotalCostOfGoods}} บาท</td>
+                    </tr>
+                    <tr>
+                        <td>ค่าจัดส่งทั้งสิ้น</td>
+                        <td class="right-align">{{cartServiceProvider.shoppingCart.grandTotalCostOfDelivery}} บาท</td>
+                    </tr>
+                    <tr>
+                        <td>ค่าธรรมเนียมชำระทั้งสิ้น</td>
+                        <td class="right-align">{{cartServiceProvider.shoppingCart.grandTotalCostOfPayment}} บาท</td>
+                    </tr>
+
+                    <tr>
+                        <td>ส่วนลดแทนคำขอบคุณจากใจ</td>
+                        <td class="right-align text-danger">
+                            <strong>{{cartServiceProvider.shoppingCart.grandTotalDiscount}} บาท</strong>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>รวมค่าใช้จ่ายทั้งสิ้น</td>
+                        <td class="right-align">
+                            <strong>{{cartServiceProvider.shoppingCart.grandTotal}} บาท</strong>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+
+    </div>
+</div>

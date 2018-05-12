@@ -1,0 +1,109 @@
+<!-- Head Section -->
+<div class="head-section bg">
+    <div class="container">
+        <h4>Shopping <span class="font-light">Cart</span></h4>
+        <p>Angushop Shopping cart with cookie</p>
+    </div>
+</div>
+
+<div class="container-page">
+    <div class="box-page">
+        <!-- Start List -->
+        <ul class="row list-justify">
+            <li class="col s4 active">
+                Cart
+            </li>
+            <li class="col s4 disabled">
+                Delivery
+            </li>
+            <li class="col s4 disabled">
+                Receipt
+            </li>
+        </ul>
+        <!-- End List -->
+        <div class="row margin-top30">
+            <div class="col l8 s12">
+
+                <!-- Start Table Cart -->
+                <table class="table-cart">
+                    <thead>
+                        <tr>
+                            <th>Added Items</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Remove</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="productsOrder.length == 0">
+                            <td class="empty" colspan="4">
+                                <img src="http://via.placeholder.com/246x339" width="100" alt=""/>
+                                <h6 class="content">No Product</h6>
+                            </td>
+                        </tr>
+                        <tr *ngFor="let product of productsOrder">
+                            <td class="item">
+                                <div class="wrap-img">
+                                    <img [src]="product.image" alt=""/>
+                                </div>
+                                <h6 class="title"><a [routerLink]="['/shop/p/' + product.slug]" >{{product.productName}}</a></h6>
+                                <p>Stock: {{product.stock}}</p>
+                            </td>
+                            <td>
+                                <input 
+                                    type="number" 
+                                    class="input-counter" 
+                                    [(ngModel)]="product.quantity" 
+                                    [value]="product.quantity" 
+                                    (change)="onChage(product)"/>
+                            </td>
+                            <td>{{product.quantity * product.price | currency:'USD':'$'}}</td>
+                            <td>
+                                <button mat-mini-fab (click)="deleteProduct(product.id)"><mat-icon>&#xE5CD;</mat-icon></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- End Table Cart -->
+            </div>
+            <div class="col l4 s12">
+
+                <!-- Coupon -->
+                <div class="input-group">
+                    <input [disabled]="productsOrder.length == 0" type="text" [value]="promoInit" placeholder="Add Promo Code" #promo />
+                    <mat-icon (click)="checkPromo(promo.value)" class="icon">&#xE145;</mat-icon>
+                </div>
+
+                <div *ngIf="productsOrder.length != 0" class="margin-bottom20 margin-top20">
+                    <p class="margin-bottom10"><em><small>try promo code for test</small></em></p>
+                    <div class="alert alert-info">
+                        <strong class="right">4234OPD</strong> Free 20%
+                        <hr />
+                        <strong class="right">12312B</strong> Free $100
+                    </div>
+                </div>
+
+                <div class="margin-top20 margin-bot20">
+                    <table class="count">
+                        <tr>
+                            <td>Sub Total</td>
+                            <td class="right-align">{{subTotal  | currency:'USD':'$'}}</td>
+                        </tr>
+                        <tr>
+                            <td>Promo</td>
+                            <td class="right-align">{{promoValue  | currency:'USD':'$'}}</td>
+                        </tr>
+                        <tr>
+                            <td>Total Price</td>
+                            <td class="right-align"><strong>{{total  | currency:'USD':'$'}}</strong></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="margin-top20">
+                     <button [disabled]="productsOrder.length == 0" mat-button routerLink="/shop/shipping" class="btn btn-primary btn-block">Continue Shipping</button>  
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
