@@ -14,39 +14,46 @@
             <ul>
                 <li>
                     <a mat-button (click)="toggleBar()" [class.active]="activebar">
-                        <mat-icon>&#xE8FE;</mat-icon>
+                        <!-- <mat-icon>&#xE8FE;</mat-icon> -->
+                        <mat-icon svgIcon="icon-menu"></mat-icon>
                     </a>
                 </li>
                 <li>
                         <a mat-button routerLink="/shop/shoppingcart" routerLinkActive="active">
                             <span *ngIf="cartServiceProvider.goodsCountInCart != 0" class="badge">{{cartServiceProvider.goodsCountInCart}}</span>
-                            <mat-icon>&#xE8CC;</mat-icon>
+                            <!-- <mat-icon>&#xE8CC;</mat-icon> -->
+                            <mat-icon svgIcon="icon-order"></mat-icon>
                         </a>
                     </li>
                 <li>
                     <a mat-button routerLink="/seller/list" routerLinkActive="active">
                         <!-- <span *ngIf="wishlistLength != 0" class="badge">{{wishlistLength}}</span> -->
-                        <mat-icon>account_circle</mat-icon>
+                        <!-- <mat-icon>account_circle</mat-icon> -->
+                        <mat-icon svgIcon="icon-chef"></mat-icon>
                     </a>
                 </li>
                 <li>
                     <a mat-button routerLink="/shop/product1" routerLinkActive="active">
                         <!-- <span *ngIf="wishlistLength != 0" class="badge">{{wishlistLength}}</span> -->
-                        <mat-icon>restaurant_menu</mat-icon>
+                        <!-- <mat-icon>restaurant_menu</mat-icon> -->
+                        <!-- <mat-icon svgIcon="icon-food"></mat-icon> -->
+                        <mat-icon svgIcon="spoon-knife"></mat-icon>
                     </a>
                 </li>
 
                 <li>
                     <a mat-button routerLink="/shop/customerlocation" routerLinkActive="active">
                         <!-- <span *ngIf="wishlistLength != 0" class="badge">{{wishlistLength}}</span> -->
-                        <mat-icon>location_on</mat-icon>
+                        <!-- <mat-icon>location_on</mat-icon> -->
+                        <mat-icon svgIcon="icon-pin"></mat-icon>
                     </a>
                 </li>
 
                 <li>
                     <a mat-button routerLink="/home" routerLinkActive="active">
                         <!-- <span *ngIf="wishlistLength != 0" class="badge">{{wishlistLength}}</span> -->
-                        <mat-icon>home</mat-icon>
+                        <!-- <mat-icon>home</mat-icon> -->
+                        <mat-icon svgIcon="icon-home"></mat-icon>
                     </a>
                 </li>
 

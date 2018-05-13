@@ -42,6 +42,9 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { firebaseConfig } from './firebase.config';
 
+// Custom icons (Aud)
+import { HttpClientModule } from "@angular/common/http";
+
 
 
 @NgModule({
@@ -71,7 +74,8 @@ import { firebaseConfig } from './firebase.config';
     SlimLoadingBarModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    HttpClientModule // for Custom Icon (Aud)
   ],
   exports: [
     ReactiveFormsModule
