@@ -148,7 +148,7 @@ Responsive
 
 @media(max-width:767px) {
     .side {
-        position: relative;
+        position: fixed; //change from relative
         width: 100%;
         height: auto;
         display: block;
@@ -183,7 +183,8 @@ Responsive
             overflow: hidden;
             position: relative;
             top: 0;
-            padding-top: 14px;
+            padding: 0px; //change
+            // padding-top: 14px;
             margin-top: 0px;
             text-align: center;
             z-index: 2;
