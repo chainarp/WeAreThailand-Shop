@@ -1,53 +1,44 @@
 <!-- Start Banner -->
-<div class="banner" >
-    <div class="container" >
+<div class="banner">
+    <div class="container">
         <div class="row">
-            <div class="col l6 m12 content center">
-               
-                <h1 class="sub-title">We Chef
-                    <span class="sub-title2">(Thailand)</span></h1>
-                <h2 class="title">
-                    "เชื่อมผู้คนจากบ้านสู่บ้าน<br>ด้วยอาหารที่ปรุงจากใจ"
-                </h2>
-                
-                <a mat-button routerLink="/shop" class="btn btn-default btn-lg">เลือกอาหารเลย!</a>
-                <a mat-button routerLink="/seller" class="btn btn-primary btn-lg">รู้จักเชฟกันก่อน</a>
-                
-            </div>
+
             <div class="col l4 m12">
-                <div class="wrap-demo">
+                <div class="wc-logo">
                     <img src="assets/images/brand/wechef-logo-new.svg" class="responsive-img" alt="" />
                 </div>
             </div>
-            
-            <div class="col l2 s6">
+
+            <!-- <div class="col l4 m12"> -->
+            <div class="col l6 m12 content center ">
+                <div class="wc-slogan">
+                    <img src="assets/images/brand/slogan-black-02.svg" class="responsive-img" alt="" />
+                </div>
+            <!-- </div> -->
+
+                <h4 class="title">
+                    "เปลี่ยนครัวที่บ้านให้เป็นงาน
+                    <br>เปลี่ยนฝีมือทำอาหารให้เป็นเงิน"
+                </h4>
+                <a mat-button routerLink="/seller" class="btn btn-black ">
+                    <mat-icon svgIcon="icon-chef"></mat-icon>&nbsp; รู้จักเชฟกันก่อน
+                </a>
+                <a mat-button routerLink="/shop" class="btn btn-white ">
+                    <mat-icon svgIcon="icon-food"></mat-icon>&nbsp; เลือกอาหารเลย!
+                </a>
+            </div>
+
+
+            <!-- <div class="col l2 s6">
                 <div class="call-center">
-<!--
-                    <mat-icon class="font-light">&#xE8CC;</mat-icon>
-                    <mat-icon class="bg">&#xE8CC;</mat-icon>
--->
-<!--                   <center>-->
-<!--                    <h5 class="title center">Callcenter</h5>-->
-                     <img src="assets/images/call-center.png" class="responsive-img" alt="" />
-                     <img src="assets/images/linewechef.jpg" class="responsive-img" alt="" />
+                    <img src="assets/images/call-center.png" class="responsive-img" alt="" />
+                    <img src="assets/images/linewechef.jpg" class="responsive-img" alt="" />
                     <p class="center">
                         ติดต่อสอบถามที่ Line @wechefthaild ค่ะ
                     </p>
-<!--                    </center>-->
                 </div>
-            </div>
-<!--
-            <div class="callcenter col l3 m12">
-                <div class="wrap-demo">
-                    <img src="/assets/images/call-center.png" class="responsive-img" alt="" />
-                </div>
-            </div>
-            <div class="callcenter col l2 m12">
-                <div class="wrap-demo">
-                   <img src="/assets/images/linewechef.jpg" class="responsive-img" alt="" />
-                </div>
-            </div>
--->
+            </div> -->
+
         </div>
     </div>
 </div>
@@ -56,8 +47,8 @@
 <div class="wrap-feature">
     <div class="container">
         <div class="row" myMatchHeight="col">
-            
-<!--
+
+            <!--
             <div class="col l3 s12">
                 <div class="item-feature">
                     <mat-icon class="font-light">&#xE8CC;</mat-icon>
@@ -70,7 +61,7 @@
                 </div>
             </div>
 -->
-           
+
             <!--
             <div class="col l4 s12">
                 <div class="item-feature">
@@ -101,10 +92,10 @@
 <!-- Head Section -->
 <div class="head-section">
     <div class="container">
-       
-        <h2>รายการอาหาร รอบตัวใกล้ๆคุณ</h2>
-        
-<!--
+
+        <h4>รายการอาหาร รอบตัวใกล้ๆคุณ</h4>
+
+        <!--
         <p>คัดสรรมาด้วยขบวนการมาตราฐานพิถีพิถัน</p>
         <p>โดย WeChef</p>
 -->
@@ -127,14 +118,37 @@
 
 </div>
 <!-- End Product -->
+
+<div class="head-section">
+    <div class="container">
+        <h4>ติดต่อสอบถาม</h4>
+        <!-- <p class="margin-bottom0">Delectus aliquando incorrupte ne sea qui cu iudicabit.</p> -->
+    </div>
+</div>
+<div class="line">
+    <img src="assets/images/social-media/line-logo.png" class="responsive-img logo" alt="">
+    <!-- <span class="lineAd">LINE@</span> -->
+    <span class="title">@WeChefThailand</span>
+    <img src="assets/images/social-media/qr-line-wechefthailand.svg" class="responsive-img qr" alt="">
+</div>
+<div class="facebook">
+    <img src="assets/images/social-media/facebook-icon.png" class="responsive-img logo" alt="">
+    <!-- <span class="lineAd">LINE@</span> -->
+    <span class="title">WeChefThailand</span>
+    <img src="assets/images/social-media/qr-fb-wechefthailand.svg" class="responsive-img qr" alt="">
+</div>
+
+
+
 <!-- Head Section -->
 <div class="head-section">
     <div class="container">
-        <h3>ผู้สนับสนุน</h3>
+        <h4>ผู้สนับสนุน</h4>
         <!-- <p class="margin-bottom0">Delectus aliquando incorrupte ne sea qui cu iudicabit.</p> -->
     </div>
 </div>
 <!-- End Section -->
+
 <!-- Start Vendor -->
 <grid-logo [setlimit]="4"></grid-logo>
 

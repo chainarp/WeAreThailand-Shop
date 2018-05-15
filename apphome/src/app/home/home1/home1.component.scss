@@ -1,21 +1,23 @@
 /*
 Import
 =========================== */
+
 @import '../../../assets/sass/css3-mixins';
 @import '../../../assets/sass/variable';
-.container{
+.container {
     padding-left: 0;
 }
+
 /*
 Banner
 =========================== */
-.banner{
-    padding: 30px 0 0 0;
-    background-color: $color-bg-gray3;
-    background-image: url('/assets/images/bg/wechefbg-01-p-500.png');
+
+.banner {
+    padding: 30px 0 0 16px;
+    background-color: $color-wc2-yellow1; // background-color: $color-bg-gray3;
+    // background-image: url('/assets/images/bg/wechefbg-01-p-500.png');
     position: relative;
-    
-    &:before{
+    &:before {
         content: '';
         position: absolute;
         z-index: 1;
@@ -23,74 +25,121 @@ Banner
         left: 0;
         width: 100%;
         height: 100%;
-//        @include background-gradient(rgba(0,0,0,0.1),$color-bg-gray3);
+        //        @include background-gradient(rgba(0,0,0,0.1),$color-bg-gray3);
     }
-
-    .row{
+    .row {
         margin-top: 0;
         margin-bottom: 0;
         position: relative;
         z-index: 2;
-
-        .content{
+        .content {
             padding-top: 50px;
             margin-bottom: 25px;
-
-            .sub-title{
+            .sub-title {
                 text-transform: uppercase;
             }
-
-            .title{
-                margin: 15px 0 40px 0;
+            .title {
+                margin: 30px 0 20px 0;
                 text-transform: none;
+                color: #000;
+            }
+            .btn-black {
+                background-color: #120e17;
+                color: #fff;
+                margin: 10px;
+                font-size: 16px;
+                vertical-align: middle;
+                font-weight: normal;
+            }
+            .btn-white {
+                // font-weight: bold;
+                background-color: #fff;
+                color: rgb(46, 46, 46);
+                font-size: 16px;
             }
         }
     }
-
-    .wrap-demo{
+    .wrap-demo {
         height: auto;
         padding: 0 15px;
     }
-
-    img{
+    .wc-logo {
+        height: auto;
+        padding: 10px 15px;
+        img {
+            width: auto;
+        }
+    }
+    .wc-slogan {
+        height: auto;
+        padding: 0 15px 20px 15px;
+        img {
+            width: 60%;
+            display: block;
+            margin-left: auto;
+            margin-right: auto; // width: 50%;
+        }
+    }
+    img {
         display: block;
+    }
+    .title{
+        font-size: 30px;
     }
 }
 
+/* Sponser 
+===========================*/
+
+.line,
+.facebook {
+    margin: 18px;
+    box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.2);
+    padding: 5px 20px;
+    text-align: center;
+    font-size: 16px;
+    .title {}
+    .logo {
+        width: 40px;
+    }
+    img {
+        width: 100px;
+    }
+}
 
 /*
 Title
 =========================== */
-.sub-title{
+
+.sub-title {
     font-family: acme;
     text-transform: none !important;
     color: $color-wc-yellow1;
-   
 }
-.sub-title2{
+
+.sub-title2 {
     font-family: acme;
     text-transform: none !important;
     color: #965a2e;
-    
 }
-
 
 /*
 head-section
 =========================== */
-.head-section{
-  position: relative;
-  h2{
-    
-      
-    color: #332a1d !important;
-    
-  }
-    
-  background-color: $color-bg-yellow1;
+
+// .head-section{
+//   position: relative;
+//   h4{
+//         //   color: #332a1d !important;
+//     font-size: 20px;
+//       color: #fff !important;
+//       letter-spacing: normal !important;
+//   }
+//   background-color: $color-wc2-yellow2;
+//   background-color: $color-bg-yellow1;
 //  background: rgba(76, 175, 80, 0.6);
 //  background-image: url('/assets/images/bg/AIP_Food_Nara-Thai-Cuisine_2015-06-03_Full-Res_012_web-slider-p-800.jpeg');
-}
+// }
 //.head-section:after {
 //    content : "";
 //    display: block;
@@ -103,51 +152,43 @@ head-section
 //    opacity : 0.4;
 //    z-index: -1;
 //}
-
-.product-home{
+.product-home {
     padding: 0 15px;
     background-color: #f4f4f4;
 }
 
-
 /*
 Category
 =========================== */
-.wrap-feature{
+
+.wrap-feature {
     display: block;
     position: relative;
-    
-    .container{
+    .container {
         position: relative;
         z-index: 2;
     }
-
-    .row{
+    .row {
         margin: 0;
     }
-
-    .col{
+    .col {
         padding: 0;
         margin: -0.5px;
     }
-
-    .item-feature{
-        
+    .item-feature {
         padding: 20px 35px 20px 65px;
         border: solid 1px #efefef;
         background: #fff;
         position: relative;
         @include box-shadow(0, 1px, 15px, 1px, rgba(147, 147, 147, 0.10));
         overflow: hidden;
-
-        mat-icon{
+        mat-icon {
             position: absolute;
             font-size: 24px;
-            top: 25px; 
+            top: 25px;
             left: 25px;
             @include opacity(0.7);
-
-            &.bg{
+            &.bg {
                 color: $color-content;
                 @include opacity(0.1);
                 font-size: 100px;
@@ -157,22 +198,18 @@ Category
                 z-index: 1;
             }
         }
-
-        .title{
+        .title {
             text-transform: capitalize;
             position: relative;
             z-index: 2;
         }
-
-        p{
+        p {
             margin-bottom: 0;
             position: relative;
             z-index: 2;
-            
         }
     }
-
-    &:before{
+    &:before {
         content: '';
         position: absolute;
         z-index: 1;
@@ -185,60 +222,79 @@ Category
     }
 }
 
-
-
-.call-center{
+.call-center {
     position: relative;
     margin: 10px;
     background-color: #fff;
-//    border-top-left-radius: 20px;
-//    border-top-right-radius: 20px;
+    //    border-top-left-radius: 20px;
+    //    border-top-right-radius: 20px;
     border: solid 2px #55a882;
     border-radius: 20px;
-    box-shadow: 0 1px 4px 0 rgba(0,0,0,0.1);
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
     padding: 5px;
 }
+
 /*
 Responsive
 =========================== */
-@media(max-width:1200px){
-    .banner .row{ 
-        .content{
+
+@media(max-width:1200px) {
+    .banner .row {
+        .content {
             padding-top: 70px;
         }
-
-        img{
+        img {
             max-width: 300px;
             margin: 0 auto !important;
         }
     }
 }
 
-@media(max-width:767px){
-    .banner{
+@media(max-width:767px) {
+    .banner {
         padding-top: 50px; //change padding
-        .row{
-            .content{
+        .row {
+            .content {
                 text-align: center;
                 padding-top: 0;
                 margin-bottom: 55px;
             }
-
-            .col{
+            .col {
                 width: 100%;
+            }
+            .wc-logo {
+                height: auto;
+                padding: 10px 15px;
+                img {
+                    width: 60%;
+                }
+            }
+            .wc-slogan {
+                padding: 0 15px;
+            }
+            .title{
+                font-size: 20px;
             }
         }
     }
-
-    .product-home{
+    .product-home {
         padding: 10px 25px;
     }
 }
 
-@media(max-width:360px){
-    .banner .row{ 
-        img{
+@media(max-width:360px) {
+    .banner .row {
+        img {
             max-width: 200px;
+        }
+        .title{
+            font-size: 20px;
+        }
+    }
+    .line,
+    .facebook {
+        img {
+            width: 30%;
         }
     }
 }

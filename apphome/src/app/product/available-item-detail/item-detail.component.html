@@ -1,10 +1,10 @@
 <!-- Head Section -->
-<div class="head-section bg">
+<div class="head-section2">
     <div class="container">
-        <h1>รายการอาหาร
-<!--            <span class="font-light">Seduction</span>-->
-        </h1>
-<!--        <h4>It is salivate, isn't it?</h4>-->
+        <span>
+            <mat-icon svgIcon="icon-food" class="header-icon"></mat-icon>
+        </span>
+        <span class="title">&nbsp;&nbsp;รายการอาหาร</span>
     </div>
 </div>
 
@@ -21,7 +21,7 @@
             <div class="col l7 s12">
                 <div class="wrap-image">
                     <!-- [src2]="availableItem.productItem.images[0]" <img [src]="productImage" class="img-detail" [alt]="product.productName"/> -->
-                    <img [src]="selectedImage"  class="img-detail" [alt]="availableItem.productItem.title" />
+                    <img [src]="selectedImage" class="img-detail" [alt]="availableItem.productItem.title" />
                     <!--
                     <div style="position: relative; left: 0; top: 0;">
                         <img [src]="selectedImage" class="img-detail product-image" />
@@ -29,7 +29,7 @@
                     </div>
                     -->
                     <ul>
-                        <li  (click)="selectImage(availableItem.seller.images[0])" [class.active]="selectedImage === availableItem.seller.images[0]">
+                        <li (click)="selectImage(availableItem.seller.images[0])" [class.active]="selectedImage === availableItem.seller.images[0]">
                             <img [src]="availableItem.seller.images[0]" class="responsive-img" alt="" />
                         </li>
                         <li *ngFor="let image of availableItem.productItem.images" (click)="selectImage(image)" [class.active]="selectedImage === image">
